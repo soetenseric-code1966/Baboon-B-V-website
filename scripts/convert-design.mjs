@@ -11,10 +11,8 @@ const PAGES = ['Global', 'Etalage', 'Prijslijst', 'OverOns', 'Contact', 'Juridis
 const REPLACE = [
   ['[E-MAILADRES]', 'info@datawerf.com'],
   ['<span>[TELEFOONNUMMER]</span>', ''],
-  ['<span style="color:#5C6378;font-size:14px">KvK [KVK-NUMMER]</span>', ''],
-  [' · KvK [KVK-NUMMER]', ''],
-  [', KvK [KVK-NUMMER],', ','],
-  [', Chamber of Commerce [KVK-NUMMER],', ','],
+  ['KvK [KVK-NUMMER]', 'KvK 70420874'],
+  ['Chamber of Commerce [KVK-NUMMER]', 'Chamber of Commerce 70420874'],
   ['Zolang u klant bent; aanmeldingen zonder vervolg na [TERMIJN] verwijderd.', 'Zolang u klant bent. De termijn voor aanmeldingen zonder vervolg volgt in de volledige privacyverklaring.'],
   ['As long as you are a customer; sign-ups without follow-up deleted after [TERM].', 'As long as you are a customer. The period for sign-ups without follow-up will be set out in the full privacy statement.'],
   ['[NOG UIT TE WERKEN]', 'Wordt uitgewerkt in de volledige algemene voorwaarden.'],

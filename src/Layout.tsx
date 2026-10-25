@@ -100,7 +100,7 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
           </div>
         </div>
         <div className="dw-foot-bar">
-          <span>{f.trade}</span>
+          <span>{f.trade} · KvK 70420874</span>
           <span style={{ marginLeft: 'auto' }}>datawerf.com · {f.gdpr}</span>
         </div>
       </footer>

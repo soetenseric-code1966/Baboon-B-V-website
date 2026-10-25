@@ -47,7 +47,7 @@ export default function Page({ lang, signal }) {
 </form>
 <aside style={css("display:flex;flex-direction:column;gap:16px")}>
 <div style={css("background:#14213D;color:#FFFFFF;border-radius:20px;padding:28px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.mt_eb}</div><div style={css("font-size:26px;font-weight:700;margin-top:8px")}>{$v?.t?.mt_t}</div><p style={css("margin:8px 0 18px;color:#C7CEDB;font-size:16px;line-height:1.5")}>{$v?.t?.mt_s}</p><a href={"mailto:info@datawerf.com?subject=" + encodeURIComponent(lang === "en" ? "Datawerf – introduction" : "Datawerf – kennismaking")} style={css(`display:inline-block;padding:14px 24px;border-radius:999px;background:${$v?.signal ?? ""};color:#FFFFFF;font-weight:700;text-decoration:none`)}>{$v?.t?.mt_b} →</a></div>
-<div style={css("border:1px solid #D5DAE3;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:6px;font-size:16px")}><strong style={css("font-size:20px")}>Baboon B.V.</strong><span>info@datawerf.com</span><span>Esbeek</span></div>
+<div style={css("border:1px solid #D5DAE3;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:6px;font-size:16px")}><strong style={css("font-size:20px")}>Baboon B.V.</strong><span>info@datawerf.com</span><span>Esbeek</span><span style={css("color:#5C6378;font-size:14px")}>KvK 70420874</span></div>
 <div style={css("background:#F7F8FA;border-radius:20px;padding:22px;font-size:15px;line-height:1.5;color:#3A4258")}>{$v?.t?.cust} <a href={H("Inloggen.dc.html")} style={css("font-weight:700;color:#14213D")}>{$v?.t?.cust_b} →</a></div>
 </aside>
 </section>
