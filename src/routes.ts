@@ -18,6 +18,7 @@ const ALIAS: Record<string, PageName> = {
   Aanmelden: 'Contact', // "Start gratis": het lab is nog niet live
   Start: 'Contact',
   Contract: 'Contact',
+  Main: 'Contact', // "Demo openen": demo's op aanvraag zolang het portaal niet live is
 };
 
 export function href(name: string, lang: string, hash = '') {

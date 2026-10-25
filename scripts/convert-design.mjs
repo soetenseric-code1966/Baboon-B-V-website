@@ -11,10 +11,9 @@ const PAGES = ['Global', 'Etalage', 'Prijslijst', 'OverOns', 'Contact', 'Juridis
 const REPLACE = [
   ['[E-MAILADRES]', 'info@datawerf.com'],
   ['<span>[TELEFOONNUMMER]</span>', ''],
-  ['<span style="color:#5C6378;font-size:14px">KvK [KVK-NUMMER]</span>', ''],
-  [' · KvK [KVK-NUMMER]', ''],
-  [', KvK [KVK-NUMMER],', ','],
-  [', Chamber of Commerce [KVK-NUMMER],', ','],
+  ['<strong style="font-size:20px">Baboon B.V.</strong>', '<span style="display:inline-flex;align-items:center;gap:8px;color:#14213D"><svg width="30" height="30" viewBox="4 4 56 56" aria-hidden="true"><rect x="10" y="8" width="12" height="12" rx="2" fill="#14213D"/><rect x="24" y="8" width="12" height="12" rx="2" fill="#14213D"/><rect x="10" y="22" width="12" height="12" rx="2" fill="#14213D"/><rect x="42" y="22" width="12" height="12" rx="2" fill="#14213D"/><rect x="10" y="36" width="12" height="12" rx="2" fill="#14213D"/><rect x="42" y="36" width="12" height="12" rx="2" fill="#14213D" opacity="0.35"/><rect x="10" y="50" width="12" height="6" rx="2" fill="#14213D"/><rect x="24" y="50" width="12" height="6" rx="2" fill="#14213D"/><rect x="38" y="8" width="12" height="12" rx="2" fill="{{signal}}"/></svg><strong style="font-size:24px;letter-spacing:-0.6px">Datawerf</strong></span><span style="color:#5C6378;font-size:14px">{{f.trade}}</span>'],
+  ['KvK [KVK-NUMMER]', 'KvK 70420874'],
+  ['Chamber of Commerce [KVK-NUMMER]', 'Chamber of Commerce 70420874'],
   ['Zolang u klant bent; aanmeldingen zonder vervolg na [TERMIJN] verwijderd.', 'Zolang u klant bent. De termijn voor aanmeldingen zonder vervolg volgt in de volledige privacyverklaring.'],
   ['As long as you are a customer; sign-ups without follow-up deleted after [TERM].', 'As long as you are a customer. The period for sign-ups without follow-up will be set out in the full privacy statement.'],
   ['[NOG UIT TE WERKEN]', 'Wordt uitgewerkt in de volledige algemene voorwaarden.'],
@@ -33,7 +32,28 @@ const NOTICE = {
   nl: 'Het klantportaal opent binnenkort. Al klant of een vraag over uw platform? Mail ons, dan helpen wij u direct.',
   en: 'The customer portal opens soon. Already a customer or a question about your platform? Email us and we will help you right away.',
 };
+const LIVE_SECTION = `<section style={css("padding:0 48px 88px")}><div style={css(\`font-family:'IBM Plex Mono',monospace;font-size:13px;color:\${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase\`)}>{LT.eb}</div><h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{LT.t}</h2><p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{LT.s}</p>
+<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px;margin-top:32px")}>{LIVE.map((p) => <article key={p.name} style={css("border:2px solid #14213D;border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:12px")}><div style={css("display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap")}><span style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:#14213D;color:#FFFFFF;text-transform:uppercase")}>{p.kind[lang]}</span><span style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:#E7F6EF;color:#0F7A55")}>live</span></div><div style={css("font-size:34px;font-weight:700;letter-spacing:-1px")}>{p.name}</div><p style={css("margin:0;font-size:17px;line-height:1.55;color:#3A4258")}>{p.text[lang]}</p><div>{p.points[lang].map((x) => <div key={x} style={css("display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #E3E7EE;font-size:15px")}><span aria-hidden="true" style={css(\`color:\${$v?.signal ?? ""}\`)}>✓</span>{x}</div>)}</div><a href={p.url} target="_blank" rel="noopener" style={css(\`align-self:flex-start;margin-top:8px;padding:14px 22px;border-radius:999px;background:\${$v?.signal ?? ""};color:#FFFFFF;font-weight:700;text-decoration:none\`)}>{LT.open}: {p.host} →</a></article>)}</div>
+</section>
+`;
+
 const PATCH = {
+  Global: {
+    imports: `import { liveUrl, LIVE_TEXT } from '../live';`,
+    edits: [
+      ['<p style={css("font-size:19px;line-height:1.5;color:#3A4258;margin:12px 0 0")}>{$v?.car?.d}</p>',
+        '<p style={css("font-size:19px;line-height:1.5;color:#3A4258;margin:12px 0 0")}>{$v?.car?.d}</p>{liveUrl($v?.car?.name) ? <a href={liveUrl($v?.car?.name)} target="_blank" rel="noopener" style={css(`align-self:flex-start;margin-top:16px;font-weight:700;color:${$v?.signal ?? ""};text-decoration:none`)}>{LIVE_TEXT[lang].open} →</a> : null}'],
+    ],
+  },
+  Etalage: {
+    imports: `import { LIVE, LIVE_TEXT } from '../live';`,
+    extra: `
+  const LT = LIVE_TEXT[lang];`,
+    edits: [
+      ['<section style={css("padding:0 48px 88px")}><div style={css(`font-family:\'IBM Plex Mono\',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.dm_eb}',
+        LIVE_SECTION + '<section style={css("padding:0 48px 88px")}><div style={css(`font-family:\'IBM Plex Mono\',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.dm_eb}'],
+    ],
+  },
   Contact: {
     extra: `
   const sendMail = (e) => {
@@ -159,6 +179,7 @@ function convert(name) {
 // Gegenereerd uit het Design-canvas (${name}.dc.html) door scripts/convert-design.mjs.
 import React from 'react';
 import { DCLogic, css, H, useDC } from '../dc';
+${patch.imports || ''}
 
 ${script.trim()}
 

@@ -2,6 +2,7 @@
 // Gegenereerd uit het Design-canvas (Global.dc.html) door scripts/convert-design.mjs.
 import React from 'react';
 import { DCLogic, css, H, useDC } from '../dc';
+import { liveUrl, LIVE_TEXT } from '../live';
 
 const FTXT = {"nl": {"nav": ["Wat we bouwen", "Hoe het werkt", "Prijzen", "Over ons", "Contact"], "login": "Inloggen", "cta": "Start gratis", "eu": "Nederlandse regie · data in Europa", "company": "BEDRIJF", "legal": "JURIDISCH", "n1": "Wat we bouwen", "n2": "Hoe het werkt", "n3": "Prijzen", "n4": "Over ons", "n5": "Contact", "l1": "Privacyverklaring", "l2": "Algemene voorwaarden", "l3": "Verwerkersovereenkomst", "l4": "Cookies", "trade": "Datawerf is een handelsnaam van Baboon B.V.", "gdpr": "Data in Europa · AVG-conform"}, "en": {"nav": ["What we build", "How it works", "Pricing", "About", "Contact"], "login": "Log in", "cta": "Start free", "eu": "Dutch-led · data in Europe", "company": "COMPANY", "legal": "LEGAL", "n1": "What we build", "n2": "How it works", "n3": "Pricing", "n4": "About", "n5": "Contact", "l1": "Privacy statement", "l2": "Terms and conditions", "l3": "Data processing agreement", "l4": "Cookies", "trade": "Datawerf is a trade name of Baboon B.V.", "gdpr": "Data in Europe · GDPR compliant"}};
 const NAVH = ["Etalage.dc.html", "Global.dc.html#hoe", "Prijslijst.dc.html", "OverOns.dc.html", "Contact.dc.html"];
@@ -122,7 +123,7 @@ export default function Page({ lang, signal }) {
 <div style={css("padding:44px;display:flex;flex-direction:column;justify-content:center")}>
 <div style={css("display:flex;gap:8px;align-items:center")}><span style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:#14213D;color:#FFFFFF;text-transform:uppercase")}>{$v?.car?.kind}</span><span style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378")}>{$v?.car?.stage}</span></div>
 <div style={css("font-size:44px;font-weight:700;letter-spacing:-1.4px;margin-top:14px")}>{$v?.car?.name}</div>
-<p style={css("font-size:19px;line-height:1.5;color:#3A4258;margin:12px 0 0")}>{$v?.car?.d}</p>
+<p style={css("font-size:19px;line-height:1.5;color:#3A4258;margin:12px 0 0")}>{$v?.car?.d}</p>{liveUrl($v?.car?.name) ? <a href={liveUrl($v?.car?.name)} target="_blank" rel="noopener" style={css(`align-self:flex-start;margin-top:16px;font-weight:700;color:${$v?.signal ?? ""};text-decoration:none`)}>{LIVE_TEXT[lang].open} →</a> : null}
 <div style={css("display:flex;gap:6px;margin-top:28px")}>{($v?.car?.dots || []).map((o, o__i) => <React.Fragment key={o__i}><button type="button" aria-label={o?.label} aria-pressed={o?.on} onClick={o?.pick} style={css(o?.style)}></button></React.Fragment>)}</div>
 </div>
 <div style={css("background:#14213D;padding:36px;display:flex;align-items:center;min-height:320px")}>
