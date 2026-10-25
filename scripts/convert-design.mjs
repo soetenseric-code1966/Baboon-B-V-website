@@ -11,6 +11,7 @@ const PAGES = ['Global', 'Etalage', 'Prijslijst', 'OverOns', 'Contact', 'Juridis
 const REPLACE = [
   ['[E-MAILADRES]', 'info@datawerf.com'],
   ['<span>[TELEFOONNUMMER]</span>', ''],
+  ['<strong style="font-size:20px">Baboon B.V.</strong>', '<span style="display:inline-flex;align-items:center;gap:8px;color:#14213D"><svg width="30" height="30" viewBox="4 4 56 56" aria-hidden="true"><rect x="10" y="8" width="12" height="12" rx="2" fill="#14213D"/><rect x="24" y="8" width="12" height="12" rx="2" fill="#14213D"/><rect x="10" y="22" width="12" height="12" rx="2" fill="#14213D"/><rect x="42" y="22" width="12" height="12" rx="2" fill="#14213D"/><rect x="10" y="36" width="12" height="12" rx="2" fill="#14213D"/><rect x="42" y="36" width="12" height="12" rx="2" fill="#14213D" opacity="0.35"/><rect x="10" y="50" width="12" height="6" rx="2" fill="#14213D"/><rect x="24" y="50" width="12" height="6" rx="2" fill="#14213D"/><rect x="38" y="8" width="12" height="12" rx="2" fill="{{signal}}"/></svg><strong style="font-size:24px;letter-spacing:-0.6px">Datawerf</strong></span><span style="color:#5C6378;font-size:14px">{{f.trade}}</span>'],
   ['KvK [KVK-NUMMER]', 'KvK 70420874'],
   ['Chamber of Commerce [KVK-NUMMER]', 'Chamber of Commerce 70420874'],
   ['Zolang u klant bent; aanmeldingen zonder vervolg na [TERMIJN] verwijderd.', 'Zolang u klant bent. De termijn voor aanmeldingen zonder vervolg volgt in de volledige privacyverklaring.'],
