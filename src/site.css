@@ -1,0 +1,42 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; }
+input, textarea, button, select { font: inherit; }
+img, svg { max-width: 100%; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid #FF5A1F; outline-offset: 2px; }
+[id] { scroll-margin-top: 24px; }
+
+.skip { position: absolute; left: -9999px; top: 8px; background: #14213D; color: #fff; padding: 10px 16px; border-radius: 999px; z-index: 10; }
+.skip:focus { left: 16px; }
+
+.dw-head { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding: 20px 48px; border-bottom: 1px solid #EEF0F4; background: #FFFFFF; }
+.dw-brand { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #14213D; }
+.dw-nav { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 15px; }
+.dw-tools { margin-left: auto; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.dw-foot { padding: 56px 48px 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px; }
+.dw-foot-bar { padding: 16px 48px 28px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+
+/* Ontwerp is getekend op 1440 px; hieronder schalen we het netjes terug. */
+@media (max-width: 1100px) {
+  .dw main h1 { font-size: 56px !important; letter-spacing: -2px !important; }
+  .dw main h2 { font-size: 40px !important; }
+}
+@media (max-width: 760px) {
+  .dw-head, .dw-foot, .dw-foot-bar { padding-left: 16px; padding-right: 16px; }
+  .dw-nav { order: 3; width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .dw-nav a { white-space: nowrap; }
+  .dw-tools { gap: 10px; }
+  .dw main section { padding-left: 16px !important; padding-right: 16px !important; }
+  .dw main section[style*="margin:0 48px"], .dw main section[style*="margin: 0 48px"] { margin-left: 16px !important; margin-right: 16px !important; padding: 32px 20px !important; }
+  .dw main [style*="minmax(2"], .dw main [style*="minmax(3"], .dw main [style*="minmax(4"], .dw main [style*="minmax(5"] { grid-template-columns: minmax(0, 1fr) !important; }
+  .dw main [style*="repeat(4,minmax(0,1fr))"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .dw main [style*="grid-template-columns:150px 1fr"] { grid-template-columns: minmax(0, 1fr) !important; }
+  .dw main [style*="grid-template-columns:150px 1fr"] > :first-child { display: none !important; }
+  .dw main h1 { font-size: 40px !important; letter-spacing: -1.4px !important; line-height: 1.05 !important; }
+  .dw main h2 { font-size: 30px !important; letter-spacing: -0.8px !important; }
+  .dw main [style*="padding:48px"], .dw main [style*="padding:44px"], .dw main [style*="padding:64px"] { padding: 24px !important; }
+  .dw main [style*="position:relative;height:500px"] { height: 460px !important; }
+  .dw main [style*="font-size:44px"] { font-size: 32px !important; }
+  .dw main [style*="grid-template-columns:220px 1fr"] { grid-template-columns: minmax(0, 1fr) !important; gap: 4px !important; }
+  .dw main { overflow-wrap: anywhere; }
+}
