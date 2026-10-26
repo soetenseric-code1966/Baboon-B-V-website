@@ -24,12 +24,12 @@ export const LIVE = [
     status: 'live',
     kind: { nl: 'Business-idee · website en app', en: 'Business idea · website and app' },
     text: {
-      nl: 'Een eigen wijnkelder, zonder de kelder. Leden ontdekken met een korte smaaktest wat ze lekker vinden en krijgen elke maand wijn van kleine wijnmakers, thuis bezorgd of bewaard in hun eigen vak in het gewelf. Wij werkten het idee uit tot merk, website en app, om het te toetsen bij de eerste leden.',
-      en: 'Your own wine cellar, without the cellar. Members find out what they like with a short taste test and receive wine from small winemakers every month, delivered at home or kept in their own space in the vault. We turned the idea into a brand, website and app, to test it with the first members.',
+      nl: 'Jouw privé wijnkelder die zichzelf bijvult: een abonnement op kwaliteitswijn naar jouw smaak, elke maand gratis thuisbezorgd. Met smaaktest, een overzicht van al je flessen thuis en in het gewelf, en bieden en inschrijven op wijn. Van idee tot merk, website en app.',
+      en: 'Your private wine cellar that refills itself: a subscription to quality wine matched to your taste, delivered free every month. With a taste test, an overview of all your bottles at home and in the vault, and bidding and subscribing to wine. From idea to brand, website and app.',
     },
     points: {
-      nl: ['Merk, verhaal en website', 'Klikbare app met smaaktest', 'Wachtlijst voor de eerste leden'],
-      en: ['Brand, story and website', 'Clickable app with a taste test', 'Waiting list for the first members'],
+      nl: ['Abonnement met smaaktest en drie smaakprofielen', 'Mijn Qeldr: alle flessen thuis en in het gewelf', 'Bieden en inschrijven op wijn'],
+      en: ['Subscription with taste test and three taste profiles', 'My Qeldr: all bottles at home and in the vault', 'Bidding and subscribing to wine'],
     },
   },
   {

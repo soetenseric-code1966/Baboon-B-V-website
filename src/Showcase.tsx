@@ -36,7 +36,7 @@ export default function Showcase({ lang, signal, title, sub }: { lang: Lang; sig
   const auto = playing && !reduced;
 
   const screen = it.screen ? (
-    <img src={it.screen} alt={`${name}: ${lang === 'nl' ? 'schermafbeelding' : 'screenshot'}`} width={1920} height={1200}
+    <img src={it.screen} alt={`${name}: ${lang === 'nl' ? 'schermafbeelding' : 'screenshot'}`} width={1600} height={1000}
       loading={i === 0 ? 'eager' : 'lazy'} decoding="async" style={{ display: 'block', width: '100%', height: 'auto', aspectRatio: '16 / 10', objectFit: 'cover', objectPosition: 'top' }} />
   ) : (
     <div style={{ background: '#FFFFFF', padding: 18, display: 'flex', flexDirection: 'column', gap: 12, aspectRatio: '16 / 10' }}>
