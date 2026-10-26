@@ -32,14 +32,15 @@ export const LIVE = [
     },
   },
   {
-    name: 'Ontwerpuren',
-    url: 'https://ontwerpuren-demo.netlify.app',
-    host: 'ontwerpuren-demo.netlify.app',
+    name: 'Urenregistratie',
+    title: { nl: 'Urenregistratie voor zzp’ers', en: 'Time tracking for freelancers' },
+    url: 'https://uren.datawerf.com',
+    host: 'uren.datawerf.com',
     status: 'demo',
     kind: { nl: 'App · urenregistratie', en: 'App · time tracking' },
     text: {
-      nl: 'Automatische urenregistratie voor een ontwerpstudio: de app ziet aan welk bestand of project wordt gewerkt, wijst de tijd toe en zet de uren klaar om te factureren.',
-      en: 'Automatic time tracking for a design studio: the app sees which file or project is being worked on, assigns the time and prepares the hours for invoicing.',
+      nl: 'Automatische urenregistratie voor zzp’ers die de hele dag achter de computer werken: de app ziet aan welk bestand of project u werkt, wijst de tijd toe en zet de uren klaar om te factureren.',
+      en: 'Automatic time tracking for freelancers who work at a computer all day: the app sees which file or project you are working on, assigns the time and prepares the hours for invoicing.',
     },
     points: {
       nl: ['Tijdlijn van de werkdag per project', 'AI-voorstel als een activiteit niet herkend wordt', 'Goedgekeurde uren direct klaar voor de factuur'],
