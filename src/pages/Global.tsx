@@ -2,7 +2,7 @@
 // Gegenereerd uit het Design-canvas (Global.dc.html) door scripts/convert-design.mjs.
 import React from 'react';
 import { DCLogic, css, H, useDC } from '../dc';
-import { liveUrl, LIVE_TEXT } from '../live';
+import Showcase from '../Showcase';
 
 const FTXT = {"nl": {"nav": ["Wat we bouwen", "Hoe het werkt", "Prijzen", "Over ons", "Contact"], "login": "Inloggen", "cta": "Start gratis", "eu": "Nederlandse regie · data in Europa", "company": "BEDRIJF", "legal": "JURIDISCH", "n1": "Wat we bouwen", "n2": "Hoe het werkt", "n3": "Prijzen", "n4": "Over ons", "n5": "Contact", "l1": "Privacyverklaring", "l2": "Algemene voorwaarden", "l3": "Verwerkersovereenkomst", "l4": "Cookies", "trade": "Datawerf is een handelsnaam van Baboon B.V.", "gdpr": "Data in Europa · AVG-conform"}, "en": {"nav": ["What we build", "How it works", "Pricing", "About", "Contact"], "login": "Log in", "cta": "Start free", "eu": "Dutch-led · data in Europe", "company": "COMPANY", "legal": "LEGAL", "n1": "What we build", "n2": "How it works", "n3": "Pricing", "n4": "About", "n5": "Contact", "l1": "Privacy statement", "l2": "Terms and conditions", "l3": "Data processing agreement", "l4": "Cookies", "trade": "Datawerf is a trade name of Baboon B.V.", "gdpr": "Data in Europe · GDPR compliant"}};
 const NAVH = ["Etalage.dc.html", "Global.dc.html#hoe", "Prijslijst.dc.html", "OverOns.dc.html", "Contact.dc.html"];
@@ -114,28 +114,7 @@ export default function Page({ lang, signal }) {
 <div style={css("margin-top:24px;background:#14213D;color:#FFFFFF;border-radius:16px;padding:20px 24px;font-size:19px;line-height:1.45")}><span style={css(`color:${$v?.signal ?? ""};font-weight:700`)}>= </span>{$v?.t?.co_r}</div>
 </div>
 </section>
-<section id="werk" style={css("padding:0 48px 88px")}>
-<div style={css("display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px")}>
-<div><h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.wk_t}</h2><p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{$v?.t?.wk_s}</p></div>
-<div style={css("display:flex;gap:10px;align-items:center")}><span style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;color:#5C6378")}>{$v?.car?.pos}</span><button type="button" aria-label={$v?.t?.prev} onClick={$v?.car?.prev} style={css("width:52px;height:52px;border-radius:50%;border:2px solid #14213D;background:#FFFFFF;font-size:20px;cursor:pointer")}>←</button><button type="button" aria-label={$v?.t?.next} onClick={$v?.car?.next} style={css(`width:52px;height:52px;border-radius:50%;border:0;background:${$v?.signal ?? ""};color:#FFFFFF;font-size:20px;cursor:pointer`)}>→</button></div>
-</div>
-<div style={css("margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));border-radius:24px;overflow:hidden;border:1px solid #D5DAE3")}>
-<div style={css("padding:44px;display:flex;flex-direction:column;justify-content:center")}>
-<div style={css("display:flex;gap:8px;align-items:center")}><span style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:#14213D;color:#FFFFFF;text-transform:uppercase")}>{$v?.car?.kind}</span><span style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378")}>{$v?.car?.stage}</span></div>
-<div style={css("font-size:44px;font-weight:700;letter-spacing:-1.4px;margin-top:14px")}>{$v?.car?.name}</div>
-<p style={css("font-size:19px;line-height:1.5;color:#3A4258;margin:12px 0 0")}>{$v?.car?.d}</p>{liveUrl($v?.car?.name) ? <a href={liveUrl($v?.car?.name)} target="_blank" rel="noopener" style={css(`align-self:flex-start;margin-top:16px;font-weight:700;color:${$v?.signal ?? ""};text-decoration:none`)}>{LIVE_TEXT[lang].open} →</a> : null}
-<div style={css("display:flex;gap:6px;margin-top:28px")}>{($v?.car?.dots || []).map((o, o__i) => <React.Fragment key={o__i}><button type="button" aria-label={o?.label} aria-pressed={o?.on} onClick={o?.pick} style={css(o?.style)}></button></React.Fragment>)}</div>
-</div>
-<div style={css("background:#14213D;padding:36px;display:flex;align-items:center;min-height:320px")}>
-<div style={css("background:#FFFFFF;border-radius:14px;padding:18px;width:100%;display:flex;flex-direction:column;gap:12px")}>
-<div style={css("display:flex;justify-content:space-between")}><strong style={css("font-size:15px")}>{$v?.car?.name}</strong><span style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 8px;border-radius:999px;background:#FFF0E8;color:#9A3412")}>demo</span></div>
-<div style={css("display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px")}><div style={css("height:56px;background:#F7F8FA;border-radius:8px")}></div><div style={css("height:56px;background:#F7F8FA;border-radius:8px")}></div><div style={css("height:56px;background:#FFF0E8;border-radius:8px")}></div></div>
-<div style={css("display:flex;align-items:flex-end;gap:8px;height:110px")}>{($v?.car?.bars || []).map((b, b__i) => <React.Fragment key={b__i}><div style={css(b)}></div></React.Fragment>)}</div>
-<div style={css("height:28px;border:1px solid #EEF0F4;border-radius:6px")}></div><div style={css("height:28px;border:1px solid #EEF0F4;border-radius:6px")}></div>
-</div>
-</div>
-</div>
-</section>
+<Showcase lang={lang} signal={$v?.signal} title={$v?.t?.wk_t} sub={$v?.t?.wk_s} />
 <section style={css("padding:0 48px 88px")}>
 <div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.us_eb}</div>
 <h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.us_t}</h2>
