@@ -1,6 +1,6 @@
 # Datawerf-website – afspraken voor de bouwagent
 
-- Bron van waarheid voor alle besluiten: de besluitenlijst in het claude.ai-project ("qplatformz/besluitenlijst.md"). Bij twijfel geldt die lijst.
+- Bron van waarheid voor alle besluiten: de besluitenlijst in het claude.ai-project ("datawerf/besluitenlijst.md"). Bij twijfel geldt die lijst.
 - Vóór elke opdracht eerst lezen: de besluitenlijst, deze `CLAUDE.md` en `README.md`. Bij strijdigheid eerst Eric vragen.
 - Elk nieuw besluit of nieuwe afspraak direct vastleggen, met datum.
 - Elke pull request werkt in dezelfde wijziging bij wat erdoor verandert: `CLAUDE.md`, `README.md` en zo nodig de besluitenlijst. Een wijziging zonder bijgewerkte afspraken is niet af.
