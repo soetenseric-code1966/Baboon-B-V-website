@@ -30,3 +30,4 @@ npm run build    # statische site in dist/
 De pagina's in `src/pages/` zijn gegenereerd uit het Design-canvas "Qplatformz – website en platform" met `scripts/convert-design.mjs`.
 Kopteksten en voet staan in `src/Layout.tsx`, de adressen in `src/routes.ts`, de schaalregels voor telefoon in `src/site.css`.
 Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog niet actief) staan bovenin het conversiescript.
+Opgeleverde projecten (kaarten op Wat we bouwen) staan in `src/live.ts`; de carrousel op de homepage in `src/showcase.ts` met schermafbeeldingen in `public/showcase/`.
