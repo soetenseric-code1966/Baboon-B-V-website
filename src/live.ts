@@ -20,11 +20,12 @@ export const LIVE = [
     name: 'Qeldr',
     url: 'https://qeldr.nl',
     host: 'qeldr.nl',
+    screen: '/showcase/qeldr.jpg',
     status: 'live',
     kind: { nl: 'Business-idee · website en app', en: 'Business idea · website and app' },
     text: {
-      nl: 'Een nieuw idee, een privé wijnkelder, uitgewerkt tot naam, verhaal, website en klikbare app, om te toetsen bij de eerste klanten.',
-      en: 'A new idea, a private wine cellar, worked out into a name, a story, a website and a clickable app, to test with the first customers.',
+      nl: 'Een eigen wijnkelder, zonder de kelder. Leden ontdekken met een korte smaaktest wat ze lekker vinden en krijgen elke maand wijn van kleine wijnmakers, thuis bezorgd of bewaard in hun eigen vak in het gewelf. Wij werkten het idee uit tot merk, website en app, om het te toetsen bij de eerste leden.',
+      en: 'Your own wine cellar, without the cellar. Members find out what they like with a short taste test and receive wine from small winemakers every month, delivered at home or kept in their own space in the vault. We turned the idea into a brand, website and app, to test it with the first members.',
     },
     points: {
       nl: ['Merk, verhaal en website', 'Klikbare app met smaaktest', 'Wachtlijst voor de eerste leden'],
@@ -36,11 +37,12 @@ export const LIVE = [
     title: { nl: 'Urenregistratie voor zzp’ers', en: 'Time tracking for freelancers' },
     url: 'https://uren.datawerf.com',
     host: 'uren.datawerf.com',
+    screen: '/showcase/uren.jpg',
     status: 'demo',
     kind: { nl: 'App · urenregistratie', en: 'App · time tracking' },
     text: {
-      nl: 'Automatische urenregistratie voor zzp’ers die de hele dag achter de computer werken: de app ziet aan welk bestand of project u werkt, wijst de tijd toe en zet de uren klaar om te factureren.',
-      en: 'Automatic time tracking for freelancers who work at a computer all day: the app sees which file or project you are working on, assigns the time and prepares the hours for invoicing.',
+      nl: 'Voor zzp’ers die de hele dag achter de computer werken en hun uren kwijtraken. De app ziet welk programma en bestand openstaat en zet de tijd automatisch op het juiste project; bij twijfel doet hij een voorstel. Eén keer per dag goedkeuren, en de uren staan klaar voor de factuur.',
+      en: 'For freelancers who work at a computer all day and lose track of their hours. The app sees which program and file are open and puts the time on the right project automatically; when in doubt it makes a suggestion. Approve once a day and the hours are ready for the invoice.',
     },
     points: {
       nl: ['Tijdlijn van de werkdag per project', 'AI-voorstel als een activiteit niet herkend wordt', 'Goedgekeurde uren direct klaar voor de factuur'],
