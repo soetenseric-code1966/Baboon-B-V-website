@@ -28,10 +28,10 @@ export const SHOWCASE: ShowcaseItem[] = [
   {
     name: { nl: 'Qeldr', en: 'Qeldr' },
     kind: { nl: 'Business-idee', en: 'Business idea' },
-    stage: { nl: 'idee → merk, website en app', en: 'idea → brand, website and app' },
+    stage: { nl: 'live · website en app', en: 'live · website and app' },
     text: {
-      nl: 'Een eigen wijnkelder, zonder de kelder. Leden ontdekken met een korte smaaktest wat ze lekker vinden; elke maand komt er wijn van kleine wijnmakers bij, thuis bezorgd of bewaard in een eigen vak in het gewelf. Van idee tot merk, verhaal, website en app met smaaktest en wachtlijst, om het te toetsen bij de eerste leden.',
-      en: 'Your own wine cellar, without the cellar. Members find out what they like with a short taste test; every month new wine from small winemakers is added, delivered at home or kept in their own space in the vault. From idea to brand, story, website and an app with a taste test and waiting list, to test it with the first members.',
+      nl: 'Jouw privé wijnkelder die zichzelf bijvult. Een abonnement op kwaliteitswijn naar jouw smaak: met een korte smaaktest kies je je profiel en elke maand komt er bijzondere wijn bij die je niet in de supermarkt vindt, gratis thuisbezorgd. In Mijn Qeldr zie je al je flessen, thuis of in het gewelf, en je kunt bieden en inschrijven op wijn. Van idee tot merk, website en app.',
+      en: 'Your private wine cellar that refills itself. A subscription to quality wine matched to your taste: a short taste test sets your profile and every month special wine you will not find in the supermarket is added, delivered free. In My Qeldr you see all your bottles, at home or in the vault, and you can bid and subscribe to wine. From idea to brand, website and app.',
     },
     url: 'https://qeldr.nl',
     host: 'qeldr.nl',
