@@ -49,6 +49,23 @@ export const LIVE = [
       en: ['Timeline of the working day per project', 'AI suggestion when an activity is not recognised', 'Approved hours ready for the invoice'],
     },
   },
+  {
+    name: 'Aardappelmonitor',
+    title: { nl: 'Aardappelmonitor', en: 'Potato monitor' },
+    url: 'https://aardappelmonitor.netlify.app',
+    host: 'aardappelmonitor.netlify.app',
+    screen: '/showcase/aardappelmonitor.jpg',
+    status: 'live',
+    kind: { nl: 'Monitor · markt en prijsverwachting', en: 'Monitor · market and price forecast' },
+    text: {
+      nl: 'Openbare monitor voor de markt van fritesaardappelen in Noordwest-Europa. Prijzen, oogst, handel, weer en gewasconditie uit vele bronnen, elke nacht automatisch bijgewerkt, met een prijsverwachting voor het seizoen. Van losse Excel-lijsten en websites naar één scherm dat een teler of handelaar helpt kiezen wanneer hij verkoopt.',
+      en: 'Public monitor for the processing potato market in north-west Europe. Prices, harvest, trade, weather and crop condition from many sources, updated automatically every night, with a price forecast for the season. From scattered spreadsheets and websites to one screen that helps a grower or trader decide when to sell.',
+    },
+    points: {
+      nl: ['Vrije markt en contractprijzen uit NL, BE, DE en FR', 'Weer en neerslagtekort; gewasconditie via satellietbeelden', 'Prijsverwachting per seizoen, getoetst op eerdere jaren', 'Inzicht in het verkoopmoment, met uitleg van begrippen'],
+      en: ['Free-market and contract prices from NL, BE, DE and FR', 'Weather and rainfall deficit; crop condition from satellite images', 'Seasonal price forecast, tested against previous years', 'Insight into when to sell, with explanations of terms'],
+    },
+  },
 ] as const;
 
 export const LIVE_TEXT = {
