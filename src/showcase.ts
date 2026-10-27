@@ -56,8 +56,8 @@ export const SHOWCASE: ShowcaseItem[] = [
       nl: 'Alles over de markt voor fritesaardappelen in Noordwest-Europa op één scherm: vrije-marktprijzen uit Nederland, België, Duitsland en Frankrijk, contractprijzen, oogst, handel, weer en gewasconditie via satellietbeelden. Elke nacht worden de bronnen automatisch bijgewerkt, en een rekenmodel geeft een prijsverwachting voor het seizoen, getoetst op eerdere jaren. Zo kiest een teler of handelaar zijn verkoopmoment op basis van data in plaats van gevoel; indicatief, geen advies.',
       en: 'Everything about the market for processing potatoes in north-west Europe on one screen: free-market prices from the Netherlands, Belgium, Germany and France, contract prices, harvest, trade, weather and crop condition from satellite images. The sources update automatically every night, and a model gives a price forecast for the season, tested against previous years. Growers and traders choose their moment to sell on data instead of gut feeling; indicative, not advice.',
     },
-    url: 'https://aardappelmonitor.netlify.app',
-    host: 'aardappelmonitor.netlify.app',
+    url: 'https://aardappelmonitor.datawerf.com',
+    host: 'aardappelmonitor.datawerf.com',
     screen: '/showcase/aardappelmonitor.jpg',
   },
   {

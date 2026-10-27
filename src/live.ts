@@ -52,8 +52,8 @@ export const LIVE = [
   {
     name: 'Aardappelmonitor',
     title: { nl: 'Aardappelmonitor', en: 'Potato monitor' },
-    url: 'https://aardappelmonitor.netlify.app',
-    host: 'aardappelmonitor.netlify.app',
+    url: 'https://aardappelmonitor.datawerf.com',
+    host: 'aardappelmonitor.datawerf.com',
     screen: '/showcase/aardappelmonitor.jpg',
     status: 'live',
     kind: { nl: 'Monitor · markt en prijsverwachting', en: 'Monitor · market and price forecast' },
