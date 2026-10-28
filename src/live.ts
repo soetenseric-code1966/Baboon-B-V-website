@@ -66,6 +66,23 @@ export const LIVE = [
       en: ['Free-market and contract prices from NL, BE, DE and FR', 'Weather and rainfall deficit; crop condition from satellite images', 'Seasonal price forecast, tested against previous years', 'Insight into when to sell, with explanations of terms'],
     },
   },
+  {
+    name: 'Dagplanning',
+    title: { nl: 'Dagplanning wagenpark', en: 'Daily fleet planning' },
+    url: 'https://dagplanning.qcontrolz.nl/dagplanning/demo',
+    host: 'dagplanning.qcontrolz.nl',
+    screen: '/showcase/dagplanning.jpg',
+    status: 'demo',
+    kind: { nl: 'Platform · busvervoer', en: 'Platform · bus operations' },
+    text: {
+      nl: 'Elke ochtend moet er per stalling het juiste aantal bussen van het juiste type klaarstaan voor de dienstregeling. Het planbord toont per stalling wat nodig is en wat er staat, telt mee met de stallingen, stelt verplaatsingen voor en volgt bussen bij de onderhoudspartijen. Vlootbeheerder, wagenparkbeheerder, stalling en onderhoudspartij werken elk vanuit hun eigen scherm.',
+      en: 'Every morning each depot needs the right number of buses of the right type ready for the timetable. The planning board shows per depot what is needed and what is there, takes in the depot counts, suggests transfers and tracks buses at the maintenance partners. Fleet manager, fleet supervisor, depot and maintenance partner each work from their own screen.',
+    },
+    points: {
+      nl: ['Planbord per stalling: nodig volgens dienstregeling tegenover inzetbaar', 'Voorstel voor verplaatsingen; met één klik een opdracht geven', 'Onderhoud volgen per partij: wacht, gestart, gereed', 'Eigen scherm per rol, demo met fictieve gegevens'],
+      en: ['Planning board per depot: needed by timetable versus available', 'Suggested transfers; issue the order in one click', 'Maintenance tracked per partner: waiting, started, ready', 'Own screen per role, demo with fictitious data'],
+    },
+  },
 ] as const;
 
 export const LIVE_TEXT = {

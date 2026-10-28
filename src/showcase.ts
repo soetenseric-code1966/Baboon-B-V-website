@@ -38,6 +38,18 @@ export const SHOWCASE: ShowcaseItem[] = [
     screen: '/showcase/qeldr.jpg',
   },
   {
+    name: { nl: 'Dagplanning wagenpark', en: 'Daily fleet planning' },
+    kind: { nl: 'Platform', en: 'Platform' },
+    stage: { nl: 'demo', en: 'demo' },
+    text: {
+      nl: 'Het planbord voor busvervoer: per stalling ziet de vlootbeheerder hoeveel bussen van elk type de dienstregeling vraagt en hoeveel er inzetbaar staan. De tellingen van de stallingen komen erbij, het systeem stelt verplaatsingen voor en houdt bij welke bussen bij welke onderhoudspartij staan. In de demo logt u in als vlootbeheerder, wagenparkbeheerder, stalling of onderhoudspartij.',
+      en: 'The planning board for bus operations: per depot the fleet manager sees how many buses of each type the timetable needs and how many are available. Depot counts come in, the system suggests transfers and keeps track of which buses are at which maintenance partner. In the demo you log in as fleet manager, fleet supervisor, depot or maintenance partner.',
+    },
+    url: 'https://dagplanning.qcontrolz.nl/dagplanning/demo',
+    host: 'dagplanning.qcontrolz.nl',
+    screen: '/showcase/dagplanning.jpg',
+  },
+  {
     name: { nl: 'Qfleetz', en: 'Qfleetz' },
     kind: { nl: 'Platform', en: 'Platform' },
     stage: { nl: 'live', en: 'live' },
