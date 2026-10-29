@@ -4,7 +4,7 @@
 export const LAB_URL = 'https://wmqofgxvwasvjlejxjji.supabase.co/functions/v1/datawerf-lab';
 // Openbare site key van Cloudflare Turnstile. Leeg = geen robotcontrole in beeld (de functie controleert alleen als
 // TURNSTILE_SECRET is ingesteld).
-export const TURNSTILE_SITEKEY = '';
+export const TURNSTILE_SITEKEY = '0x4AAAAAAFrXtRgfM6V-VSEQ';
 
 export type LabPrompt = { nr: number; tekst: string; status: 'bezig' | 'klaar' | 'fout'; samenvatting: string | null; duur_ms: number | null };
 export type LabStand = {
