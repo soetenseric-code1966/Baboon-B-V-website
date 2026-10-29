@@ -10,11 +10,14 @@ import OverOns from './pages/OverOns';
 import Contact from './pages/Contact';
 import Juridisch from './pages/Juridisch';
 import Inloggen from './pages/Inloggen';
+import Start from './pages/Start';
+import Lab from './pages/Lab';
+import LabBeheer from './pages/LabBeheer';
 
 export const SIGNAL = '#FF5A1F';
 
 const COMPONENTS: Record<PageName, React.ComponentType<{ lang: Lang; signal: string }>> = {
-  Global, Etalage, Apps, Prijslijst, OverOns, Contact, Juridisch, Inloggen,
+  Global, Etalage, Apps, Prijslijst, OverOns, Contact, Juridisch, Inloggen, Start, Lab, LabBeheer,
 };
 
 export default function App({ page, lang }: { page: PageName; lang: Lang }) {

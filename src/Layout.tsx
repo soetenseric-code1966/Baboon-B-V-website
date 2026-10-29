@@ -58,7 +58,7 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
             ))}
           </div>
           <a href={href('Inloggen', lang)} style={{ fontSize: 15, fontWeight: 600, color: '#14213D', textDecoration: 'none' }}>{f.login}</a>
-          <a href={href('Contact', lang)} style={{ padding: '11px 18px', borderRadius: 999, background: '#14213D', color: '#FFFFFF', fontWeight: 700, fontSize: 15, textDecoration: 'none' }}>{f.cta}</a>
+          <a href={href('Start', lang)} style={{ padding: '11px 18px', borderRadius: 999, background: '#14213D', color: '#FFFFFF', fontWeight: 700, fontSize: 15, textDecoration: 'none' }}>{f.cta}</a>
         </div>
       </header>
 
@@ -81,7 +81,7 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
             <a href={href('Apps', lang)} style={footLink}>Apps</a>
             <a href={href('Global', lang, '#hoe')} style={footLink}>{f.n2}</a>
             <a href={href('Prijslijst', lang)} style={footLink}>{f.n3}</a>
-            <a href={href('Contact', lang)} style={footLink}>{f.cta}</a>
+            <a href={href('Start', lang)} style={footLink}>{f.cta}</a>
           </nav>
           <nav aria-label={lang === 'nl' ? 'Bedrijf' : 'Company'} style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
             <strong style={footHead}>{f.company}</strong>

@@ -56,3 +56,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .dw main [style*="grid-template-columns:220px 1fr"] { grid-template-columns: minmax(0, 1fr) !important; gap: 4px !important; }
   .dw main { overflow-wrap: anywhere; }
 }
+
+/* Lab: draaiend teken terwijl het ontwerp wordt gemaakt */
+@keyframes labdraai { to { transform: rotate(360deg); } }
+.lab-laden { animation: labdraai 1s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .lab-laden { animation: none; } }
