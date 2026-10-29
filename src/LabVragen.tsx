@@ -1,5 +1,6 @@
 // Hulpvragen bij het idee (besluit 29-10-2026): de AI stelt 3-5 vragen met keuzes die bij het getypte idee passen
-// (actie "vragen"); lukt dat niet, dan algemene vragen. De antwoorden komen als tekst in het ideevak.
+// (actie "vragen"); lukt dat niet, dan algemene vragen. Eén vraag tegelijk (besluit 29-10-2026), met Vorige/Volgende;
+// bij één mogelijke keuze gaat hij na het kiezen vanzelf door. De antwoorden komen als tekst in het ideevak.
 import React, { useState } from 'react';
 import { Lang } from './routes';
 import { LAB_TEXT, LabAntwoord, LabVraag, STANDAARD_VRAGEN, antwoordenTekst, labApi } from './lab';
@@ -9,6 +10,7 @@ export default function LabVragen({ lang, signal, idee, zetIdee }: { lang: Lang;
   const [open, setOpen] = useState(false); const [bezig, setBezig] = useState(false); const [standaard, setStandaard] = useState(false);
   const [vragen, setVragen] = useState<LabVraag[]>([]); const [antwoorden, setAntwoorden] = useState<LabAntwoord[]>([]);
   const [melding, setMelding] = useState<string | null>(null);
+  const [stap, setStap] = useState(0);
 
   async function haal() {
     if (idee.trim().length < 10) { setMelding(t.hulpKort); return; }
@@ -16,14 +18,14 @@ export default function LabVragen({ lang, signal, idee, zetIdee }: { lang: Lang;
     let v: LabVraag[] | null = null;
     try { v = (await labApi<{ vragen: LabVraag[] | null }>({ actie: 'vragen', idee, taal: lang })).vragen; } catch { v = null; }
     const lijst = v && v.length ? v : STANDAARD_VRAGEN[lang];
-    setStandaard(!(v && v.length)); setVragen(lijst); setAntwoorden(lijst.map(() => ({ gekozen: [], anders: '' }))); setBezig(false);
+    setStandaard(!(v && v.length)); setStap(0); setVragen(lijst); setAntwoorden(lijst.map(() => ({ gekozen: [], anders: '' }))); setBezig(false);
   }
   function kies(i: number, k: string) {
-    setAntwoorden((a) => a.map((x, j) => {
-      if (j !== i) return x;
-      const aan = x.gekozen.includes(k);
-      return { ...x, gekozen: vragen[i].meerdere ? (aan ? x.gekozen.filter((y) => y !== k) : [...x.gekozen, k]) : (aan ? [] : [k]) };
-    }));
+    const aan = antwoorden[i]?.gekozen.includes(k) ?? false;
+    setAntwoorden((a) => a.map((x, j) => (j !== i ? x
+      : { ...x, gekozen: vragen[i].meerdere ? (aan ? x.gekozen.filter((y) => y !== k) : [...x.gekozen, k]) : (aan ? [] : [k]) })));
+    // Eén keuze mogelijk: na het kiezen vanzelf door naar de volgende vraag.
+    if (!vragen[i].meerdere && !aan && i < vragen.length - 1) window.setTimeout(() => setStap(i + 1), 250);
   }
   function zet() {
     const extra = antwoordenTekst(vragen, antwoorden, lang);
@@ -52,19 +54,28 @@ export default function LabVragen({ lang, signal, idee, zetIdee }: { lang: Lang;
         </div>
       ) : <>
         <p style={{ margin: 0, fontSize: 14, color: '#5C6378' }}>{standaard ? t.hulpStandaard : t.hulpS}</p>
-        {vragen.map((v, i) => (
-          <fieldset key={i} style={{ border: 0, margin: 0, padding: 0, display: 'grid', gap: 8 }}>
-            <legend style={{ fontWeight: 700, fontSize: 15, marginBottom: 8 }}>{v.vraag}</legend>
+        {vragen[stap] ? (() => { const v = vragen[stap], i = stap, laatste = stap === vragen.length - 1; const ingevuld = (antwoorden[i]?.gekozen.length ?? 0) > 0 || !!antwoorden[i]?.anders.trim(); return (
+          <fieldset key={i} className="lab-vraag" style={{ border: 0, margin: 0, padding: 0, display: 'grid', gap: 10 }}>
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center' }} aria-hidden="true">
+              {vragen.map((_, j) => <i key={j} style={{ width: 28, height: 6, borderRadius: 3, background: j <= stap ? signal : '#E3E7EE' }} />)}
+              <span style={{ fontSize: 13, color: '#5C6378', marginLeft: 4 }}>{stap + 1} {t.hulpVan} {vragen.length}</span>
+            </div>
+            <legend style={{ fontWeight: 700, fontSize: 18, padding: 0, marginBottom: 4 }}>{v.vraag}</legend>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               {v.keuzes.map((k) => { const aan = antwoorden[i]?.gekozen.includes(k) ?? false; return (
                 <button key={k} type="button" aria-pressed={aan} onClick={() => kies(i, k)} style={chip(aan)}>{k}</button>); })}
             </div>
             <input value={antwoorden[i]?.anders ?? ''} maxLength={200} placeholder={t.hulpAnders} aria-label={`${v.vraag} ${t.hulpAnders}`}
               onChange={(e) => setAntwoorden((a) => a.map((x, j) => (j === i ? { ...x, anders: e.target.value } : x)))}
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); if (laatste) zet(); else setStap(i + 1); } }}
               style={{ border: '1px solid #D5DAE3', borderRadius: 12, padding: '10px 12px', font: "15px 'Space Grotesk',system-ui,sans-serif", maxWidth: 520 }} />
-          </fieldset>
-        ))}
-        <button type="button" onClick={zet} style={{ justifySelf: 'start', padding: '12px 22px', borderRadius: 999, border: 0, background: '#14213D', color: '#FFFFFF', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>{t.hulpZet} →</button>
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginTop: 6 }}>
+              {stap > 0 ? <button type="button" onClick={() => setStap(stap - 1)} style={{ padding: '10px 18px', borderRadius: 999, border: '2px solid #14213D', background: '#FFFFFF', color: '#14213D', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>← {t.hulpVorige}</button> : null}
+              {laatste
+                ? <button type="button" onClick={zet} style={{ padding: '12px 22px', borderRadius: 999, border: 0, background: '#14213D', color: '#FFFFFF', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>{t.hulpZet} →</button>
+                : <button type="button" onClick={() => setStap(i + 1)} style={{ padding: '12px 22px', borderRadius: 999, border: 0, background: '#14213D', color: '#FFFFFF', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}>{ingevuld ? t.hulpVolgende : t.hulpOverslaan} →</button>}
+            </div>
+          </fieldset>); })() : null}
       </>}
     </div>
   );
