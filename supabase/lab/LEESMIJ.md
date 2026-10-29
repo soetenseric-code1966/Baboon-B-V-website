@@ -34,7 +34,8 @@ De openbare site key van Turnstile staat in `src/lab.ts` (`TURNSTILE_SITEKEY`).
 - De geheime link (`#id.sleutel`) is de toegang; op de server staat alleen een hash van de sleutel.
 - Inloggen zonder account: na het eerste ontwerp een mail met de link; op Inloggen en /lab/ kan de bezoeker zijn e-mailadres invullen en krijgt hij nieuwe links naar al zijn ideeën (tabel `lab.toegang`, max. 3 mails per uur per adres, `lab.mails`). Migratie `20261029180000_lab_toegang_mails.sql`.
 - Vaste app-stijl (zoals Dagplanning en Wielen): `functions/datawerf-lab/stijl.ts`, uitleg in `docs/app-stijl.md`. De functie zet het stylesheet zelf in elk ontwerp; de AI gebruikt alleen de klassen.
-- Later: bestanden uploaden voor de opbouw (nooit voor de getallen), verhuizen naar een eigen Datawerf-omgeving.
+- Bestanden (29-10-2026): `start` en `vraag` nemen optioneel `bestanden` mee: de opbouw die de browser uit Excel/CSV haalt (`src/labBestanden.ts`). `bestandenTekst` in `regels.ts` controleert die (max. 3 bestanden, 10 bladen, 60 kolommen, 6.000 tekens) en zet hem achter het idee of de vraag, na de kop `BESTANDEN_KOP`. Geen inhoud en geen bestandsnaam.
+- Later: verhuizen naar een eigen Datawerf-omgeving.
 
 ## Tests
 `npm test` (Node, `test/lab-regels.test.mjs`): formulier, kosten, waarde, ontwerp uit het antwoord, daglimiet, toegestane herkomst, AI-opdracht.

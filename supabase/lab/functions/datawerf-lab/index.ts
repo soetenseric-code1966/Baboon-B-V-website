@@ -15,7 +15,7 @@
 // (USD per miljoen tokens), LAB_USD_EUR. Mail: RESEND_API_KEY, LAB_AFZENDER, LAB_SITE. Nooit sleutels of volledige foutmeldingen teruggeven of loggen.
 import postgres from "npm:postgres@3.4.5";
 import {
-  BEZIG_VERLOOPT_MS, MAX_PROMPTS, SYSTEEM, begintVandaag, controleerStart, controleerVraag, kostenEur, leesOntwerp,
+  BESTANDEN_KOP, BEZIG_VERLOOPT_MS, MAX_PROMPTS, SYSTEEM, begintVandaag, bestandenTekst, controleerStart, controleerVraag, kostenEur, leesOntwerp,
   mailKlaar, mailLinks, toegestaneHerkomst, voegStijlToe, waardeEur, zonderStijl,
 } from "./regels.ts";
 
@@ -116,16 +116,18 @@ async function maakOntwerp(promptId: number, ideeId: string, sleutelVoorMail?: s
     const r = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "content-type": "application/json", "x-api-key": env("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01" },
-      body: JSON.stringify({ model, max_tokens: 20000, system: SYSTEEM(idee.taal), messages: [{ role: "user", content: inhoud }] }),
+      body: JSON.stringify({ model, max_tokens: getal("LAB_MAX_TOKENS", 32000), thinking: { type: "between_tools" }, system: SYSTEEM(idee.taal), messages: [{ role: "user", content: inhoud }] }),
     });
     const j = await r.json().catch(() => null);
-    if (!r.ok || !j) throw new Error(`AI gaf status ${r.status}${j?.error?.type ? " (" + j.error.type + ")" : ""}`);
+    if (!r.ok || !j) throw new Error(`AI gaf status ${r.status}${j?.error?.type ? " (" + j.error.type + ")" : ""}${j?.error?.message ? ": " + String(j.error.message).slice(0, 120) : ""}`);
     const tekst = (j.content ?? []).filter((c: { type: string }) => c.type === "text").map((c: { text: string }) => c.text).join("");
     const tokensIn = j.usage?.input_tokens ?? 0, tokensUit = j.usage?.output_tokens ?? 0;
     const kosten = kostenEur(tokensIn, tokensUit, getal("LAB_PRIJS_IN", 3), getal("LAB_PRIJS_UIT", 15), getal("LAB_USD_EUR", 0.86));
-    const ontwerp = leesOntwerp(tekst);
+    const ontwerp = j.stop_reason === "max_tokens" ? null : leesOntwerp(tekst);
     if (!ontwerp) {
-      await sql`UPDATE lab.prompts SET status = 'fout', fout = 'Geen bruikbaar ontwerp ontvangen', model = ${model}, tokens_in = ${tokensIn},
+      const blokken = (j.content ?? []).map((c: { type: string }) => c.type).join(",");
+      const reden = `${j.stop_reason === "max_tokens" ? "Ontwerp te groot (afgebroken)" : "Geen bruikbaar ontwerp ontvangen"}; ${tekst.length} tekens tekst; blokken ${blokken}`.slice(0, 300);
+      await sql`UPDATE lab.prompts SET status = 'fout', fout = ${reden}, model = ${model}, tokens_in = ${tokensIn},
         tokens_uit = ${tokensUit}, kosten_eur = ${kosten}, duur_ms = ${Date.now() - start}, klaar = now() WHERE id = ${promptId}`;
       return;
     }
@@ -135,8 +137,10 @@ async function maakOntwerp(promptId: number, ideeId: string, sleutelVoorMail?: s
     // Eerste ontwerp klaar: mail met de link (de bezoeker hoeft niet te wachten).
     if (sleutelVoorMail) await stuurMail(idee.email, "klaar", ideeId, mailKlaar(idee.taal, ontwerp.titel ?? "Uw idee", labLink(idee.taal, ideeId, sleutelVoorMail)));
   } catch (e) {
-    console.error("lab: ontwerp mislukt", promptId, e instanceof Error ? e.message.slice(0, 200) : "onbekend");
-    await sql`UPDATE lab.prompts SET status = 'fout', fout = 'Het ontwerp kon niet worden gemaakt', duur_ms = ${Date.now() - start}, klaar = now()
+    // De melding (zonder sleutels) komt alleen in lab.prompts.fout, voor beheer; de bezoeker ziet hem niet.
+    const melding = e instanceof Error ? e.message.slice(0, 250) : "onbekend";
+    console.error("lab: ontwerp mislukt", promptId, melding);
+    await sql`UPDATE lab.prompts SET status = 'fout', fout = ${"Het ontwerp kon niet worden gemaakt: " + melding}, duur_ms = ${Date.now() - start}, klaar = now()
       WHERE id = ${promptId}`.catch(() => {});
   }
 }
@@ -170,6 +174,9 @@ Deno.serve(async (req) => {
       case "start": {
         const c = controleerStart(body);
         if (!c.ok) return antwoord(req, { fout: c.fout }, 400);
+        const bijlage = bestandenTekst(body.bestanden);
+        if (bijlage === null) return antwoord(req, { fout: "De bestanden konden niet worden gelezen. Probeer maximaal drie Excel- of CSV-bestanden." }, 400);
+        const ideeTekst = c.idee + (bijlage ? BESTANDEN_KOP + bijlage : "");
         if (!env("ANTHROPIC_API_KEY")) return antwoord(req, { fout: "Het lab is nog niet open. Probeer het later opnieuw." }, 503);
         if (!(await robotOk(body.robot, ip))) return antwoord(req, { fout: "De robotcontrole is niet gelukt. Probeer het opnieuw." }, 400);
         if (await dagVol()) return antwoord(req, { fout: "Het lab is vandaag vol. Morgen kunt u weer starten, of mail ons." }, 429);
@@ -180,16 +187,19 @@ Deno.serve(async (req) => {
         }
         const sleutel = nieuweSleutel();
         const [idee] = await sql`INSERT INTO lab.ideeen (sleutel_hash, naam, email, bedrijf, idee, taal, ip_hash)
-          VALUES (${await sha256(sleutel)}, ${c.naam}, ${c.email}, ${c.bedrijf}, ${c.idee}, ${c.taal}, ${ipHash}) RETURNING id`;
-        const [p] = await sql`INSERT INTO lab.prompts (idee_id, nr, tekst) VALUES (${idee.id}, 1, ${c.idee.slice(0, 4000)}) RETURNING id`;
+          VALUES (${await sha256(sleutel)}, ${c.naam}, ${c.email}, ${c.bedrijf}, ${ideeTekst}, ${c.taal}, ${ipHash}) RETURNING id`;
+        const [p] = await sql`INSERT INTO lab.prompts (idee_id, nr, tekst) VALUES (${idee.id}, 1, ${ideeTekst}) RETURNING id`;
         opAchtergrond(maakOntwerp(p.id, idee.id, sleutel));
         return antwoord(req, { id: idee.id, sleutel, mail: Boolean(env("RESEND_API_KEY")) });
       }
       case "vraag": {
         const idee = await zoekIdee(body.id, body.sleutel);
         if (!idee) return antwoord(req, { fout: "Dit idee is niet gevonden." }, 404);
-        const t = controleerVraag(body.tekst);
-        if (!t) return antwoord(req, { fout: "Typ wat er anders moet (maximaal 4.000 tekens)." }, 400);
+        const vraagTekst = controleerVraag(body.tekst);
+        if (!vraagTekst) return antwoord(req, { fout: "Typ wat er anders moet (maximaal 4.000 tekens)." }, 400);
+        const bijlage = bestandenTekst(body.bestanden);
+        if (bijlage === null) return antwoord(req, { fout: "De bestanden konden niet worden gelezen. Probeer maximaal drie Excel- of CSV-bestanden." }, 400);
+        const t = vraagTekst + (bijlage ? BESTANDEN_KOP + bijlage : "");
         const prompts = await sql`SELECT id, nr, status FROM lab.prompts WHERE idee_id = ${idee.id} ORDER BY nr`;
         if (prompts.some((p) => p.status === "bezig")) return antwoord(req, { fout: "Het vorige ontwerp wordt nog gemaakt." }, 409);
         if (await dagVol()) return antwoord(req, { fout: "Het lab is vandaag vol. Morgen kunt u verder." }, 429);

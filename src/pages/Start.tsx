@@ -2,6 +2,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Lang, href } from '../routes';
 import { LAB_TEXT, TURNSTILE_SITEKEY, bewaarIdee, labApi } from '../lab';
+import LabBestanden from '../LabBestanden';
+import type { Opbouw } from '../labBestanden';
 
 const mono: React.CSSProperties = { fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' };
 const veld: React.CSSProperties = { width: '100%', border: '1px solid #D5DAE3', borderRadius: 12, padding: '12px 14px', font: "16px 'Space Grotesk',system-ui,sans-serif", color: '#14213D', background: '#FFFFFF' };
@@ -12,6 +14,7 @@ declare global { interface Window { turnstile?: { render: (el: HTMLElement, o: R
 export default function Start({ lang, signal }: { lang: Lang; signal: string }) {
   const t = LAB_TEXT[lang];
   const [idee, setIdee] = useState(''); const [naam, setNaam] = useState(''); const [email, setEmail] = useState(''); const [bedrijf, setBedrijf] = useState('');
+  const [bestanden, setBestanden] = useState<Opbouw[]>([]);
   const [bezig, setBezig] = useState(false); const [fout, setFout] = useState<string | null>(null);
   const robot = useRef<HTMLDivElement>(null); const robotToken = useRef<string>(''); const widget = useRef<string | undefined>();
 
@@ -27,7 +30,7 @@ export default function Start({ lang, signal }: { lang: Lang; signal: string }) 
   async function verstuur(e: React.FormEvent) {
     e.preventDefault(); setFout(null); setBezig(true);
     try {
-      const r = await labApi<{ id: string; sleutel: string }>({ actie: 'start', idee, naam, email, bedrijf, taal: lang, robot: robotToken.current });
+      const r = await labApi<{ id: string; sleutel: string }>({ actie: 'start', idee, naam, email, bedrijf, taal: lang, robot: robotToken.current, bestanden });
       bewaarIdee({ id: r.id, sleutel: r.sleutel, titel: idee.slice(0, 60), datum: new Date().toISOString() });
       window.location.href = href('Lab', lang) + '#' + r.id + '.' + r.sleutel;
     } catch (err) {
@@ -50,6 +53,7 @@ export default function Start({ lang, signal }: { lang: Lang; signal: string }) 
               style={{ ...veld, resize: 'vertical', lineHeight: 1.5 }}
               onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) (e.currentTarget.form as HTMLFormElement).requestSubmit(); }} />
           </label>
+          <LabBestanden lang={lang} waarde={bestanden} wijzig={setBestanden} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 14 }}>
             <label style={label} htmlFor="lab-naam">{t.naam}<input id="lab-naam" required maxLength={120} value={naam} onChange={(e) => setNaam(e.target.value)} autoComplete="name" style={veld} /></label>
             <label style={label} htmlFor="lab-email">{t.email}<input id="lab-email" type="email" required maxLength={200} value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" style={veld} /></label>

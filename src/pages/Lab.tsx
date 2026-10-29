@@ -2,7 +2,9 @@
 // doorgestreepte waarde en "Maak het nauwkeuriger". Het adres is /lab/#<id>.<sleutel>; de sleutel blijft in de browser.
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Lang, href } from '../routes';
-import { LAB_TEXT, LabStand, bewaarIdee, bewaardeIdeeen, labApi } from '../lab';
+import { LAB_TEXT, LabStand, bewaarIdee, bewaardeIdeeen, labApi, zonderBijlage } from '../lab';
+import LabBestanden from '../LabBestanden';
+import type { Opbouw } from '../labBestanden';
 import LabLinks from '../LabLinks';
 
 const mono: React.CSSProperties = { fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' };
@@ -19,7 +21,7 @@ export default function Lab({ lang, signal }: { lang: Lang; signal: string }) {
   const [geladen, setGeladen] = useState(false);
   const [stand, setStand] = useState<LabStand | null>(null);
   const [fout, setFout] = useState<string | null>(null);
-  const [vraag, setVraag] = useState(''); const [stuurt, setStuurt] = useState(false);
+  const [vraag, setVraag] = useState(''); const [bestanden, setBestanden] = useState<Opbouw[]>([]); const [stuurt, setStuurt] = useState(false);
   const [platform, setPlatform] = useState(false); const [gekopieerd, setGekopieerd] = useState(false);
   const timer = useRef<number | undefined>();
 
@@ -27,7 +29,7 @@ export default function Lab({ lang, signal }: { lang: Lang; signal: string }) {
     try {
       const s = await labApi<LabStand>({ actie: 'stand', ...k });
       setStand(s); setFout(null);
-      bewaarIdee({ id: k.id, sleutel: k.sleutel, titel: s.idee.titel || s.idee.idee.slice(0, 60), datum: new Date().toISOString() });
+      bewaarIdee({ id: k.id, sleutel: k.sleutel, titel: s.idee.titel || zonderBijlage(s.idee.idee).tekst.slice(0, 60), datum: new Date().toISOString() });
       window.clearTimeout(timer.current);
       if (s.bezig) timer.current = window.setTimeout(() => laad(k), 4000);
     } catch (e) { setFout((e as { status?: number }).status === 404 ? t.nietGevonden : (e as Error).message); }
@@ -44,7 +46,7 @@ export default function Lab({ lang, signal }: { lang: Lang; signal: string }) {
   async function stuur(e: React.FormEvent) {
     e.preventDefault(); if (!toegang || !vraag.trim()) return;
     setStuurt(true); setFout(null);
-    try { await labApi({ actie: 'vraag', ...toegang, tekst: vraag }); setVraag(''); await laad(toegang); }
+    try { await labApi({ actie: 'vraag', ...toegang, tekst: vraag, bestanden }); setVraag(''); setBestanden([]); await laad(toegang); }
     catch (err) { setFout((err as Error).message); await laad(toegang); }
     setStuurt(false);
   }
@@ -89,7 +91,7 @@ export default function Lab({ lang, signal }: { lang: Lang; signal: string }) {
             <span style={{ fontSize: 15, color: '#3A4258' }}>{t.waarde} <s>€ {stand.waarde.toLocaleString('nl-NL')}</s> · <strong style={{ color: '#0F7A55' }}>{t.geenKosten}</strong> · {stand.minuten.toLocaleString('nl-NL')} {t.minuten}</span>
           </> : null}
         </div>
-        <h1 style={{ margin: 0, fontSize: 36, letterSpacing: '-1px' }}>{stand?.idee.titel || (stand ? stand.idee.idee.slice(0, 70) : '…')}</h1>
+        <h1 style={{ margin: 0, fontSize: 36, letterSpacing: '-1px' }}>{stand?.idee.titel || (stand ? zonderBijlage(stand.idee.idee).tekst.slice(0, 70) : '…')}</h1>
         {fout ? <p role="alert" style={{ margin: 0, padding: '10px 14px', borderRadius: 12, background: '#FFF1EB', color: '#B23C0E', fontWeight: 600 }}>{fout}</p> : null}
       </section>
 
@@ -128,6 +130,7 @@ export default function Lab({ lang, signal }: { lang: Lang; signal: string }) {
             <textarea id="lab-vraag" rows={3} maxLength={4000} value={vraag} onChange={(e) => setVraag(e.target.value)} placeholder={t.nauwHint} disabled={!stand || stand.bezig}
               style={{ border: '1px solid #D5DAE3', borderRadius: 12, padding: '12px 14px', font: "16px 'Space Grotesk',system-ui,sans-serif", resize: 'vertical' }}
               onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); (e.currentTarget.form as HTMLFormElement).requestSubmit(); } }} />
+            <LabBestanden lang={lang} waarde={bestanden} wijzig={setBestanden} uit={!stand || stand.bezig} />
             <button type="submit" disabled={!stand || stand.bezig || stuurt || !vraag.trim()} style={{ ...pil(signal, '#FFFFFF'), justifySelf: 'start', opacity: !stand || stand.bezig || !vraag.trim() ? 0.5 : 1 }}>{stuurt ? t.bezig : t.verstuur + ' →'}</button>
             {!op && stand ? <a href={href('Contact', lang)} style={{ fontSize: 14, color: '#3A4258' }}>{t.platformT} →</a> : null}
           </form>
@@ -141,7 +144,7 @@ export default function Lab({ lang, signal }: { lang: Lang; signal: string }) {
             <div style={{ background: '#F7F8FA', borderRadius: 20, padding: 22 }}>
               <div style={{ ...mono, color: '#5C6378' }}>{t.geschiedenis}</div>
               <ol style={{ margin: '8px 0 0', paddingLeft: 20, display: 'grid', gap: 6 }}>
-                {stand.prompts.map((p) => <li key={p.nr} style={{ color: p.status === 'fout' ? '#B23C0E' : '#14213D' }}>{p.tekst.length > 140 ? p.tekst.slice(0, 140) + '…' : p.tekst}</li>)}
+                {stand.prompts.map((p) => { const z = zonderBijlage(p.tekst); return <li key={p.nr} style={{ color: p.status === 'fout' ? '#B23C0E' : '#14213D' }}>{z.tekst.length > 140 ? z.tekst.slice(0, 140) + '…' : z.tekst}{z.bijlage ? <span style={{ color: '#5C6378' }}> · {t.bestMee}</span> : null}</li>; })}
               </ol>
             </div>
           ) : null}
