@@ -45,6 +45,7 @@ export function leesOntwerp(antwoord: string): { html: string; titel: string | n
   let t = antwoord.trim();
   const blok = t.match(/```(?:html)?\s*([\s\S]*?)```/i);
   if (blok && !/^<!doctype|^<html/i.test(t)) t = blok[1].trim();
+  t = t.replace(/^```(?:html)?\s*/i, "").replace(/\s*```\s*$/, "");
   const begin = t.search(/<!doctype html|<html/i);
   if (begin < 0) return null;
   t = t.slice(begin);
@@ -101,7 +102,7 @@ Regels voor het ontwerp:
 - Vraagt het idee om inloggen of rollen: begin met het inlogscherm (ds-login) waarop je zonder wachtwoord een rol kiest, en laat per rol zien wat die ziet.
 - Vraagt het idee om uploads: maak een uploadvak (ds-upload) dat een gekozen bestand alleen bij naam toont en zegt dat het ontwerp niets opslaat.
 - Werkt ook op een telefoon (geen horizontale scroll; tabellen in .ds-tabelvak).
-- Houd het document onder ongeveer 800 regels.
+- Houd het document compact (maximaal ongeveer 600 regels): hoogstens 5 schermen, korte teksten, en maak voorbeeldgegevens met een kleine functie (lus met vast zaadje) in plaats van lange uitgeschreven lijsten. Liever minder schermen die goed werken dan veel half.
 
 Bij een vervolgvraag krijg je het vorige ontwerp mee (zonder het stylesheet): pas het aan volgens de vraag en lever opnieuw het hele document, met dezelfde regels.`;
 

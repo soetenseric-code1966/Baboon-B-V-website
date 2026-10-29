@@ -69,3 +69,9 @@ test('mails: link naar het idee, ontsnapte tekst, Engels waar gevraagd', () => {
   const l = r.mailLinks('en', [{ titel: 'A', link: 'https://datawerf.com/en/lab/#a.b' }, { titel: 'B', link: 'https://datawerf.com/en/lab/#c.d' }]);
   assert.match(l.onderwerp, /Your ideas/); assert.equal((l.html.match(/href=/g) || []).length, 2);
 });
+
+test('ontwerp zonder afsluitende ``` wordt toch gelezen; opdracht vraagt om een compact document', () => {
+  const html = '```html\n<!doctype html>\n<!-- titel: X -->\n<html><body>' + 'y'.repeat(300) + '</body></html>';
+  const a = r.leesOntwerp(html); assert.ok(a); assert.ok(a.html.startsWith('<!doctype html>'));
+  assert.match(r.SYSTEEM('nl'), /maximaal ongeveer 600 regels/);
+});

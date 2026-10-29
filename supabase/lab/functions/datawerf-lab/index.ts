@@ -116,16 +116,17 @@ async function maakOntwerp(promptId: number, ideeId: string, sleutelVoorMail?: s
     const r = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "content-type": "application/json", "x-api-key": env("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01" },
-      body: JSON.stringify({ model, max_tokens: 20000, system: SYSTEEM(idee.taal), messages: [{ role: "user", content: inhoud }] }),
+      body: JSON.stringify({ model, max_tokens: getal("LAB_MAX_TOKENS", 32000), system: SYSTEEM(idee.taal), messages: [{ role: "user", content: inhoud }] }),
     });
     const j = await r.json().catch(() => null);
     if (!r.ok || !j) throw new Error(`AI gaf status ${r.status}${j?.error?.type ? " (" + j.error.type + ")" : ""}`);
     const tekst = (j.content ?? []).filter((c: { type: string }) => c.type === "text").map((c: { text: string }) => c.text).join("");
     const tokensIn = j.usage?.input_tokens ?? 0, tokensUit = j.usage?.output_tokens ?? 0;
     const kosten = kostenEur(tokensIn, tokensUit, getal("LAB_PRIJS_IN", 3), getal("LAB_PRIJS_UIT", 15), getal("LAB_USD_EUR", 0.86));
-    const ontwerp = leesOntwerp(tekst);
+    const ontwerp = j.stop_reason === "max_tokens" ? null : leesOntwerp(tekst);
     if (!ontwerp) {
-      await sql`UPDATE lab.prompts SET status = 'fout', fout = 'Geen bruikbaar ontwerp ontvangen', model = ${model}, tokens_in = ${tokensIn},
+      const reden = j.stop_reason === "max_tokens" ? "Ontwerp te groot (afgebroken)" : "Geen bruikbaar ontwerp ontvangen";
+      await sql`UPDATE lab.prompts SET status = 'fout', fout = ${reden}, model = ${model}, tokens_in = ${tokensIn},
         tokens_uit = ${tokensUit}, kosten_eur = ${kosten}, duur_ms = ${Date.now() - start}, klaar = now() WHERE id = ${promptId}`;
       return;
     }
