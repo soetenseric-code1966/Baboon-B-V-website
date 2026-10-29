@@ -9,4 +9,4 @@
 - Alles nieuw in React (Vite + TypeScript), in de huisstijl: donkerblauw #14213D, oranje #FF5A1F, Space Grotesk en IBM Plex Mono, ronde knoppen.
 - Altijd Nederlands én Engels; een nieuwe pagina volgt het sjabloon van de homepage (zelfde kop en voet uit `src/Layout.tsx`).
 - Website-regels: nooit "gebouwd in Europa" of "uw gegevens verlaten de EU niet"; geen persoonsnamen; geen klantlogo's zonder akkoord; developers niet bij naam of locatie noemen.
-- Apps (besluit 29-10-2026): kant-en-klare apps staan in `src/apps.ts` en verschijnen op de pagina Apps en bij Inloggen ("Naar uw app"). Alleen eigen apps van Baboon B.V.; demo's alleen met fictieve gegevens; geen klantnaam.
+- Apps (besluit 29-10-2026): kant-en-klare apps staan in `src/apps.ts` en verschijnen op de pagina Apps en bij Inloggen. Inloggen (29-10-2026) toont direct een tegel per app met korte omschrijving en de knoppen Inloggen en Demo: één klik naar de app, geen tussenscherm. Alleen eigen apps van Baboon B.V.; demo's alleen met fictieve gegevens; geen klantnaam.
