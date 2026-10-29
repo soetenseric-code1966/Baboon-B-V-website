@@ -4,6 +4,7 @@ export type Lang = 'nl' | 'en';
 export const PAGES = {
   Global: { nl: '/', en: '/en/' },
   Etalage: { nl: '/wat-we-bouwen/', en: '/en/what-we-build/' },
+  Apps: { nl: '/apps/', en: '/en/apps/' },
   Prijslijst: { nl: '/prijzen/', en: '/en/pricing/' },
   OverOns: { nl: '/over-ons/', en: '/en/about/' },
   Contact: { nl: '/contact/', en: '/en/contact/' },
@@ -38,6 +39,7 @@ export function findPage(pathname: string): { page: PageName; lang: Lang } {
 export const TITLES: Record<PageName, { nl: string; en: string }> = {
   Global: { nl: 'Datawerf – Uw vakkennis. Draaiend als software.', en: 'Datawerf – Your know-how. Running as software.' },
   Etalage: { nl: 'Wat we bouwen – Datawerf', en: 'What we build – Datawerf' },
+  Apps: { nl: 'Apps – Datawerf', en: 'Apps – Datawerf' },
   Prijslijst: { nl: 'Prijzen – Datawerf', en: 'Pricing – Datawerf' },
   OverOns: { nl: 'Over ons – Datawerf', en: 'About – Datawerf' },
   Contact: { nl: 'Contact – Datawerf', en: 'Contact – Datawerf' },

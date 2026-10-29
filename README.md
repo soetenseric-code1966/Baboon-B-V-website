@@ -13,6 +13,7 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 |---|---|---|
 | Home | `/` | `/en/` |
 | Wat we bouwen | `/wat-we-bouwen/` | `/en/what-we-build/` |
+| Apps | `/apps/` | `/en/apps/` |
 | Prijzen | `/prijzen/` | `/en/pricing/` |
 | Over ons | `/over-ons/` | `/en/about/` |
 | Contact | `/contact/` | `/en/contact/` |
@@ -36,3 +37,9 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
 - Blok "Live in gebruik" op Wat we bouwen: `src/live.ts`. Carrousel op de homepage: `src/showcase.ts`.
 - Schermafbeeldingen in `public/showcase/` (1600 × 1000, jpg). Nu: Qeldr, Urenregistratie, Aardappelmonitor (beginscherm, toegevoegd 27-10-2026), Dagplanning wagenpark (planbord ingelogd als vlootbeheerder in de demo, toegevoegd 28-10-2026).
 - Alleen eigen producten, of klantprojecten met akkoord van de klant.
+
+## Apps en inloggen (29-10-2026)
+
+- Tabblad **Apps** (`src/pages/Apps.tsx`, handgeschreven op het sjabloon): kant-en-klare apps van Datawerf met "Probeer de demo". De lijst staat in `src/apps.ts` (naam, prijs/label, tekst, punten, scherm, demo- en inlogadres).
+- **Inloggen** (`src/pages/Inloggen.tsx`): blok "Naar uw app" met de inlog per app (alle apps met `login` in `src/apps.ts`); later één inlog via het portaal. "Eerst rondkijken?" gaat naar Apps.
+- Een app toevoegen: één regel in `src/apps.ts` en een schermafbeelding in `public/showcase/` (1600 × 1000).

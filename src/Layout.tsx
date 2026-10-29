@@ -2,7 +2,9 @@ import React from 'react';
 import { href, PAGES, PageName, Lang } from './routes';
 import { useFooterTexts } from './pages/Global';
 
-const NAV: PageName[] = ['Etalage', 'Global', 'Prijslijst', 'OverOns', 'Contact'];
+const NAV: PageName[] = ['Etalage', 'Apps', 'Global', 'Prijslijst', 'OverOns', 'Contact'];
+// Labels: Apps is nieuw (29-10-2026); de andere komen uit de teksten van de homepage (f.nav, zonder Apps).
+const navLabel = (p: PageName, nav: string[]) => (p === 'Apps' ? 'Apps' : nav[NAV.filter((x) => x !== 'Apps').indexOf(p)]);
 const NAV_HASH: Partial<Record<PageName, string>> = { Global: '#hoe' };
 
 function Logo({ color, signal, size }: { color: string; signal: string; size: number }) {
@@ -36,12 +38,12 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
           <span style={{ fontSize: 28, fontWeight: 700, letterSpacing: '-0.8px' }}>Datawerf</span>
         </a>
         <nav aria-label="Menu" className="dw-nav">
-          {NAV.map((p, i) => {
+          {NAV.map((p) => {
             const on = p === page && p !== 'Global';
             return (
               <a key={p} href={href(p, lang, NAV_HASH[p] || '')} aria-current={on ? 'page' : undefined}
                 style={{ textDecoration: 'none', color: on ? '#14213D' : '#3A4258', fontWeight: on ? 700 : 400, boxShadow: on ? `inset 0 -2px 0 ${signal}` : undefined }}>
-                {f.nav[i]}
+                {navLabel(p, f.nav)}
               </a>
             );
           })}
@@ -76,6 +78,7 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
           <nav aria-label="Product" style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
             <strong style={footHead}>PRODUCT</strong>
             <a href={href('Etalage', lang)} style={footLink}>{f.n1}</a>
+            <a href={href('Apps', lang)} style={footLink}>Apps</a>
             <a href={href('Global', lang, '#hoe')} style={footLink}>{f.n2}</a>
             <a href={href('Prijslijst', lang)} style={footLink}>{f.n3}</a>
             <a href={href('Contact', lang)} style={footLink}>{f.cta}</a>

@@ -4,6 +4,7 @@ import { PageName, Lang } from './routes';
 import { setLinkLang } from './dc';
 import Global from './pages/Global';
 import Etalage from './pages/Etalage';
+import Apps from './pages/Apps';
 import Prijslijst from './pages/Prijslijst';
 import OverOns from './pages/OverOns';
 import Contact from './pages/Contact';
@@ -13,7 +14,7 @@ import Inloggen from './pages/Inloggen';
 export const SIGNAL = '#FF5A1F';
 
 const COMPONENTS: Record<PageName, React.ComponentType<{ lang: Lang; signal: string }>> = {
-  Global, Etalage, Prijslijst, OverOns, Contact, Juridisch, Inloggen,
+  Global, Etalage, Apps, Prijslijst, OverOns, Contact, Juridisch, Inloggen,
 };
 
 export default function App({ page, lang }: { page: PageName; lang: Lang }) {
