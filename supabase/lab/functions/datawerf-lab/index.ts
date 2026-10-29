@@ -116,7 +116,7 @@ async function maakOntwerp(promptId: number, ideeId: string, sleutelVoorMail?: s
     const r = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "content-type": "application/json", "x-api-key": env("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01" },
-      body: JSON.stringify({ model, max_tokens: getal("LAB_MAX_TOKENS", 32000), system: SYSTEEM(idee.taal), messages: [{ role: "user", content: inhoud }] }),
+      body: JSON.stringify({ model, max_tokens: getal("LAB_MAX_TOKENS", 32000), thinking: { type: "disabled" }, system: SYSTEEM(idee.taal), messages: [{ role: "user", content: inhoud }] }),
     });
     const j = await r.json().catch(() => null);
     if (!r.ok || !j) throw new Error(`AI gaf status ${r.status}${j?.error?.type ? " (" + j.error.type + ")" : ""}`);
@@ -125,7 +125,8 @@ async function maakOntwerp(promptId: number, ideeId: string, sleutelVoorMail?: s
     const kosten = kostenEur(tokensIn, tokensUit, getal("LAB_PRIJS_IN", 3), getal("LAB_PRIJS_UIT", 15), getal("LAB_USD_EUR", 0.86));
     const ontwerp = j.stop_reason === "max_tokens" ? null : leesOntwerp(tekst);
     if (!ontwerp) {
-      const reden = j.stop_reason === "max_tokens" ? "Ontwerp te groot (afgebroken)" : "Geen bruikbaar ontwerp ontvangen";
+      const blokken = (j.content ?? []).map((c: { type: string }) => c.type).join(",");
+      const reden = `${j.stop_reason === "max_tokens" ? "Ontwerp te groot (afgebroken)" : "Geen bruikbaar ontwerp ontvangen"}; ${tekst.length} tekens tekst; blokken ${blokken}`.slice(0, 300);
       await sql`UPDATE lab.prompts SET status = 'fout', fout = ${reden}, model = ${model}, tokens_in = ${tokensIn},
         tokens_uit = ${tokensUit}, kosten_eur = ${kosten}, duur_ms = ${Date.now() - start}, klaar = now() WHERE id = ${promptId}`;
       return;
