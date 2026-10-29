@@ -10,14 +10,16 @@ export const PAGES = {
   Contact: { nl: '/contact/', en: '/en/contact/' },
   Juridisch: { nl: '/juridisch/', en: '/en/legal/' },
   Inloggen: { nl: '/inloggen/', en: '/en/login/' },
+  Start: { nl: '/start/', en: '/en/start/' },
+  Lab: { nl: '/lab/', en: '/en/lab/' },
+  LabBeheer: { nl: '/lab/beheer/', en: '/en/lab/admin/' },
 } as const;
 
 export type PageName = keyof typeof PAGES;
 
 // Pagina's uit het ontwerp die nog niet bestaan, wijzen naar een bestaande pagina.
 const ALIAS: Record<string, PageName> = {
-  Aanmelden: 'Contact', // "Start gratis": het lab is nog niet live
-  Start: 'Contact',
+  Aanmelden: 'Start', // "Start gratis": het lab (sinds 29-10-2026)
   Contract: 'Contact',
   Main: 'Contact', // "Demo openen": demo's op aanvraag zolang het portaal niet live is
 };
@@ -45,6 +47,9 @@ export const TITLES: Record<PageName, { nl: string; en: string }> = {
   Contact: { nl: 'Contact – Datawerf', en: 'Contact – Datawerf' },
   Juridisch: { nl: 'Juridisch – Datawerf', en: 'Legal – Datawerf' },
   Inloggen: { nl: 'Inloggen – Datawerf', en: 'Log in – Datawerf' },
+  Start: { nl: 'Start gratis met uw idee – Datawerf', en: 'Start free with your idea – Datawerf' },
+  Lab: { nl: 'Uw ontwerp – Datawerf lab', en: 'Your design – Datawerf lab' },
+  LabBeheer: { nl: 'Lab-beheer – Datawerf', en: 'Lab admin – Datawerf' },
 };
 
 export const DESCRIPTION = {

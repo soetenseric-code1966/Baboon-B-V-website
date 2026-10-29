@@ -14,6 +14,9 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 | Home | `/` | `/en/` |
 | Wat we bouwen | `/wat-we-bouwen/` | `/en/what-we-build/` |
 | Apps | `/apps/` | `/en/apps/` |
+| Start gratis (lab) | `/start/` | `/en/start/` |
+| Lab (eigen idee, via geheime link) | `/lab/` | `/en/lab/` |
+| Lab-beheer (niet in menu of sitemap) | `/lab/beheer/` | `/en/lab/admin/` |
 | Prijzen | `/prijzen/` | `/en/pricing/` |
 | Over ons | `/over-ons/` | `/en/about/` |
 | Contact | `/contact/` | `/en/contact/` |
@@ -44,3 +47,8 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
 - **Inloggen** (`src/pages/Inloggen.tsx`, handgeschreven, besluit 29-10-2026): direct een tegel per app (korte omschrijving `short` in `src/apps.ts`, knoppen **Inloggen** en **Demo**); één klik naar het inlogscherm van de app. Onderaan het klantportaal (binnenkort: één inlog voor alle apps).
 - Een app toevoegen: één regel in `src/apps.ts` en een schermafbeelding in `public/showcase/` (1600 × 1000).
 - Adressen (29-10-2026): Dagplanning op `dagplanning.datawerf.com`, Wielen natrekken op `wielen.datawerf.com` (oude qcontrolz-adressen sturen door).
+
+## Datawerf lab (29-10-2026)
+- "Start gratis" (kop, voet en alle knoppen) gaat naar `/start/`: idee, naam, e-mail, bedrijf. Daarna `/lab/#id.sleutel`
+  met het ontwerp in een afgesloten kader, de teller (x van 10), de doorgestreepte waarde en "Maak het nauwkeuriger".
+- Achterkant, geheimen en regels: `supabase/lab/LEESMIJ.md`. Tests: `npm test`.
