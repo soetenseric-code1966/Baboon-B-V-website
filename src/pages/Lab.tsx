@@ -1,11 +1,14 @@
 // Lab (besluit 29-10-2026): het ontwerp van een idee in een afgesloten kader, met de teller (x van 10), de
 // doorgestreepte waarde en "Maak het nauwkeuriger". Het adres is /lab/#<id>.<sleutel>; de sleutel blijft in de browser.
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+
+// Het adres lezen vóór het eerste beeld (geen flits van de uitlegpagina bij een eigen idee); op de server useEffect.
+const useVoorBeeld = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 import { Lang, href } from '../routes';
-import { LAB_TEXT, LabStand, bewaarIdee, bewaardeIdeeen, labApi, zonderBijlage } from '../lab';
+import { LAB_TEXT, LabStand, bewaarIdee, labApi, zonderBijlage } from '../lab';
 import LabBestanden from '../LabBestanden';
 import type { Opbouw } from '../labBestanden';
-import LabLinks from '../LabLinks';
+import LabUitleg from './LabUitleg';
 
 const mono: React.CSSProperties = { fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' };
 const pil = (bg: string, fg: string, border = bg): React.CSSProperties => ({ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '10px 20px', borderRadius: 999, background: bg, color: fg, border: `2px solid ${border}`, fontWeight: 700, textDecoration: 'none', fontSize: 15, cursor: 'pointer' });
@@ -35,7 +38,7 @@ export default function Lab({ lang, signal }: { lang: Lang; signal: string }) {
     } catch (e) { setFout((e as { status?: number }).status === 404 ? t.nietGevonden : (e as Error).message); }
   }, [t.nietGevonden]);
 
-  useEffect(() => {
+  useVoorBeeld(() => {
     const k = leesHash(); setToegang(k); setGeladen(true);
     if (k) laad(k);
     const opHash = () => { const n = leesHash(); setToegang(n); setStand(null); if (n) laad(n); };
@@ -58,24 +61,8 @@ export default function Lab({ lang, signal }: { lang: Lang; signal: string }) {
 
   const wrap: React.CSSProperties = { fontFamily: "'Space Grotesk',system-ui,sans-serif", color: '#14213D', background: '#FFFFFF', lineHeight: 1.5 };
 
-  // Zonder idee in het adres: de ideeën uit deze browser.
-  if (!geladen || !toegang) {
-    const mijn = geladen ? bewaardeIdeeen() : [];
-    return (
-      <div style={wrap}><section className="dw-sec" style={{ padding: '72px 48px 88px', display: 'grid', gap: 18 }}>
-        <div style={{ ...mono, color: signal }}>{t.eb}</div>
-        <h1 className="dw-h1" style={{ margin: 0, fontSize: 48, letterSpacing: '-1.6px' }}>{t.mijn}</h1>
-        {mijn.length ? <div style={{ display: 'grid', gap: 10, maxWidth: 760 }}>{mijn.map((m) => (
-          <a key={m.id} href={'#' + m.id + '.' + m.sleutel} style={{ ...pil('#FFFFFF', '#14213D', '#14213D'), justifyContent: 'space-between' }}><span>{m.titel}</span><span aria-hidden="true">→</span></a>))}</div>
-          : <p style={{ margin: 0, color: '#3A4258', fontSize: 18 }}>{t.geen}</p>}
-        <a href={href('Start', lang)} style={{ ...pil(signal, '#FFFFFF'), justifySelf: 'start' }}>{t.nieuw} →</a>
-        <div style={{ background: '#F7F8FA', borderRadius: 20, padding: 24, maxWidth: 760, display: 'grid', gap: 8 }}>
-          <div style={{ fontSize: 22, fontWeight: 700 }}>{t.linksT}</div>
-          <LabLinks lang={lang} signal={signal} />
-        </div>
-      </section></div>
-    );
-  }
+  // Zonder idee in het adres: het tabblad Lab (uitleg, voorbeelden, uw ideeën).
+  if (!geladen || !toegang) return <LabUitleg lang={lang} signal={signal} />;
 
   const op = stand ? stand.gebruikt >= stand.max && !stand.bezig : false;
   const laatste = stand?.prompts[stand.prompts.length - 1];

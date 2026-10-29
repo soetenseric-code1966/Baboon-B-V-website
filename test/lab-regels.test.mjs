@@ -108,3 +108,10 @@ test('opbouw naar tekst: geen bestandsnaam, kolommen zonder naam geteld, grenzen
   assert.equal(lab.BESTANDEN_KOP, r.BESTANDEN_KOP);
   assert.deepEqual(lab.zonderBijlage('Idee' + r.BESTANDEN_KOP + t), { tekst: 'Idee', bijlage: true });
 });
+
+test('voorbeelden op de pagina Lab bestaan ook in de functie (vaste ontwerpen, prompt 1)', () => {
+  for (const v of lab.LAB_VOORBEELDEN) {
+    assert.ok(Object.hasOwn(r.VOORBEELDEN, v.naam), v.naam);
+    assert.match(r.VOORBEELDEN[v.naam].id, /^[0-9a-f-]{36}$/);
+  }
+});

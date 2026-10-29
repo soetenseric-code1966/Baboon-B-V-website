@@ -2,9 +2,10 @@ import React from 'react';
 import { href, PAGES, PageName, Lang } from './routes';
 import { useFooterTexts } from './pages/Global';
 
-const NAV: PageName[] = ['Etalage', 'Apps', 'Global', 'Prijslijst', 'OverOns', 'Contact'];
-// Labels: Apps is nieuw (29-10-2026); de andere komen uit de teksten van de homepage (f.nav, zonder Apps).
-const navLabel = (p: PageName, nav: string[]) => (p === 'Apps' ? 'Apps' : nav[NAV.filter((x) => x !== 'Apps').indexOf(p)]);
+const NAV: PageName[] = ['Etalage', 'Apps', 'Lab', 'Global', 'Prijslijst', 'OverOns', 'Contact'];
+// Labels: Apps en Lab zijn nieuw (29-10-2026); de andere komen uit de teksten van de homepage (f.nav, zonder Apps en Lab).
+const EIGEN_LABEL: Partial<Record<PageName, string>> = { Apps: 'Apps', Lab: 'Lab' };
+const navLabel = (p: PageName, nav: string[]) => EIGEN_LABEL[p] ?? nav[NAV.filter((x) => !EIGEN_LABEL[x]).indexOf(p)];
 const NAV_HASH: Partial<Record<PageName, string>> = { Global: '#hoe' };
 
 function Logo({ color, signal, size }: { color: string; signal: string; size: number }) {
@@ -79,6 +80,7 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
             <strong style={footHead}>PRODUCT</strong>
             <a href={href('Etalage', lang)} style={footLink}>{f.n1}</a>
             <a href={href('Apps', lang)} style={footLink}>Apps</a>
+            <a href={href('Lab', lang)} style={footLink}>Lab</a>
             <a href={href('Global', lang, '#hoe')} style={footLink}>{f.n2}</a>
             <a href={href('Prijslijst', lang)} style={footLink}>{f.n3}</a>
             <a href={href('Start', lang)} style={footLink}>{f.cta}</a>

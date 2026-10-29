@@ -48,7 +48,7 @@ export const TITLES: Record<PageName, { nl: string; en: string }> = {
   Juridisch: { nl: 'Juridisch – Datawerf', en: 'Legal – Datawerf' },
   Inloggen: { nl: 'Inloggen – Datawerf', en: 'Log in – Datawerf' },
   Start: { nl: 'Start gratis met uw idee – Datawerf', en: 'Start free with your idea – Datawerf' },
-  Lab: { nl: 'Uw ontwerp – Datawerf lab', en: 'Your design – Datawerf lab' },
+  Lab: { nl: 'Lab: zie uw idee werken – Datawerf', en: 'Lab: see your idea work – Datawerf' },
   LabBeheer: { nl: 'Lab-beheer – Datawerf', en: 'Lab admin – Datawerf' },
 };
 

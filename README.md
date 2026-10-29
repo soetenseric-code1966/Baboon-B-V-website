@@ -15,7 +15,7 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 | Wat we bouwen | `/wat-we-bouwen/` | `/en/what-we-build/` |
 | Apps | `/apps/` | `/en/apps/` |
 | Start gratis (lab) | `/start/` | `/en/start/` |
-| Lab (eigen idee, via geheime link) | `/lab/` | `/en/lab/` |
+| Lab (tabblad; eigen idee via geheime link `/lab/#id.sleutel`) | `/lab/` | `/en/lab/` |
 | Lab-beheer (niet in menu of sitemap) | `/lab/beheer/` | `/en/lab/admin/` |
 | Prijzen | `/prijzen/` | `/en/pricing/` |
 | Over ons | `/over-ons/` | `/en/about/` |
@@ -53,5 +53,6 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
   met het ontwerp in een afgesloten kader, de teller (x van 10), de doorgestreepte waarde en "Maak het nauwkeuriger".
 - Achterkant, geheimen en regels: `supabase/lab/LEESMIJ.md`. Tests: `npm test`.
 - Inloggen zonder account: mail "Uw ontwerp staat klaar" met de link, en op Inloggen en /lab/ "Mail mijn links".
+- Tabblad **Lab** (29-10-2026, menu na Apps): `/lab/` zonder idee in het adres toont `src/pages/LabUitleg.tsx`: uitleg in vier stappen, voorbeelden uit het lab (live, via de actie `voorbeeld`; welke staat in `VOORBEELDEN` in `regels.ts` en `LAB_VOORBEELDEN` in `src/lab.ts`), veiligheid, "Uw ideeën" en "Mail mijn links". `/lab/` staat in de sitemap; alleen `/lab/beheer/` is uitgesloten in robots.txt.
 - Bestanden toevoegen (29-10-2026): bij Start en bij "Maak het nauwkeuriger" kan de bezoeker tot drie Excel- (.xlsx) of CSV-bestanden kiezen. `src/labBestanden.ts` leest ze in de browser; alleen de opbouw (bladnamen, kolomnamen, soort per kolom, aantal rijen) gaat mee, nooit de inhoud en niet de bestandsnaam. De bezoeker ziet vooraf wat er meegaat (`src/LabBestanden.tsx`).
 - Vaste app-stijl voor alle ontwerpen en apps: `docs/app-stijl.md`.
