@@ -116,7 +116,7 @@ async function maakOntwerp(promptId: number, ideeId: string, sleutelVoorMail?: s
     const r = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: { "content-type": "application/json", "x-api-key": env("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01" },
-      body: JSON.stringify({ model, max_tokens: getal("LAB_MAX_TOKENS", 32000), thinking: { type: "disabled" }, system: SYSTEEM(idee.taal), messages: [{ role: "user", content: inhoud }] }),
+      body: JSON.stringify({ model, max_tokens: getal("LAB_MAX_TOKENS", 32000), thinking: { type: "between_tools" }, system: SYSTEEM(idee.taal), messages: [{ role: "user", content: inhoud }] }),
     });
     const j = await r.json().catch(() => null);
     if (!r.ok || !j) throw new Error(`AI gaf status ${r.status}${j?.error?.type ? " (" + j.error.type + ")" : ""}`);
