@@ -36,6 +36,8 @@ De openbare site key van Turnstile staat in `src/lab.ts` (`TURNSTILE_SITEKEY`).
 - Vaste app-stijl (zoals Dagplanning en Wielen): `functions/datawerf-lab/stijl.ts`, uitleg in `docs/app-stijl.md`. De functie zet het stylesheet zelf in elk ontwerp; de AI gebruikt alleen de klassen.
 - Bestanden (29-10-2026): `start` en `vraag` nemen optioneel `bestanden` mee: de opbouw die de browser uit Excel/CSV haalt (`src/labBestanden.ts`). `bestandenTekst` in `regels.ts` controleert die (max. 3 bestanden, 10 bladen, 60 kolommen, 6.000 tekens) en zet hem achter het idee of de vraag, na de kop `BESTANDEN_KOP`. Geen inhoud en geen bestandsnaam.
 - Voorbeelden (29-10-2026): de actie `voorbeeld { naam }` geeft openbaar het ontwerp van een vaste prompt uit `VOORBEELDEN` (`regels.ts`), voor het tabblad Lab. Alleen het ontwerp, nooit het idee of de bezoeker. Nieuw voorbeeld: id en promptnummer toevoegen in `VOORBEELDEN` en in `LAB_VOORBEELDEN` (`src/lab.ts`), eerst nakijken op echte namen.
+- Hulpvragen (29-10-2026): actie `vragen { idee, taal }` vraagt een klein model (`LAB_MODEL_VRAGEN`, standaard `claude-haiku-5-5`) om 3-5 vragen met keuzes (`VRAGEN_SYSTEEM`, `leesVragen` in `regels.ts`). Max. 8 per uur per bezoeker (in het geheugen van de functie); bij een fout `{ vragen: null }` en de website toont algemene vragen. Kosten alleen in de logregel ("lab: vragen …"), niet in `lab.prompts`.
+- Lengte: idee of vraag plus de opbouw van bestanden blijft samen onder 4.000 tekens (`metBijlage`), de grens in de database.
 - Later: verhuizen naar een eigen Datawerf-omgeving.
 
 ## Tests

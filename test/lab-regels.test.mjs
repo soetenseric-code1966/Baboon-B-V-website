@@ -115,3 +115,26 @@ test('voorbeelden op de pagina Lab bestaan ook in de functie (vaste ontwerpen, p
     assert.match(r.VOORBEELDEN[v.naam].id, /^[0-9a-f-]{36}$/);
   }
 });
+
+test('idee plus bestanden blijft binnen 4.000 tekens (grens in de database)', () => {
+  assert.equal(r.metBijlage('Idee', ''), 'Idee');
+  assert.equal(r.metBijlage('Idee', 'Bestand 1'), 'Idee' + r.BESTANDEN_KOP + 'Bestand 1');
+  const lang = r.metBijlage('x'.repeat(3000), 'y'.repeat(5000));
+  assert.ok(lang.length <= r.MAX_TEKST, String(lang.length)); assert.ok(lang.endsWith('…'));
+  assert.equal(r.metBijlage('x'.repeat(3990), 'y'.repeat(100)), 'x'.repeat(3990));
+});
+
+test('hulpvragen: JSON uit het antwoord, opgeschoond en begrensd', () => {
+  const v = r.leesVragen('Hier:\n{"vragen":[{"vraag":"Welke posities?","keuzes":["As","Wielpositie",""],"meerdere":true},{"vraag":"Wie meldt?","keuzes":["Werkplaats","Upload"]},{"vraag":"Leeg","keuzes":["a"]}]}');
+  assert.deepEqual(v, [{ vraag: 'Welke posities?', keuzes: ['As', 'Wielpositie'], meerdere: true }, { vraag: 'Wie meldt?', keuzes: ['Werkplaats', 'Upload'], meerdere: false }]);
+  assert.equal(r.leesVragen('geen json'), null);
+  assert.equal(r.leesVragen('{"vragen":[{"vraag":"a","keuzes":["b","c"]}]}'), null); // minder dan 2 vragen
+  assert.match(r.VRAGEN_SYSTEEM('nl'), /Nederlands/);
+});
+
+test('antwoorden worden tekst achter het idee; standaardvragen als vangnet', () => {
+  const vr = [{ vraag: 'Wie?', keuzes: ['A', 'B'], meerdere: true }, { vraag: 'Wat?', keuzes: ['C'], meerdere: false }];
+  assert.equal(lab.antwoordenTekst(vr, [{ gekozen: ['A', 'B'], anders: ' ook C ' }, { gekozen: [], anders: '' }], 'nl'), '\n\nAanvullend:\n- Wie? A; B; ook C');
+  assert.equal(lab.antwoordenTekst(vr, [{ gekozen: [], anders: '' }, { gekozen: [], anders: '' }], 'nl'), '');
+  assert.ok(lab.STANDAARD_VRAGEN.nl.length >= 3 && lab.STANDAARD_VRAGEN.en.length === lab.STANDAARD_VRAGEN.nl.length);
+});

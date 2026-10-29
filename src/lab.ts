@@ -64,6 +64,7 @@ export const LAB_TEXT = {
     mailMelding: 'U hoeft niet te wachten: zodra het ontwerp klaar is, mailen we u de link.',
     bestT: 'Bestanden toevoegen (optioneel)', bestS: 'Excel (.xlsx) of CSV, maximaal drie. Uw bestand wordt in uw eigen browser gelezen; alleen de opbouw (bladen en kolomnamen) gaat mee, nooit de inhoud. Het ontwerp gebruikt verzonnen gegevens.',
     bestKies: 'Kies of sleep bestanden', bestRijen: 'rijen', bestKolommen: 'kolommen', bestWeg: 'Verwijder', bestLezen: 'Bestand lezen…', bestFout: 'Kan dit bestand niet lezen', bestMee: 'met bestanden',
+    hulpKnop: 'Help mij mijn idee scherper te maken', hulpS: 'Een paar vragen die bij uw idee passen. Elke vraag mag u overslaan.', hulpLaden: 'Vragen bij uw idee maken…', hulpZet: 'Zet in mijn idee', hulpWeg: 'Sluiten', hulpAnders: 'Anders, namelijk…', hulpStandaard: 'Een paar algemene vragen (de vragen bij uw idee lukten nu niet).', hulpKort: 'Typ eerst kort uw idee (minstens één zin).',
     linksT: 'Terug naar uw ideeën', linksS: 'Vul uw e-mailadres in; we mailen u de links naar al uw ideeën in het lab.', linksB: 'Mail mijn links',
   },
   en: {
@@ -83,6 +84,7 @@ export const LAB_TEXT = {
     mailMelding: 'No need to wait: as soon as the design is ready, we email you the link.',
     bestT: 'Add files (optional)', bestS: 'Excel (.xlsx) or CSV, up to three. Your file is read in your own browser; only its structure (sheets and column names) is sent, never the contents. The design uses made-up data.',
     bestKies: 'Choose or drop files', bestRijen: 'rows', bestKolommen: 'columns', bestWeg: 'Remove', bestLezen: 'Reading file…', bestFout: 'Cannot read this file', bestMee: 'with files',
+    hulpKnop: 'Help me sharpen my idea', hulpS: 'A few questions that fit your idea. You may skip any of them.', hulpLaden: 'Making questions for your idea…', hulpZet: 'Add to my idea', hulpWeg: 'Close', hulpAnders: 'Other, namely…', hulpStandaard: 'A few general questions (the questions for your idea did not work just now).', hulpKort: 'First type your idea briefly (at least one sentence).',
     linksT: 'Back to your ideas', linksS: 'Enter your email address; we will email you the links to all your ideas in the lab.', linksB: 'Email my links',
   },
 };
@@ -137,6 +139,33 @@ export const LAB_INFO = {
     mijnH: 'Your ideas', slotH: 'Ready to start?', slotS: 'Ten free prompts per idea. No account, no credit card.',
   },
 };
+
+// Hulpvragen bij het idee (besluit 29-10-2026): de AI stelt vragen die bij het idee passen; lukt dat niet, dan deze.
+export type LabVraag = { vraag: string; keuzes: string[]; meerdere: boolean };
+export const STANDAARD_VRAGEN: Record<'nl' | 'en', LabVraag[]> = {
+  nl: [
+    { vraag: 'Wie gaan ermee werken?', keuzes: ['Werkplaats', 'Wagenparkbeheer', 'Planning', 'Inkoop', 'Directie', 'Klanten'], meerdere: true },
+    { vraag: 'Wat moet het vooral doen?', keuzes: ['Overzicht en analyse', 'Registreren of afmelden', 'Plannen', 'Goedkeuren', 'Rapporteren'], meerdere: true },
+    { vraag: 'Om welke gegevens gaat het?', keuzes: ['Voertuigen', 'Orders', 'Kosten', 'Medewerkers', 'Klanten', 'Voorraad'], meerdere: true },
+    { vraag: 'Hoe komen de gegevens binnen?', keuzes: ['Zelf invoeren', 'Excel-upload', 'Koppeling met een ander systeem', 'Via de telefoon'], meerdere: true },
+  ],
+  en: [
+    { vraag: 'Who will use it?', keuzes: ['Workshop', 'Fleet management', 'Planning', 'Purchasing', 'Management', 'Customers'], meerdere: true },
+    { vraag: 'What should it mainly do?', keuzes: ['Overview and analysis', 'Register or sign off', 'Plan', 'Approve', 'Report'], meerdere: true },
+    { vraag: 'What data is it about?', keuzes: ['Vehicles', 'Orders', 'Costs', 'Employees', 'Customers', 'Stock'], meerdere: true },
+    { vraag: 'How does the data come in?', keuzes: ['Typed in', 'Excel upload', 'Link with another system', 'Via the phone'], meerdere: true },
+  ],
+};
+export type LabAntwoord = { gekozen: string[]; anders: string };
+/** De antwoorden als tekst achter het idee (alleen beantwoorde vragen). */
+export function antwoordenTekst(vragen: LabVraag[], antwoorden: LabAntwoord[], taal: 'nl' | 'en'): string {
+  const regels = vragen.map((v, i) => {
+    const a = antwoorden[i]; if (!a) return '';
+    const delen = [...a.gekozen, a.anders.trim()].filter(Boolean);
+    return delen.length ? `- ${v.vraag} ${delen.join('; ')}` : '';
+  }).filter(Boolean);
+  return regels.length ? `\n\n${taal === 'en' ? 'Details' : 'Aanvullend'}:\n${regels.join('\n')}` : '';
+}
 
 /** Klein formulier: e-mailadres → links naar alle ideeën per mail (inloggen zonder account). */
 export async function vraagLinks(email: string, taal: 'nl' | 'en'): Promise<string> {

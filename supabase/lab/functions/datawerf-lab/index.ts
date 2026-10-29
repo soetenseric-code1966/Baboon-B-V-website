@@ -7,6 +7,7 @@
 //   vraag     { id, sleutel, tekst }                          → { ok }           (volgende prompt, max 10)
 //   stand     { id, sleutel }                                 → idee, prompts, laatste ontwerp, teller, waarde
 //   voorbeeld { naam }                                        → { titel, samenvatting, html } (vaste voorbeelden, openbaar)
+//   vragen    { idee, taal }                                  → { vragen } (3-5 hulpvragen bij het idee, klein model; max. 8 per uur per bezoeker)
 //   overzicht (header x-lab-beheer)                           → alle ideeën met prompts, tijd en kosten
 //   ontwerp   (header x-lab-beheer) { id, nr }                → het ontwerp van één prompt (voor beheer)
 //
@@ -16,7 +17,7 @@
 // (USD per miljoen tokens), LAB_USD_EUR. Mail: RESEND_API_KEY, LAB_AFZENDER, LAB_SITE. Nooit sleutels of volledige foutmeldingen teruggeven of loggen.
 import postgres from "npm:postgres@3.4.5";
 import {
-  BESTANDEN_KOP, BEZIG_VERLOOPT_MS, MAX_PROMPTS, SYSTEEM, VOORBEELDEN, begintVandaag, bestandenTekst, controleerStart, controleerVraag, kostenEur, leesOntwerp,
+  BEZIG_VERLOOPT_MS, MAX_PROMPTS, MAX_TEKST, SYSTEEM, VOORBEELDEN, VRAGEN_SYSTEEM, leesVragen, metBijlage, begintVandaag, bestandenTekst, controleerStart, controleerVraag, kostenEur, leesOntwerp,
   mailKlaar, mailLinks, toegestaneHerkomst, voegStijlToe, waardeEur, zonderStijl,
 } from "./regels.ts";
 
@@ -145,6 +146,31 @@ async function maakOntwerp(promptId: number, ideeId: string, sleutelVoorMail?: s
       WHERE id = ${promptId}`.catch(() => {});
   }
 }
+// Hulpvragen: klein model, korte uitvoer. Begrenzing per bezoeker in het geheugen van de functie (best effort); het
+// vangnet is de maandlimiet van de Console-werkruimte Lab. Kosten komen niet in lab.prompts (alleen in de logregel).
+const vragenTeller = new Map<string, number[]>();
+function vragenToegestaan(ip: string): boolean {
+  const nu = Date.now(), lijst = (vragenTeller.get(ip) ?? []).filter((t) => nu - t < 3600_000);
+  if (lijst.length >= 8) return false;
+  lijst.push(nu); vragenTeller.set(ip, lijst);
+  if (vragenTeller.size > 5000) vragenTeller.clear();
+  return true;
+}
+async function maakVragen(idee: string, taal: "nl" | "en") {
+  const model = env("LAB_MODEL_VRAGEN", "claude-haiku-5-5");
+  const r = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-api-key": env("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01" },
+    body: JSON.stringify({ model, max_tokens: 1500, system: VRAGEN_SYSTEEM(taal), messages: [{ role: "user", content: `Het idee:\n${idee}` }] }),
+  });
+  const j = await r.json().catch(() => null);
+  if (!r.ok || !j) throw new Error(`AI gaf status ${r.status}${j?.error?.message ? ": " + String(j.error.message).slice(0, 120) : ""}`);
+  const tekst = (j.content ?? []).filter((c: { type: string }) => c.type === "text").map((c: { text: string }) => c.text).join("");
+  const kosten = kostenEur(j.usage?.input_tokens ?? 0, j.usage?.output_tokens ?? 0, getal("LAB_PRIJS_IN_VRAGEN", 1), getal("LAB_PRIJS_UIT_VRAGEN", 5), getal("LAB_USD_EUR", 0.86));
+  console.log("lab: vragen", model, j.usage?.input_tokens ?? 0, j.usage?.output_tokens ?? 0, kosten);
+  return leesVragen(tekst);
+}
+
 function opAchtergrond(p: Promise<unknown>) {
   if (typeof EdgeRuntime !== "undefined") EdgeRuntime.waitUntil(p); else p.catch(() => {});
 }
@@ -177,7 +203,7 @@ Deno.serve(async (req) => {
         if (!c.ok) return antwoord(req, { fout: c.fout }, 400);
         const bijlage = bestandenTekst(body.bestanden);
         if (bijlage === null) return antwoord(req, { fout: "De bestanden konden niet worden gelezen. Probeer maximaal drie Excel- of CSV-bestanden." }, 400);
-        const ideeTekst = c.idee + (bijlage ? BESTANDEN_KOP + bijlage : "");
+        const ideeTekst = metBijlage(c.idee, bijlage);
         if (!env("ANTHROPIC_API_KEY")) return antwoord(req, { fout: "Het lab is nog niet open. Probeer het later opnieuw." }, 503);
         if (!(await robotOk(body.robot, ip))) return antwoord(req, { fout: "De robotcontrole is niet gelukt. Probeer het opnieuw." }, 400);
         if (await dagVol()) return antwoord(req, { fout: "Het lab is vandaag vol. Morgen kunt u weer starten, of mail ons." }, 429);
@@ -200,7 +226,7 @@ Deno.serve(async (req) => {
         if (!vraagTekst) return antwoord(req, { fout: "Typ wat er anders moet (maximaal 4.000 tekens)." }, 400);
         const bijlage = bestandenTekst(body.bestanden);
         if (bijlage === null) return antwoord(req, { fout: "De bestanden konden niet worden gelezen. Probeer maximaal drie Excel- of CSV-bestanden." }, 400);
-        const t = vraagTekst + (bijlage ? BESTANDEN_KOP + bijlage : "");
+        const t = metBijlage(vraagTekst, bijlage);
         const prompts = await sql`SELECT id, nr, status FROM lab.prompts WHERE idee_id = ${idee.id} ORDER BY nr`;
         if (prompts.some((p) => p.status === "bezig")) return antwoord(req, { fout: "Het vorige ontwerp wordt nog gemaakt." }, 409);
         if (await dagVol()) return antwoord(req, { fout: "Het lab is vandaag vol. Morgen kunt u verder." }, 429);
@@ -259,6 +285,14 @@ Deno.serve(async (req) => {
         const idee = await zoekIdee(body.id, body.sleutel);
         if (!idee) return antwoord(req, { fout: "Dit idee is niet gevonden." }, 404);
         return antwoord(req, await stand(idee.id));
+      }
+      case "vragen": {
+        const taal = body.taal === "en" ? "en" : "nl";
+        const idee = typeof body.idee === "string" ? body.idee.trim() : "";
+        if (idee.length < 10 || idee.length > MAX_TEKST) return antwoord(req, { fout: taal === "en" ? "Describe your idea in at least one sentence first." : "Omschrijf eerst uw idee in minstens \u00e9\u00e9n zin." }, 400);
+        if (!env("ANTHROPIC_API_KEY") || !vragenToegestaan(ip || "onbekend")) return antwoord(req, { vragen: null });
+        try { return antwoord(req, { vragen: await maakVragen(idee, taal) }); }
+        catch (e) { console.error("lab: vragen mislukt", e instanceof Error ? e.message.slice(0, 200) : "onbekend"); return antwoord(req, { vragen: null }); }
       }
       case "voorbeeld": {
         const v = typeof body.naam === "string" && Object.hasOwn(VOORBEELDEN, body.naam) ? VOORBEELDEN[body.naam] : null;

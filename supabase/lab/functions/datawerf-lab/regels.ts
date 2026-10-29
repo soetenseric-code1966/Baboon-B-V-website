@@ -63,6 +63,40 @@ export function bestandenTekst(x: unknown): string | null {
   return regels.join("\n").slice(0, 6000);
 }
 
+/** Idee of vraag plus de opbouw van de bestanden, samen binnen MAX_TEKST (grens in de database); de opbouw wordt zo nodig ingekort. */
+export function metBijlage(tekst: string, bijlage: string): string {
+  if (!bijlage) return tekst;
+  const ruimte = MAX_TEKST - tekst.length - BESTANDEN_KOP.length;
+  if (ruimte < 40) return tekst;
+  return tekst + BESTANDEN_KOP + (bijlage.length > ruimte ? bijlage.slice(0, ruimte - 2) + " …" : bijlage);
+}
+
+// Hulpvragen bij het idee (besluit 29-10-2026): na een korte omschrijving stelt een klein AI-model 3 tot 5 vragen met
+// keuzes die bij dát idee passen. De antwoorden worden tekst in het ideevak; de bezoeker kan alles nog aanpassen.
+export const VRAGEN_SYSTEEM = (taal: "nl" | "en") => `Je helpt een bezoeker van het Datawerf lab zijn idee voor zakelijke software scherper te omschrijven, zodat er daarna een goed eerste ontwerp van gemaakt kan worden.
+Stel 3 tot 5 korte vragen die bij DÍT idee horen en die het meeste verschil maken voor het ontwerp: welke schermen, welke gegevens en berekeningen, wie ermee werkt (rollen), wat een afwijking of signaal is, hoe gegevens binnenkomen. Vraag niet naar wat al in het idee staat.
+Geef per vraag 3 tot 6 korte keuzes (elk hoogstens 60 tekens) in de taal van de bezoeker; de bezoeker kan altijd ook zelf iets typen. Zet "meerdere": true als meer dan één keuze logisch is.
+Taal: ${taal === "en" ? "Engels" : "Nederlands"}, gewone woorden, u-vorm. Noem geen echte bedrijven of leveranciers.
+Antwoord met alleen JSON, zonder uitleg en zonder markdown: {"vragen":[{"vraag":"...","keuzes":["...","..."],"meerdere":true}]}`;
+
+export type Vraag = { vraag: string; keuzes: string[]; meerdere: boolean };
+const regel = (x: unknown, max: number) => (typeof x === "string" ? x.replace(/[\u0000-\u001f\u007f]+/g, " ").replace(/\s+/g, " ").trim().slice(0, max) : "");
+
+/** Haalt de vragen uit het antwoord van het model; null als er niets bruikbaars in staat. */
+export function leesVragen(antwoord: string): Vraag[] | null {
+  const begin = antwoord.indexOf("{"), eind = antwoord.lastIndexOf("}");
+  if (begin < 0 || eind <= begin) return null;
+  let j: { vragen?: unknown };
+  try { j = JSON.parse(antwoord.slice(begin, eind + 1)); } catch { return null; }
+  if (!Array.isArray(j?.vragen)) return null;
+  const vragen = (j.vragen as { vraag?: unknown; keuzes?: unknown; meerdere?: unknown }[]).slice(0, 5).map((v) => ({
+    vraag: regel(v?.vraag, 160),
+    keuzes: (Array.isArray(v?.keuzes) ? v.keuzes : []).map((k) => regel(k, 60)).filter(Boolean).slice(0, 6),
+    meerdere: v?.meerdere === true,
+  })).filter((v) => v.vraag && v.keuzes.length >= 2);
+  return vragen.length >= 2 ? vragen : null;
+}
+
 /** Kosten in euro uit tokens en prijzen per miljoen tokens (USD) en de koers USD→EUR. */
 export function kostenEur(tokensIn: number, tokensUit: number, prijsIn: number, prijsUit: number, usdEur: number): number {
   const usd = (tokensIn / 1e6) * prijsIn + (tokensUit / 1e6) * prijsUit;
