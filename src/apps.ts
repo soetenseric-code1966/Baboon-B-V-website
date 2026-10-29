@@ -49,7 +49,7 @@ export const APPS: AppItem[] = [
       nl: ['Openstaande natrekopdrachten per bus', 'Status per opdracht: open of uitgevoerd', 'Zichtbaar op het planbord van de dagplanning'],
       en: ['Open re-torque orders per bus', 'Status per order: open or done', 'Visible on the planning board of the daily planning'],
     },
-    login: 'https://wielen.qcontrolz.nl/',
+    login: 'https://wielen.datawerf.com/',
   },
   {
     key: 'uren',

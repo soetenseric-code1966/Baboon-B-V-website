@@ -43,3 +43,4 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
 - Tabblad **Apps** (`src/pages/Apps.tsx`, handgeschreven op het sjabloon): kant-en-klare apps van Datawerf met "Probeer de demo". De lijst staat in `src/apps.ts` (naam, prijs/label, tekst, punten, scherm, demo- en inlogadres).
 - **Inloggen** (`src/pages/Inloggen.tsx`): blok "Naar uw app" met de inlog per app (alle apps met `login` in `src/apps.ts`); later één inlog via het portaal. "Eerst rondkijken?" gaat naar Apps.
 - Een app toevoegen: één regel in `src/apps.ts` en een schermafbeelding in `public/showcase/` (1600 × 1000).
+- Adressen (29-10-2026): Dagplanning op `dagplanning.datawerf.com`, Wielen natrekken op `wielen.datawerf.com` (oude qcontrolz-adressen sturen door).
