@@ -9,6 +9,8 @@ export type AppItem = {
   price: T;
   free: boolean;
   text: T;
+  /** Eén regel voor de tegel op Inloggen. */
+  short: T;
   points: { nl: string[]; en: string[] };
   screen?: string;
   demo?: string;
@@ -27,6 +29,7 @@ export const APPS: AppItem[] = [
       nl: 'Elke ochtend het juiste aantal bussen van het juiste type op elke stalling. Het planbord zet de telling van de stallingen tegen de dienstregeling, stelt verplaatsingen voor en volgt bussen bij de onderhoudspartijen. Vlootbeheerder, wagenparkbeheerder, stalling en onderhoudspartij werken elk vanuit hun eigen scherm.',
       en: 'Every morning the right number of buses of the right type at every depot. The planning board sets the depot counts against the timetable, suggests transfers and tracks buses at the maintenance partners. Fleet manager, fleet supervisor, depot and maintenance partner each work from their own screen.',
     },
+    short: { nl: 'Elke ochtend de juiste bussen op elke stalling: telling, planbord en verplaatsingen.', en: 'The right buses at every depot each morning: count, planning board and transfers.' },
     points: {
       nl: ['Planbord per stalling: nodig volgens dienstregeling tegenover inzetbaar', 'Voorstel voor verplaatsingen; met één klik een opdracht geven', 'Onderhoud volgen per partij: wacht, gestart, gereed', 'Werkt samen met Wielen natrekken'],
       en: ['Planning board per depot: needed by timetable versus available', 'Suggested transfers; issue the order in one click', 'Maintenance tracked per partner: waiting, started, ready', 'Works together with Wheel re-torquing'],
@@ -45,6 +48,7 @@ export const APPS: AppItem[] = [
       nl: 'Na een wielwissel moeten de wielmoeren op tijd worden nagetrokken. De app houdt per bus bij welke natrekopdrachten openstaan en wanneer ze zijn uitgevoerd, en toont dat op het planbord van de dagplanning.',
       en: 'After a wheel change, the wheel nuts must be re-torqued in time. The app tracks per bus which re-torque orders are open and when they were carried out, and shows it on the planning board of the daily planning.',
     },
+    short: { nl: 'Natrekopdrachten per bus geven en op de telefoon afmelden, met logboek.', en: 'Issue re-torque orders per bus and sign them off on the phone, with a log.' },
     points: {
       nl: ['Openstaande natrekopdrachten per bus', 'Status per opdracht: open of uitgevoerd', 'Zichtbaar op het planbord van de dagplanning'],
       en: ['Open re-torque orders per bus', 'Status per order: open or done', 'Visible on the planning board of the daily planning'],
@@ -62,6 +66,7 @@ export const APPS: AppItem[] = [
       nl: 'Voor zzp’ers die de hele dag achter de computer werken. De app ziet welk programma en bestand openstaat en zet de tijd automatisch op het juiste project. Eén keer per dag goedkeuren, en de uren staan klaar voor de factuur.',
       en: 'For freelancers who work at a computer all day. The app sees which program and file are open and puts the time on the right project automatically. Approve once a day and the hours are ready for the invoice.',
     },
+    short: { nl: 'Automatische urenregistratie voor zzp’ers, klaar voor de factuur.', en: 'Automatic time tracking for freelancers, ready for the invoice.' },
     points: {
       nl: ['Tijdlijn van de werkdag per project', 'AI-voorstel als een activiteit niet herkend wordt', 'Goedgekeurde uren direct klaar voor de factuur'],
       en: ['Timeline of the working day per project', 'AI suggestion when an activity is not recognised', 'Approved hours ready for the invoice'],
@@ -91,6 +96,18 @@ export const APPS_TEXT = {
 };
 
 export const LOGIN_APPS_TEXT = {
-  nl: { eb: 'Naar uw app', t: 'Al een app van Datawerf?', s: 'Kies uw app en log in met uw eigen gegevens. Later logt u hier één keer in voor al uw apps.' },
-  en: { eb: 'To your app', t: 'Already using a Datawerf app?', s: 'Choose your app and log in with your own details. Later you will log in here once for all your apps.' },
+  nl: {
+    eb: 'Inloggen', h1: 'Kies uw app', sub: 'Log direct in op uw app, of probeer eerst de demo met verzonnen gegevens.',
+    login: 'Inloggen', demo: 'Demo', soon: 'Binnenkort', list: 'Zet mij op de lijst',
+    portalEb: 'Klantportaal', portalT: 'Eén inlog voor al uw apps en uw eigen bouwplaats',
+    portalS: 'Het klantportaal opent binnenkort. Al klant of een vraag? Mail ons, dan helpen wij u direct.',
+    newT: 'Een eigen app laten bouwen?', newB: 'Start gratis met uw idee',
+  },
+  en: {
+    eb: 'Log in', h1: 'Choose your app', sub: 'Log in to your app straight away, or try the demo with made-up data first.',
+    login: 'Log in', demo: 'Demo', soon: 'Coming soon', list: 'Put me on the list',
+    portalEb: 'Customer portal', portalT: 'One login for all your apps and your own build site',
+    portalS: 'The customer portal opens soon. Already a customer or a question? Email us and we will help you right away.',
+    newT: 'Want your own app built?', newB: 'Start free with your idea',
+  },
 };
