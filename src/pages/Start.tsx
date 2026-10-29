@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Lang, href } from '../routes';
 import { LAB_TEXT, TURNSTILE_SITEKEY, bewaarIdee, labApi } from '../lab';
 import LabBestanden from '../LabBestanden';
+import LabVragen from '../LabVragen';
 import type { Opbouw } from '../labBestanden';
 
 const mono: React.CSSProperties = { fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' };
@@ -53,6 +54,7 @@ export default function Start({ lang, signal }: { lang: Lang; signal: string }) 
               style={{ ...veld, resize: 'vertical', lineHeight: 1.5 }}
               onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) (e.currentTarget.form as HTMLFormElement).requestSubmit(); }} />
           </label>
+          <LabVragen lang={lang} signal={signal} idee={idee} zetIdee={setIdee} />
           <LabBestanden lang={lang} waarde={bestanden} wijzig={setBestanden} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 14 }}>
             <label style={label} htmlFor="lab-naam">{t.naam}<input id="lab-naam" required maxLength={120} value={naam} onChange={(e) => setNaam(e.target.value)} autoComplete="name" style={veld} /></label>
