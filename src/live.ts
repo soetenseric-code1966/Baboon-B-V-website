@@ -69,8 +69,8 @@ export const LIVE = [
   {
     name: 'Dagplanning',
     title: { nl: 'Dagplanning wagenpark', en: 'Daily fleet planning' },
-    url: 'https://dagplanning.qcontrolz.nl/dagplanning/demo',
-    host: 'dagplanning.qcontrolz.nl',
+    url: 'https://dagplanning.datawerf.com/dagplanning/demo',
+    host: 'dagplanning.datawerf.com',
     screen: '/showcase/dagplanning.jpg',
     status: 'demo',
     kind: { nl: 'Platform · busvervoer', en: 'Platform · bus operations' },
