@@ -11,7 +11,7 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g
 
 const urls = [];
 // Persoonlijke labpagina's en beheer horen niet in Google.
-const NIET_IN_SITEMAP = ['Lab', 'LabBeheer'];
+const NIET_IN_SITEMAP = ['LabBeheer']; // Lab is sinds 29-10-2026 een tabblad; eigen ideeën staan achter #, dat ziet Google niet
 for (const [page, paths] of Object.entries(PAGES)) {
   for (const lang of ['nl', 'en']) {
     const alt = [
@@ -38,5 +38,5 @@ for (const [page, paths] of Object.entries(PAGES)) {
 fs.copyFileSync(path.join(dist, 'index.html'), path.join(dist, '404.html'));
 fs.writeFileSync(path.join(dist, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
-fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /lab/\nDisallow: /en/lab/\nSitemap: ${SITE}/sitemap.xml\n`);
+fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /lab/beheer/\nDisallow: /en/lab/admin/\nSitemap: ${SITE}/sitemap.xml\n`);
 fs.rmSync(path.resolve('dist-ssr'), { recursive: true, force: true });

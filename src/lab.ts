@@ -87,6 +87,57 @@ export const LAB_TEXT = {
   },
 };
 
+// Pagina Lab (tabblad, besluit 29-10-2026): uitleg, voorbeelden, veiligheid en "uw ideeën".
+export const LAB_VOORBEELDEN = [
+  { naam: 'bandenmonitor', label: { nl: 'Bandenmonitor', en: 'Tyre monitor' }, idee: { nl: 'Bandenkosten per vestiging, voertuig en bandpositie, met afwijkingen, rollen en uploads van prijslijsten.', en: 'Tyre costs per depot, vehicle and tyre position, with deviations, roles and price list uploads.' } },
+  { naam: 'werkorders', label: { nl: 'Werkorders per monteur', en: 'Work orders per mechanic' }, idee: { nl: 'Werkorders in de werkplaats per monteur: open, bezig en klaar, met filters en doorzetten.', en: 'Workshop work orders per mechanic: open, in progress and done, with filters and hand-over.' } },
+] as const;
+
+export const LAB_INFO = {
+  nl: {
+    eb: 'Datawerf lab · gratis', h1: 'Zie uw idee werken. Vandaag nog.',
+    sub: 'Omschrijf wat u wilt laten bouwen. Binnen een paar minuten klikt u door een eerste ontwerp van uw eigen software, met verzonnen gegevens. Daarna stuurt u het tien keer gratis bij.',
+    start: 'Start met uw idee', bekijk: 'Bekijk voorbeelden',
+    stappenEb: 'Zo werkt het',
+    stappen: [
+      { t: 'Omschrijf uw idee', s: 'In gewone taal, zoals u het aan een collega uitlegt. Voeg desgewenst een Excel- of CSV-bestand toe voor de opbouw.' },
+      { t: 'Klik door uw ontwerp', s: 'Binnen een paar minuten staat een klikbaar ontwerp klaar, met menu, schermen, filters en voorbeeldgegevens. U krijgt de link ook per mail.' },
+      { t: 'Stuur tien keer bij', s: 'Typ wat er anders moet. Elke vraag levert een nieuw ontwerp. U betaalt € 0.' },
+      { t: 'Start uw platform', s: 'Goed zo? Dan bouwen we er een echte app van, met uw eigen gegevens, inlog en beheer.' },
+    ],
+    vbEb: 'Voorbeelden uit het lab', vbH: 'Zo ziet een eerste ontwerp eruit', vbS: 'Echte ontwerpen uit het lab, gemaakt in één prompt. Klik gerust rond: alles is verzonnen en er wordt niets opgeslagen.',
+    vbIdee: 'Het idee', vbLaden: 'Ontwerp laden…', vbFout: 'Dit voorbeeld kon niet worden geladen.',
+    veiligEb: 'Veilig', veiligH: 'Uw idee blijft van u',
+    veilig: [
+      { t: 'Alleen verzonnen gegevens', s: 'Het ontwerp gebruikt nooit echte namen, klanten, leveranciers, kentekens of prijzen. Ook niet als u ze noemt.' },
+      { t: 'Van uw bestand alleen de opbouw', s: 'Een Excel- of CSV-bestand wordt in uw eigen browser gelezen. Alleen bladnamen en kolomnamen gaan mee, nooit de inhoud.' },
+      { t: 'Geen account nodig', s: 'Uw idee staat achter een persoonlijke link. Kwijt? Vul uw e-mailadres in en we mailen u de links.' },
+    ],
+    mijnH: 'Uw ideeën', slotH: 'Klaar om te beginnen?', slotS: 'Tien prompts gratis per idee. Geen account, geen creditcard.',
+  },
+  en: {
+    eb: 'Datawerf lab · free', h1: 'See your idea work. Today.',
+    sub: 'Describe what you want built. Within a few minutes you click through a first design of your own software, with made-up data. Then you refine it ten times for free.',
+    start: 'Start with your idea', bekijk: 'See examples',
+    stappenEb: 'How it works',
+    stappen: [
+      { t: 'Describe your idea', s: 'In plain words, as you would explain it to a colleague. Optionally add an Excel or CSV file for the structure.' },
+      { t: 'Click through your design', s: 'Within a few minutes a clickable design is ready, with menu, screens, filters and sample data. You also get the link by email.' },
+      { t: 'Refine it ten times', s: 'Type what should change. Every request gives a new design. You pay € 0.' },
+      { t: 'Start your platform', s: 'Happy with it? We turn it into a real app, with your own data, login and admin.' },
+    ],
+    vbEb: 'Examples from the lab', vbH: 'What a first design looks like', vbS: 'Real designs from the lab, made in one prompt. Feel free to click around: everything is made up and nothing is saved.',
+    vbIdee: 'The idea', vbLaden: 'Loading design…', vbFout: 'This example could not be loaded.',
+    veiligEb: 'Safe', veiligH: 'Your idea stays yours',
+    veilig: [
+      { t: 'Only made-up data', s: 'The design never uses real names, customers, suppliers, number plates or prices. Not even if you mention them.' },
+      { t: 'Only the structure of your file', s: 'An Excel or CSV file is read in your own browser. Only sheet and column names are sent, never the contents.' },
+      { t: 'No account needed', s: 'Your idea sits behind a personal link. Lost it? Enter your email address and we email you the links.' },
+    ],
+    mijnH: 'Your ideas', slotH: 'Ready to start?', slotS: 'Ten free prompts per idea. No account, no credit card.',
+  },
+};
+
 /** Klein formulier: e-mailadres → links naar alle ideeën per mail (inloggen zonder account). */
 export async function vraagLinks(email: string, taal: 'nl' | 'en'): Promise<string> {
   const r = await labApi<{ melding: string }>({ actie: 'links', email, taal });

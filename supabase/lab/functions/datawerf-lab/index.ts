@@ -6,6 +6,7 @@
 //   start     { naam, email, bedrijf?, idee, taal, robot }   → { id, sleutel }   (prompt 1 start op de achtergrond)
 //   vraag     { id, sleutel, tekst }                          → { ok }           (volgende prompt, max 10)
 //   stand     { id, sleutel }                                 → idee, prompts, laatste ontwerp, teller, waarde
+//   voorbeeld { naam }                                        → { titel, samenvatting, html } (vaste voorbeelden, openbaar)
 //   overzicht (header x-lab-beheer)                           → alle ideeën met prompts, tijd en kosten
 //   ontwerp   (header x-lab-beheer) { id, nr }                → het ontwerp van één prompt (voor beheer)
 //
@@ -15,7 +16,7 @@
 // (USD per miljoen tokens), LAB_USD_EUR. Mail: RESEND_API_KEY, LAB_AFZENDER, LAB_SITE. Nooit sleutels of volledige foutmeldingen teruggeven of loggen.
 import postgres from "npm:postgres@3.4.5";
 import {
-  BESTANDEN_KOP, BEZIG_VERLOOPT_MS, MAX_PROMPTS, SYSTEEM, begintVandaag, bestandenTekst, controleerStart, controleerVraag, kostenEur, leesOntwerp,
+  BESTANDEN_KOP, BEZIG_VERLOOPT_MS, MAX_PROMPTS, SYSTEEM, VOORBEELDEN, begintVandaag, bestandenTekst, controleerStart, controleerVraag, kostenEur, leesOntwerp,
   mailKlaar, mailLinks, toegestaneHerkomst, voegStijlToe, waardeEur, zonderStijl,
 } from "./regels.ts";
 
@@ -258,6 +259,14 @@ Deno.serve(async (req) => {
         const idee = await zoekIdee(body.id, body.sleutel);
         if (!idee) return antwoord(req, { fout: "Dit idee is niet gevonden." }, 404);
         return antwoord(req, await stand(idee.id));
+      }
+      case "voorbeeld": {
+        const v = typeof body.naam === "string" && Object.hasOwn(VOORBEELDEN, body.naam) ? VOORBEELDEN[body.naam] : null;
+        if (!v) return antwoord(req, { fout: "Dit voorbeeld bestaat niet." }, 404);
+        const [p] = await sql`SELECT i.titel, p.samenvatting, p.html FROM lab.prompts p JOIN lab.ideeen i ON i.id = p.idee_id
+          WHERE p.idee_id = ${v.id} AND p.nr = ${v.nr} AND p.status = 'klaar'`;
+        if (!p) return antwoord(req, { fout: "Dit voorbeeld bestaat niet." }, 404);
+        return antwoord(req, { titel: p.titel, samenvatting: p.samenvatting, html: p.html });
       }
       case "platform": {
         const idee = await zoekIdee(body.id, body.sleutel);

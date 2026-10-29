@@ -8,6 +8,13 @@ export const BEZIG_VERLOOPT_MS = 7 * 60 * 1000; // een prompt die langer "bezig"
 export const WAARDE_FACTOR = 5;
 export const WAARDE_UURTARIEF = 125;
 
+// Voorbeelden op de pagina Lab (besluit 29-10-2026): vaste ontwerpen (één prompt, verandert niet meer) met alleen
+// verzonnen gegevens, door iedereen te bekijken via de actie "voorbeeld". Alleen het ontwerp gaat mee, nooit het idee.
+export const VOORBEELDEN: Record<string, { id: string; nr: number }> = {
+  bandenmonitor: { id: "afba2f21-0253-4901-86b7-7fd37ca53dce", nr: 1 },
+  werkorders: { id: "9d9dc134-7a23-4775-9cec-e878a2283507", nr: 1 },
+};
+
 export type Invoer = { naam?: unknown; email?: unknown; bedrijf?: unknown; idee?: unknown; taal?: unknown };
 
 const tekst = (x: unknown) => (typeof x === "string" ? x.trim() : "");
