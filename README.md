@@ -53,4 +53,5 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
   met het ontwerp in een afgesloten kader, de teller (x van 10), de doorgestreepte waarde en "Maak het nauwkeuriger".
 - Achterkant, geheimen en regels: `supabase/lab/LEESMIJ.md`. Tests: `npm test`.
 - Inloggen zonder account: mail "Uw ontwerp staat klaar" met de link, en op Inloggen en /lab/ "Mail mijn links".
+- Bestanden toevoegen (29-10-2026): bij Start en bij "Maak het nauwkeuriger" kan de bezoeker tot drie Excel- (.xlsx) of CSV-bestanden kiezen. `src/labBestanden.ts` leest ze in de browser; alleen de opbouw (bladnamen, kolomnamen, soort per kolom, aantal rijen) gaat mee, nooit de inhoud en niet de bestandsnaam. De bezoeker ziet vooraf wat er meegaat (`src/LabBestanden.tsx`).
 - Vaste app-stijl voor alle ontwerpen en apps: `docs/app-stijl.md`.

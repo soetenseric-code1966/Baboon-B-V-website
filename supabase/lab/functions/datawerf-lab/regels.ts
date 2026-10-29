@@ -29,6 +29,33 @@ export function controleerVraag(x: unknown): string | null {
   return t.length >= 2 && t.length <= MAX_TEKST ? t : null;
 }
 
+// Bijgevoegde bestanden (besluit 29-10-2026): de browser leest alleen de opbouw (bladen, kolomnamen, soort, aantal
+// rijen); hier wordt die gecontroleerd en als korte tekst achter het idee of de vraag gezet. Nooit de inhoud.
+export const BESTANDEN_KOP = "\n\n[Bijgevoegde bestanden: alleen de opbouw, geen inhoud]\n";
+const SOORTEN = new Set(["tekst", "getal", "ja/nee", "leeg"]);
+const kort = (x: unknown, max = 60) => (typeof x === "string" ? x.replace(/[\u0000-\u001f\u007f\[\]]+/g, " ").replace(/\s+/g, " ").trim().slice(0, max) : "");
+
+/** '' = geen bestanden, null = ongeldig, anders de tekst (max. 6.000 tekens). Bestandsnamen gaan niet mee. */
+export function bestandenTekst(x: unknown): string | null {
+  if (x == null || (Array.isArray(x) && !x.length)) return "";
+  if (!Array.isArray(x) || x.length > 3) return null;
+  const regels: string[] = [];
+  x.forEach((b: { naam?: unknown; bladen?: unknown }, i) => {
+    const ext = kort(typeof b?.naam === "string" ? b.naam.split(".").pop() : "", 5).toLowerCase();
+    regels.push(`Bestand ${i + 1}${ext ? ` (.${ext})` : ""}`);
+    const bladen = Array.isArray(b?.bladen) ? b.bladen.slice(0, 10) : [];
+    for (const bl of bladen as { naam?: unknown; rijen?: unknown; kolommen?: unknown }[]) {
+      const kolommen = (Array.isArray(bl?.kolommen) ? bl.kolommen.slice(0, 60) : []) as { naam?: unknown; soort?: unknown }[];
+      const metNaam = kolommen.filter((k) => kort(k?.naam) && !/^\(kolom [A-Z]+\)$/.test(kort(k?.naam)));
+      const zonder = kolommen.length - metNaam.length;
+      const rijen = Math.max(0, Math.min(10_000_000, Math.round(Number(bl?.rijen) || 0)));
+      const lijst = metNaam.map((k) => `${kort(k.naam)} (${SOORTEN.has(String(k.soort)) ? k.soort : "tekst"})`).join(", ");
+      regels.push(`- Blad "${kort(bl?.naam, 40) || "Blad"}", ca. ${rijen} rijen: ${lijst || "geen kolomnamen gevonden"}${zonder > 0 ? `; plus ${zonder} kolommen zonder naam` : ""}`);
+    }
+  });
+  return regels.join("\n").slice(0, 6000);
+}
+
 /** Kosten in euro uit tokens en prijzen per miljoen tokens (USD) en de koers USD→EUR. */
 export function kostenEur(tokensIn: number, tokensUit: number, prijsIn: number, prijsUit: number, usdEur: number): number {
   const usd = (tokensIn / 1e6) * prijsIn + (tokensUit / 1e6) * prijsUit;
@@ -101,6 +128,7 @@ Regels voor het ontwerp:
 - Gebruik uitsluitend VERZONNEN voorbeeldgegevens die realistisch ogen. Noem nooit echte bedrijven, klanten, leveranciers, personen, kentekens of echte prijzen, ook niet als de bezoeker ze noemt; vervang ze door verzonnen namen en bedragen. Algemene vaktermen, productsoorten, merken van materiaal en maten mogen wel.
 - Vraagt het idee om inloggen of rollen: begin met het inlogscherm (ds-login) waarop je zonder wachtwoord een rol kiest, en laat per rol zien wat die ziet.
 - Vraagt het idee om uploads: maak een uploadvak (ds-upload) dat een gekozen bestand alleen bij naam toont en zegt dat het ontwerp niets opslaat.
+- Staan er bijgevoegde bestanden bij (alleen bladnamen en kolomnamen): gebruik die opbouw voor de tabellen en velden, en laat bij het uploadvak zien hoe zo'n bestand wordt ingelezen (kolom in het bestand → veld in de app). Verzin de gegevens. Komen er namen van bedrijven of leveranciers in blad- of kolomnamen voor, vervang ze dan door een algemene naam (bijvoorbeeld "Leveranciersnummer").
 - Werkt ook op een telefoon (geen horizontale scroll; tabellen in .ds-tabelvak).
 - Houd het document compact: je hele antwoord blijft onder ongeveer 40.000 tekens (circa 600 regels). Kies hoogstens 4 schermen met de belangrijkste onderdelen van het idee; de rest kan de bezoeker later vragen. Gebruik korte teksten, en maak voorbeeldgegevens met een kleine functie (lus met vast zaadje) in plaats van lange uitgeschreven lijsten. Liever minder schermen die goed werken dan veel half.
 

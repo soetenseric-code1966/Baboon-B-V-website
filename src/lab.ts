@@ -14,6 +14,14 @@ export type LabStand = {
   gebruikt: number; max: number; bezig: boolean; waarde: number; minuten: number;
 };
 
+// Zelfde kop als BESTANDEN_KOP in supabase/lab/functions/datawerf-lab/regels.ts (test controleert dat).
+export const BESTANDEN_KOP = "\n\n[Bijgevoegde bestanden: alleen de opbouw, geen inhoud]\n";
+/** Tekst van een idee of vraag zonder het blok met de opbouw van bijgevoegde bestanden. */
+export function zonderBijlage(tekst: string): { tekst: string; bijlage: boolean } {
+  const i = tekst.indexOf(BESTANDEN_KOP);
+  return i < 0 ? { tekst, bijlage: false } : { tekst: tekst.slice(0, i), bijlage: true };
+}
+
 export async function labApi<T = unknown>(body: Record<string, unknown>, beheer?: string): Promise<T> {
   const r = await fetch(LAB_URL, {
     method: 'POST',
@@ -54,6 +62,8 @@ export const LAB_TEXT = {
     geschiedenis: 'Uw vragen', mijn: 'Uw ideeën in deze browser', geen: 'Er is hier nog geen idee geopend.', nieuw: 'Nieuw idee',
     nietGevonden: 'Dit idee is niet gevonden. Controleer de link.', minuten: 'min werk',
     mailMelding: 'U hoeft niet te wachten: zodra het ontwerp klaar is, mailen we u de link.',
+    bestT: 'Bestanden toevoegen (optioneel)', bestS: 'Excel (.xlsx) of CSV, maximaal drie. Uw bestand wordt in uw eigen browser gelezen; alleen de opbouw (bladen en kolomnamen) gaat mee, nooit de inhoud. Het ontwerp gebruikt verzonnen gegevens.',
+    bestKies: 'Kies of sleep bestanden', bestRijen: 'rijen', bestKolommen: 'kolommen', bestWeg: 'Verwijder', bestLezen: 'Bestand lezen…', bestFout: 'Kan dit bestand niet lezen', bestMee: 'met bestanden',
     linksT: 'Terug naar uw ideeën', linksS: 'Vul uw e-mailadres in; we mailen u de links naar al uw ideeën in het lab.', linksB: 'Mail mijn links',
   },
   en: {
@@ -71,6 +81,8 @@ export const LAB_TEXT = {
     geschiedenis: 'Your requests', mijn: 'Your ideas in this browser', geen: 'No idea has been opened here yet.', nieuw: 'New idea',
     nietGevonden: 'This idea was not found. Check the link.', minuten: 'min of work',
     mailMelding: 'No need to wait: as soon as the design is ready, we email you the link.',
+    bestT: 'Add files (optional)', bestS: 'Excel (.xlsx) or CSV, up to three. Your file is read in your own browser; only its structure (sheets and column names) is sent, never the contents. The design uses made-up data.',
+    bestKies: 'Choose or drop files', bestRijen: 'rows', bestKolommen: 'columns', bestWeg: 'Remove', bestLezen: 'Reading file…', bestFout: 'Cannot read this file', bestMee: 'with files',
     linksT: 'Back to your ideas', linksS: 'Enter your email address; we will email you the links to all your ideas in the lab.', linksB: 'Email my links',
   },
 };

@@ -75,3 +75,36 @@ test('ontwerp zonder afsluitende ``` wordt toch gelezen; opdracht vraagt om een 
   const a = r.leesOntwerp(html); assert.ok(a); assert.ok(a.html.startsWith('<!doctype html>'));
   assert.match(r.SYSTEEM('nl'), /40\.000 tekens/);
 });
+
+// ---- Bijgevoegde bestanden: alleen de opbouw gaat mee (besluit 29-10-2026) ----
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import * as lab from '../src/lab.ts';
+import * as b from '../src/labBestanden.ts';
+
+test('xlsx: bladnamen, kopregel onder een titel, soort per kolom, verborgen blad overgeslagen', async () => {
+  const pad = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures', 'lab-voorbeeld.xlsx');
+  const o = await b.leesXlsx('lab-voorbeeld.xlsx', new Uint8Array(readFileSync(pad)));
+  assert.equal(o.bladen.length, 1);
+  const bl = o.bladen[0];
+  assert.equal(bl.naam, 'Banden'); assert.equal(bl.rijen, 12);
+  assert.deepEqual(bl.kolommen.map((k) => `${k.naam}:${k.soort}`), ['Voertuig:tekst', 'Positie:tekst', 'Merk:tekst', 'Profiel mm:getal', 'Prijs:getal', 'Actief:ja/nee']);
+  assert.ok(!JSON.stringify(o).includes('BUS-10'), 'geen inhoud in de opbouw');
+});
+
+test('csv: scheidingsteken raden en aanhalingstekens', () => {
+  const o = b.leesCsv('lijst.csv', 'Maat;"Prijs; bruto";Merk\n315/80R22.5;"1.234,50";Merkloos\n295/60R22.5;999;Ander\n');
+  assert.deepEqual(o.bladen[0].kolommen.map((k) => `${k.naam}:${k.soort}`), ['Maat:tekst', 'Prijs; bruto:getal', 'Merk:tekst']);
+  assert.equal(o.bladen[0].rijen, 2);
+});
+
+test('opbouw naar tekst: geen bestandsnaam, kolommen zonder naam geteld, grenzen', () => {
+  assert.equal(r.bestandenTekst(undefined), ''); assert.equal(r.bestandenTekst([]), '');
+  assert.equal(r.bestandenTekst('x'), null); assert.equal(r.bestandenTekst([{}, {}, {}, {}]), null);
+  const t = r.bestandenTekst([{ naam: 'Leverancier_X_prijslijst.xlsx', bladen: [{ naam: 'Prijzen', rijen: 40, kolommen: [{ naam: 'Maat', soort: 'tekst' }, { naam: 'Prijs', soort: 'getal' }, { naam: '(kolom C)', soort: 'getal' }, { naam: 'X', soort: 'raar' }] }] }]);
+  assert.equal(t, 'Bestand 1 (.xlsx)\n- Blad "Prijzen", ca. 40 rijen: Maat (tekst), Prijs (getal), X (tekst); plus 1 kolommen zonder naam');
+  assert.ok(!t.includes('Leverancier'));
+  assert.equal(lab.BESTANDEN_KOP, r.BESTANDEN_KOP);
+  assert.deepEqual(lab.zonderBijlage('Idee' + r.BESTANDEN_KOP + t), { tekst: 'Idee', bijlage: true });
+});
