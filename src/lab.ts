@@ -64,7 +64,7 @@ export const LAB_TEXT = {
     mailMelding: 'U hoeft niet te wachten: zodra het ontwerp klaar is, mailen we u de link.',
     bestT: 'Bestanden toevoegen (optioneel)', bestS: 'Excel (.xlsx) of CSV, maximaal drie. Uw bestand wordt in uw eigen browser gelezen; alleen de opbouw (bladen en kolomnamen) gaat mee, nooit de inhoud. Het ontwerp gebruikt verzonnen gegevens.',
     bestKies: 'Kies of sleep bestanden', bestRijen: 'rijen', bestKolommen: 'kolommen', bestWeg: 'Verwijder', bestLezen: 'Bestand lezen…', bestFout: 'Kan dit bestand niet lezen', bestMee: 'met bestanden',
-    hulpKnop: 'Help mij mijn idee scherper te maken', hulpS: 'Een paar vragen die bij uw idee passen. Elke vraag mag u overslaan.', hulpLaden: 'Vragen bij uw idee maken…', hulpZet: 'Zet in mijn idee', hulpWeg: 'Sluiten', hulpAnders: 'Anders, namelijk…', hulpStandaard: 'Een paar algemene vragen (de vragen bij uw idee lukten nu niet).', hulpKort: 'Typ eerst kort uw idee (minstens één zin).',
+    hulpKnop: 'Help mij mijn idee scherper te maken', hulpS: 'Een paar vragen die bij uw idee passen. Elke vraag mag u overslaan.', hulpLaden: 'Vragen bij uw idee maken…', hulpZet: 'Zet in mijn idee', hulpVolgende: 'Volgende', hulpVorige: 'Vorige', hulpOverslaan: 'Overslaan', hulpVan: 'van', hulpWeg: 'Sluiten', hulpAnders: 'Anders, namelijk…', hulpStandaard: 'Een paar algemene vragen (de vragen bij uw idee lukten nu niet).', hulpKort: 'Typ eerst kort uw idee (minstens één zin).',
     linksT: 'Terug naar uw ideeën', linksS: 'Vul uw e-mailadres in; we mailen u de links naar al uw ideeën in het lab.', linksB: 'Mail mijn links',
   },
   en: {
@@ -84,7 +84,7 @@ export const LAB_TEXT = {
     mailMelding: 'No need to wait: as soon as the design is ready, we email you the link.',
     bestT: 'Add files (optional)', bestS: 'Excel (.xlsx) or CSV, up to three. Your file is read in your own browser; only its structure (sheets and column names) is sent, never the contents. The design uses made-up data.',
     bestKies: 'Choose or drop files', bestRijen: 'rows', bestKolommen: 'columns', bestWeg: 'Remove', bestLezen: 'Reading file…', bestFout: 'Cannot read this file', bestMee: 'with files',
-    hulpKnop: 'Help me sharpen my idea', hulpS: 'A few questions that fit your idea. You may skip any of them.', hulpLaden: 'Making questions for your idea…', hulpZet: 'Add to my idea', hulpWeg: 'Close', hulpAnders: 'Other, namely…', hulpStandaard: 'A few general questions (the questions for your idea did not work just now).', hulpKort: 'First type your idea briefly (at least one sentence).',
+    hulpKnop: 'Help me sharpen my idea', hulpS: 'A few questions that fit your idea. You may skip any of them.', hulpLaden: 'Making questions for your idea…', hulpZet: 'Add to my idea', hulpVolgende: 'Next', hulpVorige: 'Back', hulpOverslaan: 'Skip', hulpVan: 'of', hulpWeg: 'Close', hulpAnders: 'Other, namely…', hulpStandaard: 'A few general questions (the questions for your idea did not work just now).', hulpKort: 'First type your idea briefly (at least one sentence).',
     linksT: 'Back to your ideas', linksS: 'Enter your email address; we will email you the links to all your ideas in the lab.', linksB: 'Email my links',
   },
 };

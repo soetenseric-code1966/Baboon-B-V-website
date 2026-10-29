@@ -61,3 +61,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 @keyframes labdraai { to { transform: rotate(360deg); } }
 .lab-laden { animation: labdraai 1s linear infinite; }
 @media (prefers-reduced-motion: reduce) { .lab-laden { animation: none; } }
+
+/* Lab: hulpvragen één voor één (29-10-2026) */
+.lab-vraag { animation: lab-vraag-in .25s ease-out; }
+@keyframes lab-vraag-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .lab-vraag { animation: none; } }
