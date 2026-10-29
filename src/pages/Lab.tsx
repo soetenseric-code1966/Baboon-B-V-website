@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Lang, href } from '../routes';
 import { LAB_TEXT, LabStand, bewaarIdee, bewaardeIdeeen, labApi } from '../lab';
+import LabLinks from '../LabLinks';
 
 const mono: React.CSSProperties = { fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' };
 const pil = (bg: string, fg: string, border = bg): React.CSSProperties => ({ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '10px 20px', borderRadius: 999, background: bg, color: fg, border: `2px solid ${border}`, fontWeight: 700, textDecoration: 'none', fontSize: 15, cursor: 'pointer' });
@@ -66,6 +67,10 @@ export default function Lab({ lang, signal }: { lang: Lang; signal: string }) {
           <a key={m.id} href={'#' + m.id + '.' + m.sleutel} style={{ ...pil('#FFFFFF', '#14213D', '#14213D'), justifyContent: 'space-between' }}><span>{m.titel}</span><span aria-hidden="true">→</span></a>))}</div>
           : <p style={{ margin: 0, color: '#3A4258', fontSize: 18 }}>{t.geen}</p>}
         <a href={href('Start', lang)} style={{ ...pil(signal, '#FFFFFF'), justifySelf: 'start' }}>{t.nieuw} →</a>
+        <div style={{ background: '#F7F8FA', borderRadius: 20, padding: 24, maxWidth: 760, display: 'grid', gap: 8 }}>
+          <div style={{ fontSize: 22, fontWeight: 700 }}>{t.linksT}</div>
+          <LabLinks lang={lang} signal={signal} />
+        </div>
       </section></div>
     );
   }
@@ -94,6 +99,7 @@ export default function Lab({ lang, signal }: { lang: Lang; signal: string }) {
             <div style={{ display: 'grid', placeItems: 'center', padding: 40, textAlign: 'center', gap: 12, borderBottom: stand.ontwerp ? '1px solid #D5DAE3' : 0 }}>
               <div className="lab-laden" aria-hidden="true" style={{ width: 44, height: 44, borderRadius: '50%', border: `4px solid #E3E7EE`, borderTopColor: signal }} />
               <p style={{ margin: 0, maxWidth: 480, color: '#3A4258' }}>{t.maken}</p>
+              {stand.gebruikt <= 1 ? <p style={{ margin: 0, maxWidth: 480, color: '#14213D', fontWeight: 600 }}>{t.mailMelding}</p> : null}
             </div>
           ) : null}
           {laatste?.status === 'fout' ? (

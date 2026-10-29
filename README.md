@@ -52,3 +52,5 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
 - "Start gratis" (kop, voet en alle knoppen) gaat naar `/start/`: idee, naam, e-mail, bedrijf. Daarna `/lab/#id.sleutel`
   met het ontwerp in een afgesloten kader, de teller (x van 10), de doorgestreepte waarde en "Maak het nauwkeuriger".
 - Achterkant, geheimen en regels: `supabase/lab/LEESMIJ.md`. Tests: `npm test`.
+- Inloggen zonder account: mail "Uw ontwerp staat klaar" met de link, en op Inloggen en /lab/ "Mail mijn links".
+- Vaste app-stijl voor alle ontwerpen en apps: `docs/app-stijl.md`.

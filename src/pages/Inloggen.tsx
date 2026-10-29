@@ -5,6 +5,8 @@
 import React from 'react';
 import { Lang, href } from '../routes';
 import { APPS, LOGIN_APPS_TEXT } from '../apps';
+import { LAB_TEXT } from '../lab';
+import LabLinks from '../LabLinks';
 
 const mono: React.CSSProperties = { fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' };
 const chip: React.CSSProperties = { fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, fontWeight: 600, padding: '4px 10px', borderRadius: 999, textTransform: 'uppercase' };
@@ -39,6 +41,16 @@ export default function Inloggen({ lang, signal }: { lang: Lang; signal: string 
             </div>
           </article>
         ))}
+      </section>
+
+      <section className="dw-sec" style={{ padding: '0 48px 24px' }}>
+        <div style={{ background: '#14213D', color: '#FFFFFF', borderRadius: 20, padding: 32, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(320px,100%),1fr))', gap: 24, alignItems: 'center' }}>
+          <div>
+            <div style={{ ...mono, color: signal }}>{LAB_TEXT[lang].eb}</div>
+            <div style={{ fontSize: 24, fontWeight: 700, letterSpacing: '-0.5px', marginTop: 6 }}>{LAB_TEXT[lang].linksT}</div>
+          </div>
+          <LabLinks lang={lang} signal={signal} donker />
+        </div>
       </section>
 
       <section className="dw-sec" style={{ padding: '0 48px 88px' }}>

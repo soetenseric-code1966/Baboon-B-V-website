@@ -12,11 +12,11 @@
 // Geheimen (Supabase → Edge Functions → Secrets): ANTHROPIC_API_KEY (werkruimte "Lab" in de Claude Console, met
 // maandlimiet), TURNSTILE_SECRET (Cloudflare Turnstile), LAB_BEHEER_SLEUTEL (eigen wachtwoord voor het overzicht).
 // Instellingen (optioneel): LAB_MODEL, LAB_DAGLIMIET (prompts per dag, standaard 50), LAB_PRIJS_IN / LAB_PRIJS_UIT
-// (USD per miljoen tokens), LAB_USD_EUR. Nooit sleutels of volledige foutmeldingen teruggeven of loggen.
+// (USD per miljoen tokens), LAB_USD_EUR. Mail: RESEND_API_KEY, LAB_AFZENDER, LAB_SITE. Nooit sleutels of volledige foutmeldingen teruggeven of loggen.
 import postgres from "npm:postgres@3.4.5";
 import {
   BEZIG_VERLOOPT_MS, MAX_PROMPTS, SYSTEEM, begintVandaag, controleerStart, controleerVraag, kostenEur, leesOntwerp,
-  toegestaneHerkomst, waardeEur,
+  mailKlaar, mailLinks, toegestaneHerkomst, voegStijlToe, waardeEur, zonderStijl,
 } from "./regels.ts";
 
 const sql = postgres(Deno.env.get("SUPABASE_DB_URL")!, { max: 3, prepare: false });
@@ -73,12 +73,35 @@ async function dagVol(): Promise<boolean> {
 async function zoekIdee(id: unknown, sleutel: unknown) {
   if (typeof id !== "string" || !/^[0-9a-f-]{36}$/.test(id) || typeof sleutel !== "string" || sleutel.length < 20) return null;
   const [idee] = await sql`SELECT * FROM lab.ideeen WHERE id = ${id}`;
-  if (!idee || !gelijk(idee.sleutel_hash, await sha256(sleutel))) return null;
-  return idee;
+  if (!idee) return null;
+  const hash = await sha256(sleutel);
+  if (gelijk(idee.sleutel_hash, hash)) return idee;
+  // Een link uit een inlogmail (lab.toegang).
+  const [t] = await sql`SELECT 1 FROM lab.toegang WHERE idee_id = ${id} AND sleutel_hash = ${hash}`;
+  return t ? idee : null;
+}
+
+const labLink = (taal: string, id: string, sleutel: string) =>
+  `${env("LAB_SITE", "https://datawerf.com")}${taal === "en" ? "/en/lab/" : "/lab/"}#${id}.${sleutel}`;
+
+/** Verstuurt een mail via Resend (als RESEND_API_KEY is ingesteld) en legt hem vast in lab.mails. */
+async function stuurMail(email: string, soort: "klaar" | "links", ideeId: string | null, m: { onderwerp: string; tekst: string; html: string }) {
+  const sleutel = env("RESEND_API_KEY");
+  let gelukt = false;
+  if (sleutel) {
+    const r = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${sleutel}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ from: env("LAB_AFZENDER", "Datawerf lab <lab@datawerf.com>"), to: [email], subject: m.onderwerp, text: m.tekst, html: m.html }),
+    }).catch(() => null);
+    gelukt = Boolean(r?.ok);
+    if (!gelukt) console.error("lab: mail mislukt", soort, r?.status ?? "netwerk");
+  }
+  await sql`INSERT INTO lab.mails (email, soort, idee_id, gelukt) VALUES (${email}, ${soort}, ${ideeId}, ${gelukt})`.catch(() => {});
 }
 
 /** Roept Claude aan en slaat het ontwerp, de tokens, de kosten en de duur op bij de prompt. */
-async function maakOntwerp(promptId: number, ideeId: string) {
+async function maakOntwerp(promptId: number, ideeId: string, sleutelVoorMail?: string) {
   const start = Date.now();
   try {
     const [idee] = await sql`SELECT * FROM lab.ideeen WHERE id = ${ideeId}`;
@@ -87,7 +110,7 @@ async function maakOntwerp(promptId: number, ideeId: string) {
     const vorige = [...prompts].reverse().find((p) => p.status === "klaar" && p.html);
     const geschiedenis = prompts.filter((p) => p.status === "klaar").map((p) => `${p.nr}. ${p.tekst}`).join("\n");
     const inhoud = vorige
-      ? `Het idee:\n${idee.idee}\n\nEerdere vragen:\n${geschiedenis}\n\nHet huidige ontwerp:\n${vorige.html}\n\nNieuwe vraag van de bezoeker:\n${huidig?.tekst}`
+      ? `Het idee:\n${idee.idee}\n\nEerdere vragen:\n${geschiedenis}\n\nHet huidige ontwerp:\n${zonderStijl(vorige.html)}\n\nNieuwe vraag van de bezoeker:\n${huidig?.tekst}`
       : `Het idee van de bezoeker${idee.bedrijf ? ` (bedrijf: verzonnen naam gebruiken)` : ""}:\n${idee.idee}`;
     const model = env("LAB_MODEL", "claude-sonnet-5-5");
     const r = await fetch("https://api.anthropic.com/v1/messages", {
@@ -106,9 +129,11 @@ async function maakOntwerp(promptId: number, ideeId: string) {
         tokens_uit = ${tokensUit}, kosten_eur = ${kosten}, duur_ms = ${Date.now() - start}, klaar = now() WHERE id = ${promptId}`;
       return;
     }
-    await sql`UPDATE lab.prompts SET status = 'klaar', html = ${ontwerp.html}, samenvatting = ${ontwerp.samenvatting}, model = ${model},
+    await sql`UPDATE lab.prompts SET status = 'klaar', html = ${voegStijlToe(ontwerp.html)}, samenvatting = ${ontwerp.samenvatting}, model = ${model},
       tokens_in = ${tokensIn}, tokens_uit = ${tokensUit}, kosten_eur = ${kosten}, duur_ms = ${Date.now() - start}, klaar = now() WHERE id = ${promptId}`;
     if (ontwerp.titel) await sql`UPDATE lab.ideeen SET titel = ${ontwerp.titel} WHERE id = ${ideeId} AND titel IS NULL`;
+    // Eerste ontwerp klaar: mail met de link (de bezoeker hoeft niet te wachten).
+    if (sleutelVoorMail) await stuurMail(idee.email, "klaar", ideeId, mailKlaar(idee.taal, ontwerp.titel ?? "Uw idee", labLink(idee.taal, ideeId, sleutelVoorMail)));
   } catch (e) {
     console.error("lab: ontwerp mislukt", promptId, e instanceof Error ? e.message.slice(0, 200) : "onbekend");
     await sql`UPDATE lab.prompts SET status = 'fout', fout = 'Het ontwerp kon niet worden gemaakt', duur_ms = ${Date.now() - start}, klaar = now()
@@ -157,8 +182,8 @@ Deno.serve(async (req) => {
         const [idee] = await sql`INSERT INTO lab.ideeen (sleutel_hash, naam, email, bedrijf, idee, taal, ip_hash)
           VALUES (${await sha256(sleutel)}, ${c.naam}, ${c.email}, ${c.bedrijf}, ${c.idee}, ${c.taal}, ${ipHash}) RETURNING id`;
         const [p] = await sql`INSERT INTO lab.prompts (idee_id, nr, tekst) VALUES (${idee.id}, 1, ${c.idee.slice(0, 4000)}) RETURNING id`;
-        opAchtergrond(maakOntwerp(p.id, idee.id));
-        return antwoord(req, { id: idee.id, sleutel });
+        opAchtergrond(maakOntwerp(p.id, idee.id, sleutel));
+        return antwoord(req, { id: idee.id, sleutel, mail: Boolean(env("RESEND_API_KEY")) });
       }
       case "vraag": {
         const idee = await zoekIdee(body.id, body.sleutel);
@@ -196,6 +221,29 @@ Deno.serve(async (req) => {
         opAchtergrond(maakOntwerp(laatste.id, idee.id));
         return antwoord(req, { ok: true });
       }
+      case "links": {
+        // Inloggen zonder account: stuur de links naar alle ideeën van dit e-mailadres (nieuwe links, de oude blijven werken).
+        const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+        const taal = body.taal === "en" ? "en" : "nl";
+        const melding = taal === "en" ? "If ideas belong to this address, we have emailed the links." : "Als er ideeën bij dit adres horen, hebben we de links gemaild.";
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || email.length > 200) return antwoord(req, { fout: taal === "en" ? "Please enter a valid email address." : "Vul een geldig e-mailadres in." }, 400);
+        if (!env("RESEND_API_KEY")) return antwoord(req, { fout: taal === "en" ? "Email login is not available yet." : "Inloggen per e-mail is nog niet beschikbaar." }, 503);
+        const [{ n }] = await sql`SELECT count(*)::int AS n FROM lab.mails WHERE email = ${email} AND soort = 'links' AND aangemaakt > now() - interval '1 hour'`;
+        if (n >= 3) return antwoord(req, { ok: true, melding });
+        const ideeen = await sql`SELECT id, titel, idee FROM lab.ideeen WHERE email = ${email} AND status <> 'spam' ORDER BY aangemaakt DESC LIMIT 10`;
+        if (ideeen.length) {
+          const links = [];
+          for (const i of ideeen) {
+            const sleutel = nieuweSleutel();
+            await sql`INSERT INTO lab.toegang (idee_id, sleutel_hash) VALUES (${i.id}, ${await sha256(sleutel)})`;
+            links.push({ titel: i.titel || String(i.idee).slice(0, 60), link: labLink(taal, i.id, sleutel) });
+          }
+          await stuurMail(email, "links", null, mailLinks(taal, links));
+        } else {
+          await sql`INSERT INTO lab.mails (email, soort, gelukt) VALUES (${email}, 'links', false)`;
+        }
+        return antwoord(req, { ok: true, melding });
+      }
       case "stand": {
         const idee = await zoekIdee(body.id, body.sleutel);
         if (!idee) return antwoord(req, { fout: "Dit idee is niet gevonden." }, 404);
@@ -223,7 +271,7 @@ Deno.serve(async (req) => {
               'aangemaakt', p.aangemaakt) ORDER BY p.nr) FILTER (WHERE p.id IS NOT NULL), '[]') AS lijst
           FROM lab.ideeen i LEFT JOIN lab.prompts p ON p.idee_id = i.id GROUP BY i.id ORDER BY i.aangemaakt DESC LIMIT 200`;
         const [vandaag] = await sql`SELECT count(*)::int AS n FROM lab.prompts WHERE aangemaakt >= ${begintVandaag()}`;
-        return antwoord(req, { ideeen, vandaag: vandaag.n, daglimiet: getal("LAB_DAGLIMIET", 50), model: env("LAB_MODEL", "claude-sonnet-5-5"), open: Boolean(env("ANTHROPIC_API_KEY")), robot: Boolean(env("TURNSTILE_SECRET")) });
+        return antwoord(req, { ideeen, vandaag: vandaag.n, daglimiet: getal("LAB_DAGLIMIET", 50), model: env("LAB_MODEL", "claude-sonnet-5-5"), open: Boolean(env("ANTHROPIC_API_KEY")), robot: Boolean(env("TURNSTILE_SECRET")), mail: Boolean(env("RESEND_API_KEY")) });
       }
       default:
         return antwoord(req, { fout: "Onbekende actie." }, 400);

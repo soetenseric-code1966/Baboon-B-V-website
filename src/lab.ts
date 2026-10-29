@@ -53,6 +53,8 @@ export const LAB_TEXT = {
     link: 'Bewaar deze link: hiermee komt u later terug bij uw idee.', kopieer: 'Kopieer link', gekopieerd: 'Gekopieerd',
     geschiedenis: 'Uw vragen', mijn: 'Uw ideeën in deze browser', geen: 'Er is hier nog geen idee geopend.', nieuw: 'Nieuw idee',
     nietGevonden: 'Dit idee is niet gevonden. Controleer de link.', minuten: 'min werk',
+    mailMelding: 'U hoeft niet te wachten: zodra het ontwerp klaar is, mailen we u de link.',
+    linksT: 'Terug naar uw ideeën', linksS: 'Vul uw e-mailadres in; we mailen u de links naar al uw ideeën in het lab.', linksB: 'Mail mijn links',
   },
   en: {
     eb: 'Datawerf lab', h1: 'Start with your idea', sub: 'Describe what you want built and press Start. Within a few minutes your first clickable design is ready, with made-up data. You can then refine it ten times for free.',
@@ -68,5 +70,13 @@ export const LAB_TEXT = {
     link: 'Keep this link: it brings you back to your idea later.', kopieer: 'Copy link', gekopieerd: 'Copied',
     geschiedenis: 'Your requests', mijn: 'Your ideas in this browser', geen: 'No idea has been opened here yet.', nieuw: 'New idea',
     nietGevonden: 'This idea was not found. Check the link.', minuten: 'min of work',
+    mailMelding: 'No need to wait: as soon as the design is ready, we email you the link.',
+    linksT: 'Back to your ideas', linksS: 'Enter your email address; we will email you the links to all your ideas in the lab.', linksB: 'Email my links',
   },
 };
+
+/** Klein formulier: e-mailadres → links naar alle ideeën per mail (inloggen zonder account). */
+export async function vraagLinks(email: string, taal: 'nl' | 'en'): Promise<string> {
+  const r = await labApi<{ melding: string }>({ actie: 'links', email, taal });
+  return r.melding;
+}

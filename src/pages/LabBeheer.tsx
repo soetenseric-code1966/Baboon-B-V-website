@@ -7,7 +7,7 @@ import { labApi } from '../lab';
 type Prompt = { nr: number; tekst: string; status: string; kosten: number | null; duur_ms: number | null };
 type Idee = { id: string; aangemaakt: string; naam: string; email: string; bedrijf: string | null; titel: string | null; idee: string; status: string;
   prompts: number; kosten: number; duur_ms: number; tokens_in: number; tokens_uit: number; lijst: Prompt[] };
-type Overzicht = { ideeen: Idee[]; vandaag: number; daglimiet: number; model: string; open: boolean; robot: boolean };
+type Overzicht = { ideeen: Idee[]; vandaag: number; daglimiet: number; model: string; open: boolean; robot: boolean; mail: boolean };
 
 const SLOT = 'dw-lab-beheer';
 const eur = (n: number) => '€ ' + n.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -44,7 +44,7 @@ export default function LabBeheer({ signal }: { lang: Lang; signal: string }) {
         {data && tot ? <>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: 12 }}>
             {[['Ideeën', String(data.ideeen.length)], ['Prompts', String(tot.prompts)], ['AI-kosten', eur(tot.kosten)], ['Vandaag', `${data.vandaag} / ${data.daglimiet}`],
-              ['Lab', data.open ? 'open' : 'dicht (geen sleutel)'], ['Robotcontrole', data.robot ? 'aan' : 'uit']].map(([k, v]) => (
+              ['Lab', data.open ? 'open' : 'dicht (geen sleutel)'], ['Robotcontrole', data.robot ? 'aan' : 'uit'], ['Mail', data.mail ? 'aan' : 'uit']].map(([k, v]) => (
               <div key={k} style={{ background: '#F7F8FA', borderRadius: 16, padding: 16 }}><div style={{ fontSize: 12, color: '#5C6378', fontFamily: "'IBM Plex Mono',monospace", textTransform: 'uppercase' }}>{k}</div><div style={{ fontSize: 24, fontWeight: 700 }}>{v}</div></div>))}
           </div>
           <p style={{ margin: 0, fontSize: 13, color: '#5C6378' }}>Model {data.model}. Kosten zijn berekend uit de tokens en de ingestelde prijzen; de factuur in de Claude Console is leidend.</p>

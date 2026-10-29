@@ -50,3 +50,22 @@ test('de opdracht aan de AI eist verzonnen gegevens en één HTML-document', () 
   assert.match(s, /VERZONNEN/); assert.match(s, /Noem nooit echte bedrijven/); assert.match(s, /<!doctype html>/); assert.match(s, /Nederlands/);
   assert.match(r.SYSTEEM('en'), /Engels/);
 });
+
+test('vaste app-stijl: wordt in <head> gezet en voor de vervolgvraag weer weggehaald', async () => {
+  const s = await import('../supabase/lab/functions/datawerf-lab/stijl.ts');
+  const html = '<!doctype html><html><head><title>x</title></head><body><div class="ds-app"></div></body></html>';
+  const met = r.voegStijlToe(html);
+  assert.match(met, /<style id="ds-stijl">/); assert.match(met, /Montserrat/); assert.match(met, /--merk:#0062a3/);
+  assert.ok(met.indexOf('ds-stijl') < met.indexOf('<title>'));
+  assert.equal(r.zonderStijl(met).includes('ds-stijl'), false);
+  assert.match(r.voegStijlToe('<!doctype html><html><body></body></html>'), /<head>\n<link/);
+  assert.match(s.APP_OPBOUW, /ds-login/); assert.match(r.SYSTEEM('nl'), /Neem ze NIET zelf op/);
+});
+
+test('mails: link naar het idee, ontsnapte tekst, Engels waar gevraagd', () => {
+  const m = r.mailKlaar('nl', 'Banden <monitor>', 'https://datawerf.com/lab/#id.sleutel');
+  assert.match(m.onderwerp, /staat klaar/); assert.match(m.tekst, /https:\/\/datawerf\.com\/lab\/#id\.sleutel/);
+  assert.match(m.html, /Banden &lt;monitor&gt;/); assert.doesNotMatch(m.html, /<monitor>/);
+  const l = r.mailLinks('en', [{ titel: 'A', link: 'https://datawerf.com/en/lab/#a.b' }, { titel: 'B', link: 'https://datawerf.com/en/lab/#c.d' }]);
+  assert.match(l.onderwerp, /Your ideas/); assert.equal((l.html.match(/href=/g) || []).length, 2);
+});
