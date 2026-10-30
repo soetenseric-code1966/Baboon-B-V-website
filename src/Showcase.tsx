@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SHOWCASE, SHOWCASE_TEXT, SHOWCASE_INTERVAL } from './showcase';
+import Film from './Film';
 import type { Lang } from './routes';
 
 const MONO = "'IBM Plex Mono',monospace";
@@ -26,16 +27,21 @@ export default function Showcase({ lang, signal, title, sub }: { lang: Lang; sig
 
   useEffect(() => {
     if (!playing || hold || reduced) return;
-    const id = window.setInterval(() => { if (!document.hidden) setI((k) => (k + 1) % n); }, SHOWCASE_INTERVAL);
-    return () => window.clearInterval(id);
-  }, [playing, hold, reduced, n]);
+    // Per project een eigen tijd (een animatie blijft staan tot hij rond is).
+    let id = 0;
+    const plan = (ms: number) => { id = window.setTimeout(() => { if (document.hidden) plan(1000); else setI((k) => (k + 1) % n); }, ms); };
+    plan(SHOWCASE[i].duur ?? SHOWCASE_INTERVAL);
+    return () => window.clearTimeout(id);
+  }, [playing, hold, reduced, n, i]);
 
   const go = (k: number) => setI(((k % n) + n) % n);
   const it = SHOWCASE[i];
   const name = it.name[lang];
   const auto = playing && !reduced;
 
-  const screen = it.screen ? (
+  const screen = it.video ? (
+    <Film lang={lang} src={it.video} poster={it.screen ?? ''} label={`${name}: ${lang === 'nl' ? 'animatie' : 'animation'}`} signal={signal} rond={0} />
+  ) : it.screen ? (
     <img src={it.screen} alt={`${name}: ${lang === 'nl' ? 'schermafbeelding' : 'screenshot'}`} width={1600} height={1000}
       loading={i === 0 ? 'eager' : 'lazy'} decoding="async" style={{ display: 'block', width: '100%', height: 'auto', aspectRatio: '16 / 10', objectFit: 'cover', objectPosition: 'top' }} />
   ) : (
@@ -101,7 +107,7 @@ export default function Showcase({ lang, signal, title, sub }: { lang: Lang; sig
           </div>
         </div>
         <div style={{ background: '#14213D', padding: 32, display: 'flex', alignItems: 'center', minHeight: 320 }}>
-          {it.url ? (
+          {it.url && !it.video ? (
             <a href={it.url} target="_blank" rel="noopener" className="sc-link" aria-label={`${T.open} ${name} (${it.host})`} style={{ display: 'block', width: '100%', position: 'relative', textDecoration: 'none' }}>
               {frame}
               <span className="sc-hint" style={{ position: 'absolute', right: 14, bottom: 14, padding: '8px 14px', borderRadius: 999, background: signal, color: '#FFFFFF', fontWeight: 700, fontSize: 14 }}>{T.open} {it.host} ↗</span>

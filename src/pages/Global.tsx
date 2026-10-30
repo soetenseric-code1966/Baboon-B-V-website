@@ -3,6 +3,7 @@
 import React from 'react';
 import { DCLogic, css, H, useDC } from '../dc';
 import Showcase from '../Showcase';
+import IdeeTotLiveFilm from '../IdeeTotLiveFilm';
 
 const FTXT = {"nl": {"nav": ["Wat we bouwen", "Hoe het werkt", "Prijzen", "Over ons", "Contact"], "login": "Inloggen", "cta": "Start gratis", "eu": "Nederlandse regie · data in Europa", "company": "BEDRIJF", "legal": "JURIDISCH", "n1": "Wat we bouwen", "n2": "Hoe het werkt", "n3": "Prijzen", "n4": "Over ons", "n5": "Contact", "l1": "Privacyverklaring", "l2": "Algemene voorwaarden", "l3": "Verwerkersovereenkomst", "l4": "Cookies", "trade": "Datawerf is een handelsnaam van Baboon B.V.", "gdpr": "Data in Europa · AVG-conform"}, "en": {"nav": ["What we build", "How it works", "Pricing", "About", "Contact"], "login": "Log in", "cta": "Start free", "eu": "Dutch-led · data in Europe", "company": "COMPANY", "legal": "LEGAL", "n1": "What we build", "n2": "How it works", "n3": "Pricing", "n4": "About", "n5": "Contact", "l1": "Privacy statement", "l2": "Terms and conditions", "l3": "Data processing agreement", "l4": "Cookies", "trade": "Datawerf is a trade name of Baboon B.V.", "gdpr": "Data in Europe · GDPR compliant"}};
 const NAVH = ["Etalage.dc.html", "Global.dc.html#hoe", "Prijslijst.dc.html", "OverOns.dc.html", "Contact.dc.html"];
@@ -101,6 +102,7 @@ export default function Page({ lang, signal }) {
 </div>
 </div>
 </div>
+<IdeeTotLiveFilm lang={lang} signal={$v?.signal} />
 </section>
 <section style={css("padding:24px 48px 88px")}>
 <div style={css("background:#F7F8FA;border-radius:28px;padding:48px")}>

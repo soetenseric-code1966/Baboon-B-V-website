@@ -10,6 +10,10 @@ export type ShowcaseItem = {
   url?: string;
   host?: string;
   screen?: string;
+  // Getekende animatie (30-10-2026): video in plaats van de schermafbeelding; `screen` is dan de poster.
+  video?: string;
+  // Hoe lang dit project in beeld blijft (ms); standaard SHOWCASE_INTERVAL. Bij een video: de lengte van de video.
+  duur?: number;
 };
 
 export const SHOWCASE: ShowcaseItem[] = [
@@ -82,7 +86,7 @@ export const SHOWCASE: ShowcaseItem[] = [
     },
   },
   {
-    // Vervangt de mockup "Verzekeringsportaal" (besluit 30-10-2026). Kentekens op de schermafbeelding onherkenbaar gemaakt.
+    // Vervangt de mockup "Verzekeringsportaal" (besluit 30-10-2026). Getekende animatie met verzonnen gegevens.
     name: { nl: 'Verzekerings- en schadeportaal', en: 'Insurance and claims portal' },
     kind: { nl: 'Platform', en: 'Platform' },
     stage: { nl: 'verzekeraar · assurantiekantoor · wagenpark', en: 'insurer · broker · fleet' },
@@ -92,7 +96,9 @@ export const SHOWCASE: ShowcaseItem[] = [
     },
     url: 'https://www.qfleetz.nl',
     host: 'qfleetz.nl',
-    screen: '/showcase/schadeportaal.jpg',
+    screen: '/video/schadeportaal.jpg',
+    video: '/video/schadeportaal.mp4',
+    duur: 33000,
   },
 ];
 
