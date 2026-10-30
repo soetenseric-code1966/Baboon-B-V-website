@@ -3,7 +3,7 @@
 import React from 'react';
 import { DCLogic, css, H, useDC } from '../dc';
 import Showcase from '../Showcase';
-import IdeeTotLiveFilm from '../IdeeTotLiveFilm';
+import ProcesFilm from '../ProcesFilm';
 
 const FTXT = {"nl": {"nav": ["Wat we bouwen", "Hoe het werkt", "Prijzen", "Over ons", "Contact"], "login": "Inloggen", "cta": "Start gratis", "eu": "Nederlandse regie · data in Europa", "company": "BEDRIJF", "legal": "JURIDISCH", "n1": "Wat we bouwen", "n2": "Hoe het werkt", "n3": "Prijzen", "n4": "Over ons", "n5": "Contact", "l1": "Privacyverklaring", "l2": "Algemene voorwaarden", "l3": "Verwerkersovereenkomst", "l4": "Cookies", "trade": "Datawerf is een handelsnaam van Baboon B.V.", "gdpr": "Data in Europa · AVG-conform"}, "en": {"nav": ["What we build", "How it works", "Pricing", "About", "Contact"], "login": "Log in", "cta": "Start free", "eu": "Dutch-led · data in Europe", "company": "COMPANY", "legal": "LEGAL", "n1": "What we build", "n2": "How it works", "n3": "Pricing", "n4": "About", "n5": "Contact", "l1": "Privacy statement", "l2": "Terms and conditions", "l3": "Data processing agreement", "l4": "Cookies", "trade": "Datawerf is a trade name of Baboon B.V.", "gdpr": "Data in Europe · GDPR compliant"}};
 const NAVH = ["Etalage.dc.html", "Global.dc.html#hoe", "Prijslijst.dc.html", "OverOns.dc.html", "Contact.dc.html"];
@@ -83,26 +83,7 @@ export default function Page({ lang, signal }) {
 <div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.ph_eb}</div>
 <h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.ph_t}</h2>
 <p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{$v?.t?.ph_s}</p>
-<div role="tablist" style={css("display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:36px")}>{($v?.phases || []).map((p, p__i) => <React.Fragment key={p__i}><button type="button" role="tab" aria-selected={p?.on} onClick={p?.pick} style={css(p?.style)}><span style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;opacity:0.8")}>{p?.nr}</span><span style={css("font-size:22px;font-weight:700")}>{p?.name}</span></button></React.Fragment>)}</div>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:32px;margin-top:24px;align-items:start")}>
-<div style={css("padding:8px 0")}>
-<p style={css("margin:0;font-size:22px;line-height:1.45;font-weight:500")}>{$v?.cur?.caption}</p>
-<div style={css("margin-top:22px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5C6378;text-transform:uppercase;letter-spacing:0.5px")}>{$v?.t?.ext}</div>
-<div style={css("display:flex;flex-wrap:wrap;gap:8px;margin-top:10px")}>{($v?.exs || []).map((e, e__i) => <React.Fragment key={e__i}><button type="button" aria-pressed={e?.on} onClick={e?.pick} style={css(e?.style)}>{e?.label}</button></React.Fragment>)}</div>
-<div style={css("margin-top:26px;background:#F7F8FA;border-radius:16px;padding:20px 22px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:11px;color:${$v?.signal ?? ""};font-weight:600`)}>{$v?.t?.idea}</div><div style={css("font-size:20px;line-height:1.4;margin-top:6px")}>“{$v?.cur?.quote}”</div></div>
-</div>
-<div style={css("position:relative;background:#14213D;border-radius:22px;padding:18px")}>
-<div style={css("display:flex;align-items:center;gap:10px;margin-bottom:12px")}><span style={css("flex:1;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C7CEDB;background:#1E2D50;border-radius:8px;padding:7px 12px")}>{$v?.cur?.url}</span><span style={css(`font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:5px 10px;border-radius:999px;${$v?.cur?.badgeStyle ?? ""}`)}>{$v?.cur?.badge}</span></div>
-<div style={css("background:#FFFFFF;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px")}>
-<div style={css("display:flex;justify-content:space-between;align-items:center;gap:12px")}><strong style={css("font-size:18px")}>{$v?.cur?.title}</strong><span style={css(`padding:8px 14px;border-radius:8px;font-size:13px;font-weight:700;${$v?.cur?.button ?? ""}`)}>{$v?.cur?.action}</span></div>
-<div style={css("display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px")}>{($v?.cur?.tiles || []).map((x, x__i) => <React.Fragment key={x__i}><div style={css(`border-radius:10px;padding:12px;${$v?.cur?.tile ?? ""}`)}><div style={css("font-size:12px;opacity:0.8")}>{x?.k}</div><div style={css("font-size:22px;font-weight:700")}>{x?.v}</div></div></React.Fragment>)}</div>
-{($v?.cur?.rows || []).map((r, r__i) => <React.Fragment key={r__i}><div style={css("display:flex;gap:12px;align-items:center;font-size:14px;padding:10px 12px;border:1px solid #EEF0F4;border-radius:8px")}><span style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378;min-width:80px")}>{r?.a}</span><span style={css("flex:1")}>{r?.b}</span><strong>{r?.c}</strong></div></React.Fragment>)}
-{$v?.cur?.pins ? <><div style={css(`display:flex;gap:10px;align-items:flex-start;background:#FFF4EE;border:1.5px dashed ${$v?.signal ?? ""};border-radius:10px;padding:12px`)}><i style={css(`width:12px;height:12px;border-radius:50%;background:${$v?.signal ?? ""};flex:none;margin-top:4px`)}></i><div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9A3412")}>{$v?.t?.pin}</div><div style={css("font-size:14px;margin-top:2px")}>{$v?.cur?.pinText}</div></div></div></> : null}
-{$v?.cur?.live ? <><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#146C43")}>✓ {$v?.t?.ok}</div></> : null}
-</div>
-</div>
-</div>
-<IdeeTotLiveFilm lang={lang} signal={$v?.signal} />
+<ProcesFilm lang={lang} signal={$v?.signal} phases={$v?.t?.phases || []} />
 </section>
 <section style={css("padding:24px 48px 88px")}>
 <div style={css("background:#F7F8FA;border-radius:28px;padding:48px")}>
