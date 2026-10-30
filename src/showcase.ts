@@ -82,13 +82,17 @@ export const SHOWCASE: ShowcaseItem[] = [
     },
   },
   {
-    name: { nl: 'Verzekeringsportaal', en: 'Insurance portal' },
-    kind: { nl: 'Mockup', en: 'Mockup' },
-    stage: { nl: 'klikbaar ontwerp', en: 'clickable design' },
+    // Vervangt de mockup "Verzekeringsportaal" (besluit 30-10-2026). Kentekens op de schermafbeelding onherkenbaar gemaakt.
+    name: { nl: 'Verzekerings- en schadeportaal', en: 'Insurance and claims portal' },
+    kind: { nl: 'Platform', en: 'Platform' },
+    stage: { nl: 'verzekeraar · assurantiekantoor · wagenpark', en: 'insurer · broker · fleet' },
     text: {
-      nl: 'Een klikbare mockup voor een tussenpersoon: eerst laten zien en verkopen, daarna pas bouwen.',
-      en: 'A clickable mockup for a broker: show and sell first, build later.',
+      nl: 'Schade melden met de mobiele telefoon: de chauffeur of vlootmanager kiest het voertuig, geeft de plek van de schade aan en de melding staat direct klaar. Voor de verzekeraar of het assurantiekantoor wordt elke melding een schadedossier, van beoordeling door de vlootmanager tot gemeld, in behandeling bij de expert, goedgekeurd, uitgekeerd en gereed. Elke statuswijziging zet een taak klaar voor de partij die aan zet is. Het beheer ziet in één oogopslag de openstaande schades, geschatte en uitgekeerde kosten, het eigen risico en de doorlooptijd van melding tot gereed.',
+      en: 'Report damage with a mobile phone: the driver or fleet manager picks the vehicle, marks the damaged area and the report is ready right away. For the insurer or broker every report becomes a claim file, from review by the fleet manager to reported, with the assessor, approved, paid and closed. Every status change creates a task for whoever is next. Management sees open claims, estimated and paid costs, the deductible and the lead time from report to closure at a glance.',
     },
+    url: 'https://www.qfleetz.nl',
+    host: 'qfleetz.nl',
+    screen: '/showcase/schadeportaal.jpg',
   },
 ];
 
