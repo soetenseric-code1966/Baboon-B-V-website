@@ -38,7 +38,7 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
 ## Opgeleverde projecten tonen
 
 - Blok "Live in gebruik" op Wat we bouwen: `src/live.ts`. Carrousel op de homepage: `src/showcase.ts`.
-- Schermafbeeldingen in `public/showcase/` (1600 × 1000, jpg). Nu: Qeldr, Urenregistratie, Aardappelmonitor (beginscherm, toegevoegd 27-10-2026), Dagplanning wagenpark (planbord ingelogd als vlootbeheerder in de demo, toegevoegd 28-10-2026).
+- Schermafbeeldingen in `public/showcase/` (1600 × 1000, jpg). Nu: Qeldr, Urenregistratie, Aardappelmonitor (beginscherm, toegevoegd 27-10-2026), Dagplanning wagenpark (planbord ingelogd als vlootbeheerder in de demo, toegevoegd 28-10-2026), Verzekerings- en schadeportaal (schadedossiers, kentekens onherkenbaar gemaakt, link naar www.qfleetz.nl; vervangt de mockup Verzekeringsportaal, 30-10-2026).
 - Alleen eigen producten, of klantprojecten met akkoord van de klant.
 
 ## Apps en inloggen (29-10-2026)
