@@ -15,7 +15,7 @@ const T = {
     qf: [
       '“Ik wil per voertuig zien wat het echt kost: lease, onderhoud, reparatie, banden en schade.”',
       'Binnen minuten een klikbaar overzicht van de kosten per voertuig, met verzonnen gegevens.',
-      'Facturen, leasecontracten en km-standen gaan als upload de Qfleetz data engine in. Elke stap getest en gecontroleerd voordat het live gaat.',
+      'Facturen gaan de Qfleetz data engine in en worden per voertuig ingedeeld. Elke stap getest en gecontroleerd voordat het live gaat.',
       'TCO, ROI, reparatie en onderhoud per voertuig, tegen de norm. Elke volgende wens wordt een nieuwe module.',
     ],
     over: 'Qfleetz is ons grootste project: wagenpark- en vlootbeheer.', link: 'Bekijk qfleetz.nl',
@@ -26,7 +26,7 @@ const T = {
     qf: [
       '“I want to see what each vehicle really costs: lease, maintenance, repairs, tyres and damage.”',
       'Within minutes a clickable overview of costs per vehicle, with made-up data.',
-      'Invoices, lease contracts and odometer readings go into the Qfleetz data engine as uploads. Every step tested and checked before it goes live.',
+      'Invoices go into the Qfleetz data engine and are sorted per vehicle. Every step tested and checked before it goes live.',
       'TCO, ROI, repairs and maintenance per vehicle, against the norm. Every next request becomes a new module.',
     ],
     over: 'Qfleetz is our largest project: fleet management.', link: 'Visit qfleetz.nl',
