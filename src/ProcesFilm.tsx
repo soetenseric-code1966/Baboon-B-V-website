@@ -1,5 +1,5 @@
 // Homepage, "Van idee tot live" (besluit 30-10-2026): de vier processtappen bovenin lopen mee met de animatie van
-// Qfleetz (ons grootste project). Klik op een stap = de animatie springt naar het begin van die stap. Links de tekst
+// Qfleetz. Klik op een stap = de animatie springt naar het begin van die stap. Links de tekst
 // bij de stap, rechts de animatie; afspelen/pauzeren en geluid aan/uit. Vervangt het oude voorbeeldscherm per stap.
 // De video heeft in deze versie geen eigen fasebalk (die zit hier bovenin als knoppen).
 import React, { useEffect, useRef, useState } from 'react';
@@ -18,7 +18,7 @@ const T = {
       'Facturen gaan de Qfleetz data engine in en worden per voertuig ingedeeld. Elke stap getest en gecontroleerd voordat het live gaat.',
       'TCO, ROI, reparatie en onderhoud per voertuig, tegen de norm. Elke volgende wens wordt een nieuwe module.',
     ],
-    over: 'Qfleetz is ons grootste project: wagenpark- en vlootbeheer.', link: 'Bekijk qfleetz.nl',
+    over: 'Qfleetz: wagenpark- en vlootbeheer.', link: 'Bekijk qfleetz.nl',
     pauze: 'Pauzeer', speel: 'Speel af', aan: 'Geluid aan', uit: 'Geluid uit', label: 'Animatie: Qfleetz van idee tot live',
   },
   en: {
@@ -29,7 +29,7 @@ const T = {
       'Invoices go into the Qfleetz data engine and are sorted per vehicle. Every step tested and checked before it goes live.',
       'TCO, ROI, repairs and maintenance per vehicle, against the norm. Every next request becomes a new module.',
     ],
-    over: 'Qfleetz is our largest project: fleet management.', link: 'Visit qfleetz.nl',
+    over: 'Qfleetz: fleet management.', link: 'Visit qfleetz.nl',
     pauze: 'Pause', speel: 'Play', aan: 'Sound on', uit: 'Sound off', label: 'Animation: Qfleetz from idea to live',
   },
 };
