@@ -74,7 +74,9 @@ export const SHOWCASE: ShowcaseItem[] = [
     },
     url: 'https://aardappelmonitor.datawerf.com',
     host: 'aardappelmonitor.datawerf.com',
-    screen: '/showcase/aardappelmonitor.jpg',
+    screen: '/video/aardappelmonitor.jpg',
+    video: '/video/aardappelmonitor.mp4', // getekende animatie (31-10-2026), voorbeeldcijfers
+    duur: 40400,
   },
   {
     name: { nl: 'Bidderz', en: 'Bidderz' },
