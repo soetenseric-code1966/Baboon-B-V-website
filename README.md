@@ -59,3 +59,9 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
 - Hulpvragen (29-10-2026): op `/start/` de knop "Help mij mijn idee scherper te maken" (`src/LabVragen.tsx`). Een klein AI-model (actie `vragen`, standaard `claude-haiku-5-5`, instelbaar met `LAB_MODEL_VRAGEN`) stelt 3-5 vragen met keuzes die bij het getypte idee passen; lukt dat niet, dan algemene vragen (`STANDAARD_VRAGEN` in `src/lab.ts`). De vragen verschijnen één voor één (voortgang "1 van 4", Vorige/Volgende of Overslaan; bij één mogelijke keuze vanzelf door). De antwoorden komen als tekst in het ideevak en tellen niet als prompt.
 - Bestanden toevoegen (29-10-2026): bij Start en bij "Maak het nauwkeuriger" kan de bezoeker tot drie Excel- (.xlsx) of CSV-bestanden kiezen. `src/labBestanden.ts` leest ze in de browser; alleen de opbouw (bladnamen, kolomnamen, soort per kolom, aantal rijen) gaat mee, nooit de inhoud en niet de bestandsnaam. De bezoeker ziet vooraf wat er meegaat (`src/LabBestanden.tsx`).
 - Vaste app-stijl voor alle ontwerpen en apps: `docs/app-stijl.md`.
+
+## Vindbaarheid (01-11-2026)
+- `scripts/prerender.mjs` zet op elke pagina bedrijfsgegevens voor zoekmachines (JSON-LD Organization + WebSite: Datawerf, ook "Datawerf Software", Baboon B.V., KvK, logo, LinkedIn) en `og:url`.
+- `index.html`: deelbeeld `og:image` = `public/deelbeeld.jpg` (slotbeeld van de Qfleetz-animatie); logo voor Google: `public/logo.png` (512 × 512).
+- Voet: link naar de LinkedIn-pagina Datawerf Software.
+- De apps (Aardappelmonitor, Dagplanning, Wielen, Qtyrez) linken onderaan terug naar datawerf.com ("Gemaakt met Datawerf").

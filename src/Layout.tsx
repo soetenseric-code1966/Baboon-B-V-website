@@ -101,6 +101,7 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
             <strong style={footHead}>CONTACT</strong>
             <a href="mailto:info@datawerf.com" style={footLink}>info@datawerf.com</a>
+            <a href="https://www.linkedin.com/company/146888310/" target="_blank" rel="noopener me" style={footLink}>LinkedIn</a>
             <span>Esbeek</span>
           </div>
         </div>
