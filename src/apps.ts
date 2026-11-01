@@ -1,6 +1,6 @@
 // Kant-en-klare apps van Datawerf (tabblad Apps, besluit 29-10-2026).
 // Alleen eigen apps van Baboon B.V. `demo` = "Probeer de demo" (fictieve gegevens), `login` = inlog voor klanten
-// (ook gebruikt op de pagina Inloggen). Prijs: `gratis`, of een tekst zodra er een prijs is besloten.
+// (ook gebruikt op de pagina Inloggen). Prijs: een tekst ("Op aanvraag" tot er een prijs is besloten). Niets is gratis (besluit 01-11-2026).
 type T = { nl: string; en: string };
 export type AppItem = {
   key: string;
@@ -23,8 +23,8 @@ export const APPS: AppItem[] = [
     key: 'dagplanning',
     name: { nl: 'Dagplanning wagenpark', en: 'Daily fleet planning' },
     kind: { nl: 'Busvervoer · vlootbeheer', en: 'Bus operations · fleet management' },
-    price: { nl: 'Gratis', en: 'Free' },
-    free: true,
+    price: { nl: 'Op aanvraag', en: 'On request' },
+    free: false,
     text: {
       nl: 'Elke ochtend het juiste aantal bussen van het juiste type op elke stalling. Het planbord zet de telling van de stallingen tegen de dienstregeling, stelt verplaatsingen voor en volgt bussen bij de onderhoudspartijen. Vlootbeheerder, wagenparkbeheerder, stalling en onderhoudspartij werken elk vanuit hun eigen scherm.',
       en: 'Every morning the right number of buses of the right type at every depot. The planning board sets the depot counts against the timetable, suggests transfers and tracks buses at the maintenance partners. Fleet manager, fleet supervisor, depot and maintenance partner each work from their own screen.',
@@ -42,8 +42,8 @@ export const APPS: AppItem[] = [
     key: 'wielen',
     name: { nl: 'Wielen natrekken', en: 'Wheel re-torquing' },
     kind: { nl: 'Busvervoer · veiligheid', en: 'Bus operations · safety' },
-    price: { nl: 'Gratis', en: 'Free' },
-    free: true,
+    price: { nl: 'Op aanvraag', en: 'On request' },
+    free: false,
     text: {
       nl: 'Na een wielwissel moeten de wielmoeren op tijd worden nagetrokken. De app houdt per bus bij welke natrekopdrachten openstaan en wanneer ze zijn uitgevoerd, en toont dat op het planbord van de dagplanning.',
       en: 'After a wheel change, the wheel nuts must be re-torqued in time. The app tracks per bus which re-torque orders are open and when they were carried out, and shows it on the planning board of the daily planning.',
