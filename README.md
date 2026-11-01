@@ -23,6 +23,10 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 | Juridisch | `/juridisch/` | `/en/legal/` |
 | Inloggen | `/inloggen/` | `/en/login/` |
 
+## Zes usp's op de homepage (01-11-2026)
+
+De zes kaarten op de homepage (`usps` in `TXT` van `src/pages/Global.tsx`, NL en EN) volgen de visie van Datawerf: uw vakkennis is het startpunt · gebouwd met AI-agents, gecontroleerd door mensen · u ziet elke stap en houdt de regie · veilig met uw gegevens · professioneel gebouwd, ook na de livegang · bewezen in de praktijk. Tekst wijzigen: daar, en de besluitenlijst bijwerken.
+
 ## Werken aan de site
 
 ```
