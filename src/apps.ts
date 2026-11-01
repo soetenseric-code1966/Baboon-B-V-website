@@ -70,6 +70,7 @@ export const APPS: AppItem[] = [
       nl: ['Kosten per km en per mm, per merk, maat, positie en voertuig', 'Afwijkingen: te vroeg vervangen, prijs boven prijslijst, ongelijke slijtage', 'Budget tegen werkelijk, vervangplanning en prognose', 'Facturen, km-standen en budget uploaden vanuit Excel; export naar Excel'],
       en: ['Cost per km and per mm, by brand, size, position and vehicle', 'Anomalies: replaced too early, price above price list, uneven wear', 'Budget versus actual, replacement planning and forecast', 'Upload invoices, odometer readings and budget from Excel; export to Excel'],
     },
+    screen: '/showcase/qtyrez.jpg',
     demo: 'https://qtyrez.datawerf.com/demo',
     login: 'https://qtyrez.datawerf.com/',
   },
