@@ -79,6 +79,20 @@ export const SHOWCASE: ShowcaseItem[] = [
     duur: 40400,
   },
   {
+    name: { nl: 'Qtyrez bandenmonitor', en: 'Qtyrez tyre monitor' },
+    kind: { nl: 'App', en: 'App' },
+    stage: { nl: 'live · demo', en: 'live · demo' },
+    text: {
+      nl: 'Wat kosten banden echt? Qtyrez leest de facturen van de bandenleverancier, de km-standen en het budget, en laat de kosten zien per km én per mm profiel: per merk en type band, per merk en type voertuig en per aspositie. Met veiligheid (profiel onder de grens), afwijkingen zoals te vroeg vervangen of een prijs boven de prijslijst, en een vervangplanning met prognose tegen het budget.',
+      en: 'What do tyres really cost? Qtyrez reads the tyre supplier’s invoices, the odometer readings and the budget, and shows the cost per km and per mm of tread: by tyre brand and type, by vehicle make and type and by axle position. With safety (tread below the limit), anomalies such as early replacement or a price above the price list, and a replacement plan with a forecast against the budget.',
+    },
+    url: 'https://qtyrez.datawerf.com/demo',
+    host: 'qtyrez.datawerf.com',
+    screen: '/video/qtyrez.jpg',
+    video: '/video/qtyrez.mp4', // getekende animatie (01-11-2026), voorbeeldcijfers
+    duur: 47400,
+  },
+  {
     name: { nl: 'Bidderz', en: 'Bidderz' },
     kind: { nl: 'Platform', en: 'Platform' },
     stage: { nl: 'live · in ontwikkeling', en: 'live · in development' },
