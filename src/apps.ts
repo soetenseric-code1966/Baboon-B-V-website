@@ -56,6 +56,24 @@ export const APPS: AppItem[] = [
     login: 'https://wielen.datawerf.com/',
   },
   {
+    key: 'qtyrez',
+    name: { nl: 'Qtyrez bandenmonitor', en: 'Qtyrez tyre monitor' },
+    kind: { nl: 'Vervoer · banden en kosten', en: 'Transport · tyres and costs' },
+    price: { nl: 'Op aanvraag', en: 'On request' },
+    free: false,
+    text: {
+      nl: 'Wat kosten uw banden echt, per voertuig, vestiging en bandpositie? Qtyrez leest de facturen van de bandenleverancier, de km-standen en het budget, en rekent de kosten per km en per mm profiel uit. Zo ziet u welke band het voordeligst is en waar iets afwijkt.',
+      en: 'What do your tyres really cost, per vehicle, depot and tyre position? Qtyrez reads the tyre supplier’s invoices, the odometer readings and the budget, and calculates the cost per km and per mm of tread. So you see which tyre is the most economical and where something is off.',
+    },
+    short: { nl: 'Bandkosten per km en per mm profiel, afwijkingen en vervangplanning.', en: 'Tyre cost per km and per mm of tread, anomalies and replacement planning.' },
+    points: {
+      nl: ['Kosten per km en per mm, per merk, maat, positie en voertuig', 'Afwijkingen: te vroeg vervangen, prijs boven prijslijst, ongelijke slijtage', 'Budget tegen werkelijk, vervangplanning en prognose', 'Facturen, km-standen en budget uploaden vanuit Excel; export naar Excel'],
+      en: ['Cost per km and per mm, by brand, size, position and vehicle', 'Anomalies: replaced too early, price above price list, uneven wear', 'Budget versus actual, replacement planning and forecast', 'Upload invoices, odometer readings and budget from Excel; export to Excel'],
+    },
+    demo: 'https://qtyrez-app.netlify.app/demo',
+    login: 'https://qtyrez-app.netlify.app/',
+  },
+  {
     key: 'uren',
     name: { nl: 'Urenregistratie voor zzp’ers', en: 'Time tracking for freelancers' },
     kind: { nl: 'Zzp · uren en facturen', en: 'Freelance · hours and invoices' },
