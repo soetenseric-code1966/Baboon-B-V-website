@@ -76,3 +76,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .dw-head { position: sticky; top: 0; z-index: 50; }
   html { scroll-padding-top: 96px; }
 }
+
+/* Rekensom (Prijzen): op smalle schermen staan ×, = en + op een eigen regel tussen de blokken. */
+@media (max-width: 899px) { .som-op { width: 100%; text-align: center; line-height: 1; } }
