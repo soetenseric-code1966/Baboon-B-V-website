@@ -51,7 +51,7 @@ class Component extends DCLogic {
 // Nieuwe teksten (02-11-2026): korte homepage en het tabblad Hoe het werkt.
 const NTXT = {
   nl: {
-    meer: 'Zo werkt het', us_eb: 'Waarom Datawerf', us_t: 'Zes redenen.', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt', som: [['Uw branchekennis', ['Uw processen', 'Uw klanten', 'Uw ervaring']], ['AI-kennis, platform en development', ['AI-agents', 'Platform', 'Developers']], ['Uw applicatie', ['Eigen software', 'Eigen database', 'Eigen omgeving', 'Veilig in Europa']]],
+    meer: 'Zo werkt het', us_eb: 'Waarom Datawerf', us_t: 'Zes redenen.', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt', som: [['Uw branchekennis', []], ['AI-kennis, platform en development', []], ['Uw applicatie', ['Eigen software', 'Eigen database', 'Eigen omgeving', 'Veilig in Europa']]],
     hoe_h1: 'Van uw idee tot een applicatie die elke dag werkt.',
     hoe_s: 'U brengt de vakkennis. AI-agents bouwen snel, developers controleren elke stap en u keurt goed. Zo werkt dat, stap voor stap.',
     vg_eb: 'Waarom Datawerf', vg_t1: 'AI bouwt. Developers controleren.', vg_t2: 'U heeft eigen software.',
@@ -64,7 +64,7 @@ const NTXT = {
     vg_app: 'Opdrachten', vg_s: ['Klaar', 'Bezig', 'Morgen'],
   },
   en: {
-    meer: 'How it works', us_eb: 'Why Datawerf', us_t: 'Six reasons.', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works', som: [['Your industry know-how', ['Your processes', 'Your customers', 'Your experience']], ['AI expertise, platform and development', ['AI agents', 'Platform', 'Developers']], ['Your application', ['Own software', 'Own database', 'Own environment', 'Secure in Europe']]],
+    meer: 'How it works', us_eb: 'Why Datawerf', us_t: 'Six reasons.', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works', som: [['Your industry know-how', []], ['AI expertise, platform and development', []], ['Your application', ['Own software', 'Own database', 'Own environment', 'Secure in Europe']]],
     hoe_h1: 'From your idea to an application that works every day.',
     hoe_s: 'You bring the know-how. AI agents build fast, developers check every step and you approve. This is how it works, step by step.',
     vg_eb: 'Why Datawerf', vg_t1: 'AI builds. Developers check.', vg_t2: 'You get your own software.',
@@ -135,11 +135,12 @@ function Pagina({ lang, signal, deel }) {
 {i > 0 && <div aria-hidden="true" className="som-op" style={css(`align-self:center;font-size:56px;font-weight:700;color:${$v?.signal ?? ""};padding:0 4px`)}>{i === 2 ? '=' : '+'}</div>}
 <div style={css(`flex:1 1 240px;border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:12px;${i === 2 ? 'background:#14213D;color:#FFFFFF' : 'background:#F3F5F8;color:#14213D'}`)}>
 <div style={css("font-size:26px;font-weight:700;letter-spacing:-0.5px;line-height:1.15")}>{k[0]}</div>
+{i < 2 && <ol style={css("list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px")}>{($v?.t?.steps || []).filter((st) => (i === 0) === (st[1] === 'u')).map((st) => <li key={st[0]} style={css("display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid #E3E7EE;border-radius:12px;padding:10px 14px;font-size:17px;font-weight:600")}><span style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""}`)}>{st[0]}</span><span style={css("flex:1")}>{st[2]}</span>{i === 1 && <span style={css(`font-family:'IBM Plex Mono',monospace;font-size:11px;padding:2px 8px;border-radius:999px;${st[1] === 'developer' ? 'background:#14213D;color:#FFFFFF' : 'background:#FFF0E8;color:#9A3412'}`)}>{$v?.t?.who?.[st[1]]}</span>}</li>)}</ol>}
 {k[1].length > 0 && <div style={css("display:flex;flex-wrap:wrap;gap:8px")}>{k[1].map((c, j) => <span key={j} style={css(`padding:7px 13px;border-radius:999px;font-size:15px;font-weight:600;${i === 2 ? `background:${$v?.signal ?? ""};color:#FFFFFF` : 'background:#FFFFFF;color:#14213D;border:1px solid #D5DAE3'}`)}>{c}</span>)}</div>}
+{i === 2 && <div style={css("margin-top:auto;background:#FFFFFF;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;color:#14213D;font-size:14px")}><div style={css("display:flex;justify-content:space-between")}><b>{N.vg_app}</b><span style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;background:#E7F6EF;color:#0F7A55;border-radius:999px;padding:1px 8px")}>live</span></div>{N.vg_s.map((x, j) => <div key={j} style={css("display:flex;align-items:center;gap:8px;border:1px solid #EEF0F4;border-radius:6px;padding:6px 8px")}><i style={css(`width:10px;height:10px;border-radius:50%;background:${['#0F7A55', $v?.signal ?? '', '#C7CEDB'][j]}`)}></i>{x}</div>)}</div>}
 </div>
 </React.Fragment>))}
 </div>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:36px")}>{($v?.steps || []).map((s, s__i) => <React.Fragment key={s__i}><div style={css("border:1px solid #D5DAE3;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px")}><div style={css("display:flex;justify-content:space-between;align-items:center")}><span style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600")}>{s?.nr}</span><span style={css(`font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;${s?.whoStyle ?? ""}`)}>{s?.who}</span></div><div style={css("font-size:20px;font-weight:700")}>{s?.title}</div><p style={css("font-size:14px;line-height:1.5;color:#3A4258;margin:0")}>{s?.text}</p><p style={css("font-size:14px;line-height:1.5;margin:auto 0 0;padding-top:8px;border-top:1px dashed #D5DAE3")}><strong>{$v?.t?.gainL}:</strong> {s?.gain}</p></div></React.Fragment>)}</div>
 </section>
 <section style={css("background:#14213D;color:#FFFFFF;padding:80px 48px")}>
 <h2 style={css("margin:0;font-size:56px;letter-spacing:-2px;line-height:1")}>{$v?.t?.eu_t}</h2>
