@@ -51,7 +51,7 @@ class Component extends DCLogic {
 // Nieuwe teksten (02-11-2026): korte homepage en het tabblad Hoe het werkt.
 const NTXT = {
   nl: {
-    meer: 'Zo werkt het', us_eb: 'Waarom Datawerf', us_t: 'Zes redenen.', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt', sa_t: 'Uw kennis. Onze AI-agents. Developers controleren.',
+    meer: 'Zo werkt het', us_eb: 'Waarom Datawerf', us_t: 'Zes redenen.', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt', held_ck: ['Uw vakkennis', 'Gebouwd door AI-agents', '142 tests geslaagd', 'Gecontroleerd door developer'], held_omg: 'Eigen omgeving · data in Europa', held_alt: 'Qtyrez bandenmonitor, gebouwd door Datawerf (demo)', sa_t: 'Uw kennis. Onze AI-agents. Developers controleren.',
     hoe_h1: 'Van uw idee tot een applicatie die elke dag werkt.',
     hoe_s: 'U brengt de vakkennis. AI-agents bouwen snel, developers controleren elke stap en u keurt goed. Zo werkt dat, stap voor stap.',
     vg_eb: 'Waarom Datawerf', vg_t1: 'AI bouwt. Developers controleren.', vg_t2: 'U heeft eigen software.',
@@ -64,7 +64,7 @@ const NTXT = {
     vg_app: 'Opdrachten', vg_s: ['Klaar', 'Bezig', 'Morgen'],
   },
   en: {
-    meer: 'How it works', us_eb: 'Why Datawerf', us_t: 'Six reasons.', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works', sa_t: 'Your know-how. Our AI agents. Developers check.',
+    meer: 'How it works', us_eb: 'Why Datawerf', us_t: 'Six reasons.', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works', held_ck: ['Your expertise', 'Built by AI agents', '142 tests passed', 'Reviewed by a developer'], held_omg: 'Own environment · data in Europe', held_alt: 'Qtyrez tyre monitor, built by Datawerf (demo)', sa_t: 'Your know-how. Our AI agents. Developers check.',
     hoe_h1: 'From your idea to an application that works every day.',
     hoe_s: 'You bring the know-how. AI agents build fast, developers check every step and you approve. This is how it works, step by step.',
     vg_eb: 'Why Datawerf', vg_t1: 'AI builds. Developers check.', vg_t2: 'You get your own software.',
@@ -152,21 +152,14 @@ function Pagina({ lang, signal, deel }) {
 <div style={css("display:flex;flex-wrap:wrap;gap:12px;margin-top:32px")}><a href={H("Aanmelden.dc.html")} style={css(`padding:16px 24px;border-radius:999px;background:${$v?.signal ?? ""};color:#FFFFFF;font-weight:700;font-size:17px;text-decoration:none`)}>{$v?.t?.c1} →</a><a href={H("#werk")} style={css("padding:14px 24px;border-radius:999px;border:2px solid #14213D;color:#14213D;font-weight:700;font-size:17px;text-decoration:none")}>{$v?.t?.c2}</a></div>
 <div style={css("margin-top:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378")}>Where ideas are built and launched.</div>
 </div>
-<div style={css("position:relative;height:500px")}>
-<div style={css("position:absolute;inset:20px 0 0 30px;background:#14213D;border-radius:22px;padding:18px;box-shadow:0 30px 60px -20px rgba(20,33,61,0.45)")}>
-<div style={css("display:flex;gap:6px;margin-bottom:12px")}><i style={css("width:10px;height:10px;border-radius:50%;background:#FF5F57")}></i><i style={css("width:10px;height:10px;border-radius:50%;background:#FEBC2E")}></i><i style={css("width:10px;height:10px;border-radius:50%;background:#28C840")}></i></div>
-<div style={css("display:grid;grid-template-columns:150px 1fr;gap:12px;height:420px")}>
-<div style={css("background:#1E2D50;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px")}><div style={css("height:10px;width:70%;background:#3A4B72;border-radius:4px")}></div><div style={css(`height:28px;background:${$v?.signal ?? ""};border-radius:6px`)}></div><div style={css("height:10px;width:80%;background:#3A4B72;border-radius:4px")}></div><div style={css("height:10px;width:60%;background:#3A4B72;border-radius:4px")}></div><div style={css("height:10px;width:75%;background:#3A4B72;border-radius:4px")}></div></div>
-<div style={css("background:#FFFFFF;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px")}>
-<div style={css("display:flex;justify-content:space-between;align-items:center")}><strong style={css("font-size:15px")}>{$v?.hero?.title}</strong><span style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 8px;border-radius:999px;background:#E7F6EF;color:#0F7A55")}>live</span></div>
-<div style={css("display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px")}>{($v?.hero?.tiles || []).map((h, h__i) => <React.Fragment key={h__i}><div style={css("background:#F7F8FA;border-radius:8px;padding:10px")}><div style={css("font-size:11px;color:#5C6378")}>{h?.k}</div><div style={css("font-size:22px;font-weight:700")}>{h?.v}</div></div></React.Fragment>)}</div>
-<svg viewBox="0 0 300 90" style={css("width:100%;height:96px")} aria-hidden="true"><g fill="#D5DAE3"><rect x="4" y="50" width="22" height="40" rx="3"></rect><rect x="34" y="38" width="22" height="52" rx="3"></rect><rect x="64" y="44" width="22" height="46" rx="3"></rect><rect x="94" y="28" width="22" height="62" rx="3"></rect><rect x="124" y="34" width="22" height="56" rx="3"></rect><rect x="154" y="20" width="22" height="70" rx="3"></rect><rect x="184" y="26" width="22" height="64" rx="3"></rect><rect x="214" y="14" width="22" height="76" rx="3"></rect></g><rect x="244" y="6" width="22" height="84" rx="3" fill={$v?.signal}></rect></svg>
-{($v?.hero?.rows || []).map((r, r__i) => <React.Fragment key={r__i}><div style={css("display:flex;gap:10px;font-size:12px;padding:7px 10px;border:1px solid #EEF0F4;border-radius:6px")}><span style={css("font-family:'IBM Plex Mono',monospace;color:#5C6378")}>{r?.a}</span><span style={css("flex:1")}>{r?.b}</span><strong>{r?.c}</strong></div></React.Fragment>)}
-</div>
-</div>
-</div>
-<div style={css("position:absolute;left:0;top:300px;background:#FFFFFF;border-radius:14px;padding:12px 16px;box-shadow:0 12px 30px -10px rgba(20,33,61,0.35)")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5C6378")}>{$v?.hero?.step}</div><div style={css("font-weight:700;font-size:16px;margin-top:2px")}>€ 38,40</div></div>
-<div style={css(`position:absolute;right:30px;bottom:-14px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:14px;padding:10px 14px;font-size:13px;font-weight:700`)}>{lang === 'en' ? 'Data in the EU' : 'Data in Europa'}</div>
+<div style={css("position:relative;padding:28px 0 40px")}>
+<a href="https://qtyrez.datawerf.com/demo" target="_blank" rel="noopener" aria-label={N.held_alt} style={css("display:block;margin-left:30px;background:#14213D;border-radius:18px;padding:12px;box-shadow:0 30px 60px -20px rgba(20,33,61,0.45)")}>
+<div style={css("display:flex;gap:6px;align-items:center;margin:0 0 10px 4px")}><i style={css("width:10px;height:10px;border-radius:50%;background:#FF5F57")}></i><i style={css("width:10px;height:10px;border-radius:50%;background:#FEBC2E")}></i><i style={css("width:10px;height:10px;border-radius:50%;background:#28C840")}></i><span style={css("margin-left:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C7CEDB")}>qtyrez.datawerf.com</span></div>
+<img src="/showcase/qtyrez.jpg" alt={N.held_alt} width="1600" height="1000" style={css("display:block;width:100%;height:auto;border-radius:10px")} />
+</a>
+<div style={css("position:absolute;right:0;top:0;background:#FFFFFF;border-radius:999px;padding:8px 14px;font-weight:700;font-size:15px;box-shadow:0 10px 24px -10px rgba(20,33,61,0.45);display:flex;gap:8px;align-items:center")}>Qtyrez<span style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;padding:2px 8px;border-radius:999px;background:#E7F6EF;color:#0F7A55")}>demo</span></div>
+<div className="held-los" style={css("position:absolute;left:0;bottom:70px;background:#FFFFFF;border-radius:16px;padding:14px 18px;box-shadow:0 12px 30px -10px rgba(20,33,61,0.45);display:flex;flex-direction:column;gap:8px")}>{N.held_ck.map((c, k) => <span key={k} style={css("display:flex;gap:10px;align-items:center;font-weight:700;font-size:16px")}><span style={css("width:22px;height:22px;border-radius:50%;background:#0F7A55;color:#FFFFFF;display:grid;place-items:center;font-size:12px;flex:none")}>✓</span>{c}</span>)}</div>
+<div className="held-los" style={css(`position:absolute;right:12px;bottom:14px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:999px;padding:10px 16px;font-size:15px;font-weight:700`)}>{N.held_omg}</div>
 </div>
 </section>
 <Vergelijking N={N} signal={$v?.signal} />

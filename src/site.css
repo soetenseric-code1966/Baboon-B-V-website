@@ -79,3 +79,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* Rekensom (Prijzen): op smalle schermen staan ×, = en + op een eigen regel tussen de blokken. */
 @media (max-width: 899px) { .som-op { width: 100%; text-align: center; line-height: 1; } }
+
+/* Plaatje bovenaan de homepage: op smalle schermen staan de vinkjes en het label onder het scherm in plaats van erover. */
+@media (max-width: 899px) { .held-los { position: static !important; margin: 14px 0 0; display: inline-flex; } }
