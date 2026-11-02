@@ -82,3 +82,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* Plaatje bovenaan de homepage: op smalle schermen staan de vinkjes en het label onder het scherm in plaats van erover. */
 @media (max-width: 899px) { .held-los { position: static !important; margin: 14px 0 0; display: inline-flex; } }
+
+/* Over ons (02-11-2026): drie kennisvakjes in de opening passen ook op de telefoon. */
+@media (max-width: 760px) { .dw main .oo-drie { gap: 6px !important; } .dw main .oo-drie > div { padding: 12px 6px !important; } .dw main .oo-drie > div > div:last-child { font-size: 13px !important; } }
