@@ -18,7 +18,7 @@ const T = {
       'Facturen gaan de Qfleetz data engine in en worden per voertuig ingedeeld. Elke stap getest en gecontroleerd voordat het live gaat.',
       'TCO, ROI, reparatie en onderhoud per voertuig, tegen de norm. Elke volgende wens wordt een nieuwe module.',
     ],
-    over: 'Qfleetz: wagenpark- en vlootbeheer.', link: 'Bekijk qfleetz.nl',
+    over: 'Qfleetz: wagenpark- en vlootbeheer.', link: 'Bekijk qfleetz.com',
     pauze: 'Pauzeer', speel: 'Speel af', aan: 'Geluid aan', uit: 'Geluid uit', label: 'Animatie: Qfleetz van idee tot live',
   },
   en: {
@@ -29,7 +29,7 @@ const T = {
       'Invoices go into the Qfleetz data engine and are sorted per vehicle. Every step tested and checked before it goes live.',
       'TCO, ROI, repairs and maintenance per vehicle, against the norm. Every next request becomes a new module.',
     ],
-    over: 'Qfleetz: fleet management.', link: 'Visit qfleetz.nl',
+    over: 'Qfleetz: fleet management.', link: 'Visit qfleetz.com',
     pauze: 'Pause', speel: 'Play', aan: 'Sound on', uit: 'Sound off', label: 'Animation: Qfleetz from idea to live',
   },
 };
@@ -124,7 +124,7 @@ export default function ProcesFilm({ lang, signal, phases }: { lang: Lang; signa
             <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: signal, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t.bij}</div>
             <div style={{ fontSize: 18, lineHeight: 1.5, marginTop: 6 }}>{t.qf[fase]}</div>
           </div>
-          <p style={{ margin: '18px 0 0', fontSize: 15, color: '#3A4258' }}>{t.over} <a href="https://www.qfleetz.nl" target="_blank" rel="noopener" style={{ fontWeight: 700, color: signal, textDecoration: 'none' }}>{t.link} ↗</a></p>
+          <p style={{ margin: '18px 0 0', fontSize: 15, color: '#3A4258' }}>{t.over} <a href="https://www.qfleetz.com" target="_blank" rel="noopener" style={{ fontWeight: 700, color: signal, textDecoration: 'none' }}>{t.link} ↗</a></p>
         </div>
         <div>
           <div style={{ borderRadius: 20, overflow: 'hidden', background: '#14213D', aspectRatio: '16 / 9' }}>
