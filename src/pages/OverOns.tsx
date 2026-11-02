@@ -1,6 +1,5 @@
 // Over ons (opnieuw opgezet 02-11-2026, op verzoek van Eric los van de vorige versie).
-// Eén vraag: wie is Datawerf en waarom bestaat het? Opbouw: opening met "samenkomen"-beeld, ons verhaal,
-// visie en strategie, wie er aan uw idee werkt, waar wij voor staan. Geen persoonsnamen, developers niet bij
+// Eén vraag: wie is Datawerf en waarom bestaat het? Opbouw: opening met "samenkomen"-beeld, visie en strategie, wie er aan uw idee werkt, waar wij voor staan. Geen persoonsnamen, developers niet bij
 // naam of locatie, geen afsluitblok met "Start gratis". Veiligheid staat op een eigen tabblad (alleen een link).
 import React from 'react';
 import { Lang, href } from '../routes';
@@ -14,21 +13,14 @@ const T = {
     beeld: [['Praktijk', 'Uw vakkennis'], ['AI-agents', 'Bouwen snel'], ['Developers', 'Controleren elke stap']],
     beeldUit: 'Uw eigen applicatie',
     beeldOnder: 'Elke dag in gebruik',
-    vh_eb: 'Ons verhaal',
-    vh_h2: 'Eerst voor onszelf gebouwd.',
-    vh: [
-      ['Uit de praktijk', 'Wij begonnen niet in de softwarewereld, maar op de werkvloer. Daar zagen we dat vakmensen hun werk prima kennen, maar vastlopen in Excel, mailboxen en losse systemen.'],
-      ['Eerst voor onszelf', 'Met AI losten we die vragen eerst zelf op: snel en zonder groot IT-project. Zo ontstonden applicaties voor onder meer kosten, planning, marktprijzen en urenregistratie. Ze draaien elke dag, getest en nagekeken door developers.'],
-      ['Nu voor elk vakgebied', 'Deze werkwijze werkt overal waar vakkennis het verschil maakt: in logistiek, techniek, handel, landbouw of dienstverlening. U brengt de kennis van uw vak, wij bouwen de software. Daarom heet het Datawerf: een werf is de plek waar iets gebouwd wordt en daarna te water gaat.'],
-    ],
-    vh_link: 'Bekijk wat we bouwen',
     vs_eb: 'Visie en strategie',
     vs_h2: 'Waar wij in geloven.',
     vs: [
-      ['Visie', 'De beste software komt uit de praktijk', 'Wie het werk elke dag doet, weet wat er beter moet. Die kennis zit nu vaak in Excel, in mailboxen of in het hoofd van één medewerker. Wij maken er software van die het hele team elke dag gebruikt.'],
-      ['Strategie', 'Kennis combineren', 'Uw vakkennis, AI-agents die snel bouwen en developers die elke stap controleren. Zo krijgt u de snelheid van AI met de zekerheid van vakwerk, in een eigen, beveiligde omgeving.'],
+      ['Visie', 'De beste software komt uit de praktijk', 'Vakmensen kennen hun werk het best, maar lopen vaak vast in Excel, mailboxen en losse systemen. Die kennis maken wij tot software die het hele team elke dag gebruikt.'],
+      ['Strategie', 'Kennis combineren', 'Uw vakkennis, AI-agents die snel bouwen en developers die elke stap controleren, in een eigen, beveiligde omgeving. Dat werkt in elk vakgebied: logistiek, techniek, handel, landbouw of dienstverlening.'],
       ['Ambitie', 'Minder werkdruk, minder fouten', 'Processen die nu handwerk zijn, worden eenvoudig, controleerbaar en voor iedereen in uw bedrijf te gebruiken. Dat bespaart tijd en kosten, elke dag opnieuw.'],
     ],
+    vs_link: 'Bekijk wat we bouwen',
     tm_eb: 'Wie er aan uw idee werkt',
     tm_h2: 'Vier partijen, één team.',
     tm: [
@@ -54,21 +46,14 @@ const T = {
     beeld: [['Practice', 'Your expertise'], ['AI agents', 'Build fast'], ['Developers', 'Check every step']],
     beeldUit: 'Your own application',
     beeldOnder: 'In use every day',
-    vh_eb: 'Our story',
-    vh_h2: 'First built for ourselves.',
-    vh: [
-      ['From practice', 'We did not start in the software world but on the shop floor. There we saw that professionals know their work perfectly well, yet get stuck in Excel, mailboxes and separate systems.'],
-      ['First for ourselves', 'With AI we first solved those questions ourselves: fast and without a large IT project. That is how applications came about for costs, planning, market prices and time tracking, among others. They run every day, tested and reviewed by developers.'],
-      ['Now for every field', 'This way of working fits wherever expertise makes the difference: in logistics, engineering, trade, agriculture or services. You bring the knowledge of your trade, we build the software. Hence the name Datawerf: a "werf" is a shipyard, the place where something is built and then launched.'],
-    ],
-    vh_link: 'See what we build',
     vs_eb: 'Vision and strategy',
     vs_h2: 'What we believe in.',
     vs: [
-      ['Vision', 'The best software comes from practice', 'Whoever does the work every day knows what needs to improve. That knowledge often lives in Excel, in mailboxes or in one person’s head. We turn it into software the whole team uses every day.'],
-      ['Strategy', 'Combining knowledge', 'Your expertise, AI agents that build fast and developers who check every step. You get the speed of AI with the certainty of craftsmanship, in your own secure environment.'],
+      ['Vision', 'The best software comes from practice', 'Professionals know their work best, but often get stuck in Excel, mailboxes and separate systems. We turn that knowledge into software the whole team uses every day.'],
+      ['Strategy', 'Combining knowledge', 'Your expertise, AI agents that build fast and developers who check every step, in your own secure environment. It works in every field: logistics, engineering, trade, agriculture or services.'],
       ['Ambition', 'Less pressure, fewer mistakes', 'Processes that are manual work today become simple, verifiable and usable by everyone in your company. That saves time and money, every day.'],
     ],
+    vs_link: 'See what we build',
     tm_eb: 'Who works on your idea',
     tm_h2: 'Four parties, one team.',
     tm: [
@@ -118,22 +103,13 @@ export default function OverOns({ lang, signal }: { lang: Lang; signal: string }
     <Pagina>
       <Opening eb={t.eb} h1={t.h1} sub={t.sub} signal={signal} rechts={<Samenkomen t={t} signal={signal} />} />
 
-      <Deel eb={t.vh_eb} h2={t.vh_h2} signal={signal}>
-        <Raster>
-          {t.vh.map(([k, p], i) => (
-            <Kaart key={i}>
-              <Titel>{k}</Titel>
-              <Tekst>{p}</Tekst>
-              {i === t.vh.length - 1 ? <Pijllink href={href('Etalage', lang)} signal={signal}>{t.vh_link}</Pijllink> : null}
-            </Kaart>
-          ))}
-        </Raster>
-      </Deel>
-
       <Deel eb={t.vs_eb} h2={t.vs_h2} signal={signal}>
         <Raster>
           {t.vs.map(([l, k, s], i) => (
-            <Kaart key={i}><Label>{l}</Label><Titel>{k}</Titel><Tekst>{s}</Tekst></Kaart>
+            <Kaart key={i}>
+              <Label>{l}</Label><Titel>{k}</Titel><Tekst>{s}</Tekst>
+              {i === t.vs.length - 1 ? <Pijllink href={href('Etalage', lang)} signal={signal}>{t.vs_link}</Pijllink> : null}
+            </Kaart>
           ))}
         </Raster>
       </Deel>
