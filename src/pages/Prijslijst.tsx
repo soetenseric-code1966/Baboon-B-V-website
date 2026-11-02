@@ -39,7 +39,7 @@ export default function Page({ lang, signal }) {
 </div>
 </section>
 <section style={css("padding:0 48px 88px")}><div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px")}>{($v?.usps || []).map((u, u__i) => <React.Fragment key={u__i}><div style={css("background:#F3F5F8;border-radius:20px;padding:24px;display:flex;gap:14px;align-items:flex-start")}><span aria-hidden="true" style={css(`flex:0 0 auto;min-width:24px;font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:${$v?.signal ?? ""};padding-top:2px`)}>{u?.i}</span><div><div style={css("font-size:19px;font-weight:700")}>{u?.t}</div><p style={css("font-size:15px;line-height:1.5;color:#3A4258;margin:6px 0 0")}>{u?.d}</p></div></div></React.Fragment>)}</div>
-<div style={css("margin-top:20px;background:#F3F5F8;border-radius:20px;padding:24px 28px")}><div style={css("font-size:20px;font-weight:700")}>+ {$v?.t?.vb_t}</div><p style={css("font-size:15px;line-height:1.55;color:#3A4258;margin:8px 0 0;max-width:980px")}>{$v?.t?.vb_s}</p></div>
+
 </section>
 <p style={css("margin:0 48px 48px;font-size:14px;color:#5C6378")}>{$v?.t?.small}</p>
 </div>
