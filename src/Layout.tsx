@@ -2,12 +2,12 @@ import React from 'react';
 import { href, PAGES, PageName, Lang } from './routes';
 import { useFooterTexts } from './pages/Global';
 
-const NAV: PageName[] = ['Etalage', 'HoeHetWerkt', 'Lab', 'Prijslijst', 'OverOns', 'Contact'];
+const NAV: PageName[] = ['Etalage', 'HoeHetWerkt', 'Veiligheid', 'Lab', 'Prijslijst', 'OverOns', 'Contact'];
 // Tabblad Apps vervallen (besluit 02-11-2026): de apps zijn nog niet als product te koop; ze staan bij Wat we bouwen.
 // Hoe het werkt is sinds 02-11-2026 een eigen tabblad (was een stuk van de homepage, #hoe).
 // Labels: Apps en Lab zijn nieuw (29-10-2026); de andere komen uit de teksten van de homepage (f.nav, zonder Apps en Lab).
-const EIGEN_LABEL: Partial<Record<PageName, string>> = { Lab: 'Lab' };
-const navLabel = (p: PageName, nav: string[]) => EIGEN_LABEL[p] ?? nav[NAV.filter((x) => !EIGEN_LABEL[x]).indexOf(p)];
+const EIGEN_LABEL: Partial<Record<PageName, { nl: string; en: string }>> = { Lab: { nl: 'Lab', en: 'Lab' }, Veiligheid: { nl: 'Veiligheid', en: 'Security' } };
+const navLabel = (p: PageName, nav: string[], lang: Lang) => EIGEN_LABEL[p]?.[lang] ?? nav[NAV.filter((x) => !EIGEN_LABEL[x]).indexOf(p)];
 const NAV_HASH: Partial<Record<PageName, string>> = {};
 
 function Logo({ color, signal, size }: { color: string; signal: string; size: number }) {
@@ -46,7 +46,7 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
             return (
               <a key={p} href={href(p, lang, NAV_HASH[p] || '')} aria-current={on ? 'page' : undefined}
                 style={{ textDecoration: 'none', color: on ? '#14213D' : '#3A4258', fontWeight: on ? 700 : 400, boxShadow: on ? `inset 0 -2px 0 ${signal}` : undefined }}>
-                {navLabel(p, f.nav)}
+                {navLabel(p, f.nav, lang)}
               </a>
             );
           })}
@@ -83,6 +83,7 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
             <a href={href('Etalage', lang)} style={footLink}>{f.n1}</a>
             <a href={href('Lab', lang)} style={footLink}>Lab</a>
             <a href={href('HoeHetWerkt', lang)} style={footLink}>{f.n2}</a>
+            <a href={href('Veiligheid', lang)} style={footLink}>{lang === 'en' ? 'Security' : 'Veiligheid'}</a>
             <a href={href('Prijslijst', lang)} style={footLink}>{f.n3}</a>
             <a href={href('Start', lang)} style={footLink}>{f.cta}</a>
           </nav>
