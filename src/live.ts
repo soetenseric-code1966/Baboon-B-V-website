@@ -5,6 +5,7 @@ export const LIVE = [
     name: 'Qfleetz',
     url: 'https://www.qfleetz.com',
     host: 'qfleetz.com',
+    screen: '/video/qfleetz-van-idee-tot-live.jpg',
     status: 'live',
     kind: { nl: 'Platform · vlootbeheer', en: 'Platform · fleet management' },
     text: {

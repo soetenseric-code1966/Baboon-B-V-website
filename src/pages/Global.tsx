@@ -151,12 +151,6 @@ function Pagina({ lang, signal, deel }) {
 <p style={css("margin:12px 0 0;font-size:20px;color:#C7CEDB")}>{$v?.t?.eu_s}</p>
 <div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:0 40px;margin-top:36px")}>{($v?.trust || []).map((e, e__i) => <React.Fragment key={e__i}><div style={css("display:flex;gap:14px;padding:16px 0;border-bottom:1px solid #2C3B5E")}><i style={css(`width:12px;height:12px;border-radius:3px;background:${$v?.signal ?? ""};flex:none;margin-top:6px`)}></i><div><div style={css("font-size:18px;font-weight:700")}>{e?.k}</div><div style={css("font-size:15px;line-height:1.5;color:#C7CEDB;margin-top:2px")}>{e?.v}</div></div></div></React.Fragment>)}</div>
 </section>
-<section style={css("padding:88px 48px")}>
-<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.ob_eb}</div>
-<h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.ob_t}</h2>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:36px")}>{($v?.ob || []).map((o, o__i) => <React.Fragment key={o__i}><div style={css(o?.style)}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600")}>{o?.nr}</div><div style={css("font-size:21px;font-weight:700;margin-top:14px")}>{o?.title}</div><p style={css("font-size:14px;line-height:1.5;margin:8px 0 0;opacity:0.9")}>{o?.text}</p><div style={css("margin-top:auto;padding-top:14px;font-size:13px;font-weight:700")}>→ {o?.result}</div></div></React.Fragment>)}</div>
-<p style={css("margin:20px 0 0;font-size:15px;color:#3A4258")}>{$v?.t?.ob_n}</p>
-</section>
 <section style={css("padding:0 48px 48px")}><a href={H("Prijslijst.dc.html")} style={css(`font-weight:700;font-size:20px;color:${$v?.signal ?? ""};text-decoration:none`)}>{N.prijs} →</a></section>
 <section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
 <div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:44px;letter-spacing:-1.4px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>

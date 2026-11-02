@@ -99,7 +99,7 @@ export const LAB_INFO = {
   nl: {
     eb: 'Datawerf lab · gratis', h1: 'Zie uw idee werken. Vandaag nog.',
     sub: 'Omschrijf wat u wilt laten bouwen. Binnen een paar minuten klikt u door een eerste ontwerp van uw eigen software, met verzonnen gegevens. Daarna stuurt u het tien keer gratis bij.',
-    start: 'Start met uw idee', bekijk: 'Bekijk voorbeelden',
+    start: 'Start met uw idee', bekijk: 'Bekijk wat we bouwden',
     stappenEb: 'Zo werkt het',
     stappen: [
       { t: 'Omschrijf uw idee', s: 'In gewone taal, zoals u het aan een collega uitlegt. Voeg desgewenst een Excel- of CSV-bestand toe voor de opbouw.' },
@@ -120,7 +120,7 @@ export const LAB_INFO = {
   en: {
     eb: 'Datawerf lab · free', h1: 'See your idea work. Today.',
     sub: 'Describe what you want built. Within a few minutes you click through a first design of your own software, with made-up data. Then you refine it ten times for free.',
-    start: 'Start with your idea', bekijk: 'See examples',
+    start: 'Start with your idea', bekijk: 'See what we built',
     stappenEb: 'How it works',
     stappen: [
       { t: 'Describe your idea', s: 'In plain words, as you would explain it to a colleague. Optionally add an Excel or CSV file for the structure.' },

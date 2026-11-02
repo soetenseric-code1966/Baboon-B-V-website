@@ -1,9 +1,9 @@
-// Tabblad Lab (besluit 29-10-2026): /lab/ zonder idee in het adres. Uitleg, voorbeelden uit het lab (vaste ontwerpen
-// via de actie "voorbeeld"), veiligheid, de ideeën uit deze browser en "Mail mijn links". Op het homepagesjabloon.
+// Tabblad Lab (besluit 29-10-2026): /lab/ zonder idee in het adres. Uitleg, veiligheid (voorbeelden uit het lab vervallen
+// 02-11-2026: we tonen gerealiseerde projecten bij Wat we bouwen), de ideeën uit deze browser en "Mail mijn links". Op het homepagesjabloon.
 // Een eigen idee staat op /lab/#id.sleutel (dat deel ziet Google niet) en wordt getoond door Lab.tsx.
 import React, { useEffect, useState } from 'react';
 import { Lang, href } from '../routes';
-import { LAB_INFO, LAB_TEXT, LAB_VOORBEELDEN, bewaardeIdeeen, labApi } from '../lab';
+import { LAB_INFO, LAB_TEXT, bewaardeIdeeen } from '../lab';
 import LabLinks from '../LabLinks';
 
 const mono: React.CSSProperties = { fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' };
@@ -13,24 +13,11 @@ const pil = (bg: string, fg: string, border = bg): React.CSSProperties => ({
 });
 const h2: React.CSSProperties = { margin: '10px 0 0', fontSize: 44, lineHeight: 1.05, letterSpacing: '-1.4px', fontWeight: 700 };
 
-type Voorbeeld = { html: string; samenvatting: string | null } | 'fout' | undefined;
-
 export default function LabUitleg({ lang, signal }: { lang: Lang; signal: string }) {
   const t = LAB_INFO[lang];
-  const [keuze, setKeuze] = useState<string>(LAB_VOORBEELDEN[0].naam);
-  const [voorbeelden, setVoorbeelden] = useState<Record<string, Voorbeeld>>({});
   const [mijn, setMijn] = useState<ReturnType<typeof bewaardeIdeeen>>([]);
 
   useEffect(() => { setMijn(bewaardeIdeeen()); }, []);
-  useEffect(() => {
-    if (voorbeelden[keuze]) return;
-    labApi<{ html: string; samenvatting: string | null }>({ actie: 'voorbeeld', naam: keuze })
-      .then((v) => setVoorbeelden((o) => ({ ...o, [keuze]: v })))
-      .catch(() => setVoorbeelden((o) => ({ ...o, [keuze]: 'fout' })));
-  }, [keuze, voorbeelden]);
-
-  const gekozen = LAB_VOORBEELDEN.find((v) => v.naam === keuze)!;
-  const vb = voorbeelden[keuze];
 
   return (
     <div style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", color: '#14213D', background: '#FFFFFF', lineHeight: 1.5 }}>
@@ -40,7 +27,7 @@ export default function LabUitleg({ lang, signal }: { lang: Lang; signal: string
         <p style={{ margin: '20px 0 0', fontSize: 21, lineHeight: 1.55, color: '#3A4258', maxWidth: 780 }}>{t.sub}</p>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 28 }}>
           <a href={href('Start', lang)} style={pil(signal, '#FFFFFF')}>{t.start} →</a>
-          <a href="#voorbeelden" style={pil('#FFFFFF', '#14213D', '#14213D')}>{t.bekijk}</a>
+          <a href={href('Etalage', lang)} style={pil('#FFFFFF', '#14213D', '#14213D')}>{t.bekijk}</a>
         </div>
       </section>
 
@@ -55,32 +42,6 @@ export default function LabUitleg({ lang, signal }: { lang: Lang; signal: string
             </li>
           ))}
         </ol>
-      </section>
-
-      <section id="voorbeelden" className="dw-sec" style={{ padding: '72px 48px', background: '#F7F8FA' }}>
-        <div style={{ ...mono, color: signal }}>{t.vbEb}</div>
-        <h2 style={h2}>{t.vbH}</h2>
-        <p style={{ margin: '14px 0 0', fontSize: 18, color: '#3A4258', maxWidth: 760 }}>{t.vbS}</p>
-        <div role="tablist" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 24 }}>
-          {LAB_VOORBEELDEN.map((v) => (
-            <button key={v.naam} role="tab" type="button" aria-selected={keuze === v.naam} onClick={() => setKeuze(v.naam)}
-              style={{ ...pil(keuze === v.naam ? '#14213D' : '#FFFFFF', keuze === v.naam ? '#FFFFFF' : '#14213D', '#14213D'), padding: '10px 20px', fontSize: 15 }}>{v.label[lang]}</button>
-          ))}
-        </div>
-        <p style={{ margin: '16px 0 0', fontSize: 16, color: '#3A4258', maxWidth: 900 }}><strong style={{ color: '#14213D' }}>{t.vbIdee}:</strong> {gekozen.idee[lang]}</p>
-        <div role="tabpanel" style={{ marginTop: 16, border: '2px solid #14213D', borderRadius: 20, overflow: 'hidden', background: '#FFFFFF', minHeight: 420, display: 'grid' }}>
-          {vb && vb !== 'fout' ? (
-            <iframe title={gekozen.label[lang]} srcDoc={vb.html} sandbox="allow-scripts allow-forms"
-              style={{ width: '100%', height: 'min(78vh, 860px)', border: 0, background: '#FFFFFF' }} />
-          ) : (
-            <div style={{ display: 'grid', placeItems: 'center', padding: 40, gap: 12, textAlign: 'center', color: '#3A4258' }}>
-              {vb === 'fout' ? <span>{t.vbFout}</span> : <>
-                <div className="lab-laden" aria-hidden="true" style={{ width: 40, height: 40, borderRadius: '50%', border: '4px solid #E3E7EE', borderTopColor: signal }} />
-                <span>{t.vbLaden}</span></>}
-            </div>
-          )}
-        </div>
-        {vb && vb !== 'fout' && vb.samenvatting ? <p style={{ margin: '12px 0 0', color: '#3A4258', maxWidth: 900 }}>{vb.samenvatting}</p> : null}
       </section>
 
       <section className="dw-sec" style={{ padding: '72px 48px' }}>
