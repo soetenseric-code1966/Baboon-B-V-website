@@ -134,7 +134,6 @@ function Pagina({ lang, signal, deel }) {
 <div style={css(`background:#FFFFFF;border-radius:20px;padding:28px;border:2px solid ${$v?.signal ?? ""}`)}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378;text-transform:uppercase")}>{$v?.t?.db}</div><div style={css("font-size:26px;font-weight:700;margin-top:6px")}>{$v?.t?.db2}</div>{($v?.t?.dl || []).map((d, d__i) => <React.Fragment key={d__i}><div style={css("padding:12px 0;border-bottom:1px solid #E3E7EE;font-size:17px")}>{d}</div></React.Fragment>)}</div>
 </div>
 </section>
-<section style={css("padding:0 48px 48px")}><a href={H("Prijslijst.dc.html")} style={css(`font-weight:700;font-size:20px;color:${$v?.signal ?? ""};text-decoration:none`)}>{N.prijs} →</a></section>
 <section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
 <div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:44px;letter-spacing:-1.4px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>
 <a href={H("Aanmelden.dc.html")} style={css("padding:18px 28px;border-radius:999px;background:#FFFFFF;color:#14213D;font-weight:700;font-size:18px;white-space:nowrap;text-decoration:none")}>{$v?.t?.fin2} →</a>
