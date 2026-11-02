@@ -94,4 +94,4 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
 - `index.html`: deelbeeld `og:image` = `public/deelbeeld.jpg` (slotbeeld van de Qfleetz-animatie); logo voor Google: `public/logo.png` (512 × 512).
 - Voet: link naar de LinkedIn-pagina Datawerf Software.
 - De apps (Aardappelmonitor, Dagplanning, Wielen, Qtyrez) linken onderaan terug naar datawerf.com ("Gemaakt met Datawerf").
-- Voet en Contact zonder plaatsnaam (02-11-2026); de vestigingsplaats staat alleen in de privacyverklaring bij de bedrijfsgegevens.
+- Voet en Contact zonder plaatsnaam (02-11-2026); op Contact geen kaart meer met logo, handelsnaam, e-mail en KvK (staat al in de voet); de vestigingsplaats staat alleen in de privacyverklaring bij de bedrijfsgegevens.
