@@ -70,3 +70,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* Van idee tot live met de Qfleetz-animatie (30-10-2026): onder elkaar op smalle schermen */
 @media (max-width: 900px) { .pf-raster { grid-template-columns: minmax(0, 1fr) !important; } }
 @media (max-width: 760px) { .pf-stappen { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+
+/* Kop blijft staan tijdens scrollen (02-11-2026). Op de telefoon niet: daar is de kop met menu ruim 180 px hoog. */
+@media (min-width: 900px) {
+  .dw-head { position: sticky; top: 0; z-index: 50; }
+  html { scroll-padding-top: 96px; }
+}
