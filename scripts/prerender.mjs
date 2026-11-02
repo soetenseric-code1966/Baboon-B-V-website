@@ -9,6 +9,31 @@ const { render, PAGES, TITLES, DESCRIPTION } = await import(pathToFileURL(path.r
 const SITE = 'https://datawerf.com';
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
+// Bedrijfsgegevens voor zoekmachines (JSON-LD, 01-11-2026): zo herkent Google datawerf.com als het bedrijf Datawerf
+// (handelsnaam van Baboon B.V.), los van andere organisaties met dezelfde naam.
+const ORGANISATIE = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE}/#organisatie`,
+      name: 'Datawerf',
+      alternateName: ['Datawerf Software'],
+      legalName: 'Baboon B.V.',
+      url: `${SITE}/`,
+      logo: `${SITE}/logo.png`,
+      image: `${SITE}/deelbeeld.jpg`,
+      description: 'Datawerf bouwt uw idee als software: uw praktische branchekennis plus onze AI-kennis, platform en developers.',
+      email: 'info@datawerf.com',
+      identifier: { '@type': 'PropertyValue', propertyID: 'KvK', value: '70420874' },
+      address: { '@type': 'PostalAddress', addressCountry: 'NL' },
+      sameAs: ['https://www.linkedin.com/company/146888310/'],
+    },
+    { '@type': 'WebSite', '@id': `${SITE}/#website`, name: 'Datawerf', url: `${SITE}/`, publisher: { '@id': `${SITE}/#organisatie` }, inLanguage: ['nl', 'en'] },
+  ],
+};
+const LD = `<script type="application/ld+json">${JSON.stringify(ORGANISATIE)}</script>`;
+
 const urls = [];
 // Persoonlijke labpagina's en beheer horen niet in Google.
 const NIET_IN_SITEMAP = ['LabBeheer']; // Lab is sinds 29-10-2026 een tabblad; eigen ideeën staan achter #, dat ziet Google niet
@@ -19,6 +44,8 @@ for (const [page, paths] of Object.entries(PAGES)) {
       `<link rel="alternate" hreflang="nl" href="${SITE}${paths.nl}">`,
       `<link rel="alternate" hreflang="en" href="${SITE}${paths.en}">`,
       `<link rel="alternate" hreflang="x-default" href="${SITE}${paths.nl}">`,
+      `<meta property="og:url" content="${SITE}${paths[lang]}">`,
+      LD,
     ].join('\n');
     const html = template
       .replace('%LANG%', lang)

@@ -13,6 +13,7 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 |---|---|---|
 | Home | `/` | `/en/` |
 | Wat we bouwen | `/wat-we-bouwen/` | `/en/what-we-build/` |
+| Hoe het werkt (sinds 02-11-2026) | `/hoe-het-werkt/` | `/en/how-it-works/` |
 | Apps | `/apps/` | `/en/apps/` |
 | Start gratis (lab) | `/start/` | `/en/start/` |
 | Lab (tabblad; eigen idee via geheime link `/lab/#id.sleutel`) | `/lab/` | `/en/lab/` |
@@ -22,6 +23,14 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 | Contact | `/contact/` | `/en/contact/` |
 | Juridisch | `/juridisch/` | `/en/legal/` |
 | Inloggen | `/inloggen/` | `/en/login/` |
+
+## Korte homepage en tabblad Hoe het werkt (02-11-2026)
+
+De homepage is kort (± 480 woorden in plaats van ± 1.700): opening, strook, "AI gebruiken is makkelijk. Erop kunnen bouwen niet." (drie kaarten: Excel, zelf met AI, Datawerf), Wat we bouwen, de zes usp's (alleen titels), twee ingangen, link naar Prijzen en de afsluiter. De uitleg staat op het tabblad **Hoe het werkt**: van idee tot live, samenwerking, van losse AI naar eigen platform, acht bouwstappen en drie niveaus, Europees van opzet, startstappen. Beide komen uit `src/pages/Global.tsx` (`Pagina` met `deel` = `home` of `hoe`; nieuwe teksten in `NTXT`). Oude links naar `/#hoe` gaan door naar het tabblad.
+
+## Zes usp's op de homepage (01-11-2026)
+
+De zes kaarten op de homepage (`usps` in `TXT` van `src/pages/Global.tsx`, NL en EN) volgen de visie van Datawerf: uw vakkennis is het startpunt · gebouwd met AI-agents, gecontroleerd door mensen · u ziet elke stap en houdt de regie · veilig met uw gegevens · professioneel gebouwd, ook na de livegang · bewezen in de praktijk. Tekst wijzigen: daar, en de besluitenlijst bijwerken.
 
 ## Werken aan de site
 
@@ -59,3 +68,9 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
 - Hulpvragen (29-10-2026): op `/start/` de knop "Help mij mijn idee scherper te maken" (`src/LabVragen.tsx`). Een klein AI-model (actie `vragen`, standaard `claude-haiku-5-5`, instelbaar met `LAB_MODEL_VRAGEN`) stelt 3-5 vragen met keuzes die bij het getypte idee passen; lukt dat niet, dan algemene vragen (`STANDAARD_VRAGEN` in `src/lab.ts`). De vragen verschijnen één voor één (voortgang "1 van 4", Vorige/Volgende of Overslaan; bij één mogelijke keuze vanzelf door). De antwoorden komen als tekst in het ideevak en tellen niet als prompt.
 - Bestanden toevoegen (29-10-2026): bij Start en bij "Maak het nauwkeuriger" kan de bezoeker tot drie Excel- (.xlsx) of CSV-bestanden kiezen. `src/labBestanden.ts` leest ze in de browser; alleen de opbouw (bladnamen, kolomnamen, soort per kolom, aantal rijen) gaat mee, nooit de inhoud en niet de bestandsnaam. De bezoeker ziet vooraf wat er meegaat (`src/LabBestanden.tsx`).
 - Vaste app-stijl voor alle ontwerpen en apps: `docs/app-stijl.md`.
+
+## Vindbaarheid (01-11-2026)
+- `scripts/prerender.mjs` zet op elke pagina bedrijfsgegevens voor zoekmachines (JSON-LD Organization + WebSite: Datawerf, ook "Datawerf Software", Baboon B.V., KvK, logo, LinkedIn) en `og:url`.
+- `index.html`: deelbeeld `og:image` = `public/deelbeeld.jpg` (slotbeeld van de Qfleetz-animatie); logo voor Google: `public/logo.png` (512 × 512).
+- Voet: link naar de LinkedIn-pagina Datawerf Software.
+- De apps (Aardappelmonitor, Dagplanning, Wielen, Qtyrez) linken onderaan terug naar datawerf.com ("Gemaakt met Datawerf").
