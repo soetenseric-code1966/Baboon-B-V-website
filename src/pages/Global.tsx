@@ -51,7 +51,7 @@ class Component extends DCLogic {
 // Nieuwe teksten (02-11-2026): korte homepage en het tabblad Hoe het werkt.
 const NTXT = {
   nl: {
-    meer: 'Zo werkt het', us_eb: 'Waarom Datawerf', us_t: 'Zes redenen.', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt', held_ck: ['Uw vakkennis', 'Gebouwd door AI-agents', '142 tests geslaagd', 'Gecontroleerd door developer'], held_omg: 'Eigen omgeving · data in Europa', held_alt: 'Qtyrez bandenmonitor, gebouwd door Datawerf (demo)', sa_t: 'Uw kennis. Onze AI-agents. Developers controleren.',
+    meer: 'Zo werkt het', us_eb: 'Waarom Datawerf', us_t: 'Zes redenen.', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt', held_ck: ['Uw vakkennis', 'Gebouwd door AI-agents', 'Gecontroleerd door developer', '142 tests geslaagd', 'Data veilig in Europa'], held_omg: 'Eigen omgeving', held_alt: 'Qtyrez bandenmonitor, gebouwd door Datawerf (demo)', sa_t: 'Uw kennis. Onze AI-agents. Developers controleren.',
     hoe_h1: 'Van uw idee tot een applicatie die elke dag werkt.',
     hoe_s: 'U brengt de vakkennis. AI-agents bouwen snel, developers controleren elke stap en u keurt goed. Zo werkt dat, stap voor stap.',
     vg_eb: 'Waarom Datawerf', vg_t1: 'AI bouwt. Developers controleren.', vg_t2: 'U heeft eigen software.',
@@ -64,7 +64,7 @@ const NTXT = {
     vg_app: 'Opdrachten', vg_s: ['Klaar', 'Bezig', 'Morgen'],
   },
   en: {
-    meer: 'How it works', us_eb: 'Why Datawerf', us_t: 'Six reasons.', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works', held_ck: ['Your expertise', 'Built by AI agents', '142 tests passed', 'Reviewed by a developer'], held_omg: 'Own environment · data in Europe', held_alt: 'Qtyrez tyre monitor, built by Datawerf (demo)', sa_t: 'Your know-how. Our AI agents. Developers check.',
+    meer: 'How it works', us_eb: 'Why Datawerf', us_t: 'Six reasons.', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works', held_ck: ['Your expertise', 'Built by AI agents', 'Reviewed by a developer', '142 tests passed', 'Data secure in Europe'], held_omg: 'Own environment', held_alt: 'Qtyrez tyre monitor, built by Datawerf (demo)', sa_t: 'Your know-how. Our AI agents. Developers check.',
     hoe_h1: 'From your idea to an application that works every day.',
     hoe_s: 'You bring the know-how. AI agents build fast, developers check every step and you approve. This is how it works, step by step.',
     vg_eb: 'Why Datawerf', vg_t1: 'AI builds. Developers check.', vg_t2: 'You get your own software.',
@@ -94,7 +94,7 @@ function Vergelijking({ N, signal }) {
   return (
 <section style={css("padding:72px 48px 88px")}>
 <div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${signal};font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:10px`)}>{N.vg_eb}</div>
-<h2 style={css("margin:0;font-size:48px;letter-spacing:-1.6px;line-height:1.05")}>{N.vg_t1}<br /><span style={css(`color:${signal}`)}>{N.vg_t2}</span></h2>
+<h2 style={css("margin:0;font-size:48px;letter-spacing:-1.6px;line-height:1.05")}>{N.vg_t1} {N.vg_t2}</h2>
 <div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:36px")}>
 {N.vg.map((v, i) => {
   const dw = i === 2;
@@ -163,11 +163,11 @@ function Pagina({ lang, signal, deel }) {
 </div>
 </section>
 <Vergelijking N={N} signal={$v?.signal} />
-<section style={css("background:#14213D;color:#FFFFFF;padding:72px 48px")}>
+<section style={css("padding:0 48px 88px")}>
 <div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:10px`)}>{$v?.t?.eu_eb}</div>
 <h2 style={css("margin:0;font-size:48px;letter-spacing:-1.6px;line-height:1.05")}>{$v?.t?.eu_t}</h2>
-<p style={css("margin:12px 0 0;font-size:20px;color:#C7CEDB")}>{$v?.t?.eu_s}</p>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:0 40px;margin-top:36px")}>{($v?.trust || []).map((e, e__i) => <React.Fragment key={e__i}><div style={css("display:flex;gap:14px;padding:16px 0;border-bottom:1px solid #2C3B5E")}><i style={css(`width:12px;height:12px;border-radius:3px;background:${$v?.signal ?? ""};flex:none;margin-top:6px`)}></i><div><div style={css("font-size:18px;font-weight:700")}>{e?.k}</div><div style={css("font-size:15px;line-height:1.5;color:#C7CEDB;margin-top:2px")}>{e?.v}</div></div></div></React.Fragment>)}</div>
+<p style={css("margin:16px 0 0;font-size:20px;line-height:1.5;color:#3A4258;max-width:780px")}>{$v?.t?.eu_s}</p>
+<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:32px")}>{($v?.trust || []).map((e, e__i) => <div key={e__i} style={css("background:#F3F5F8;border-radius:20px;padding:24px;display:flex;gap:12px")}><span style={css(`width:24px;height:24px;border-radius:50%;background:${$v?.signal ?? ""};color:#FFFFFF;display:grid;place-items:center;font-size:12px;flex:none;margin-top:2px`)}>✓</span><div><div style={css("font-size:19px;font-weight:700")}>{e?.k}</div><div style={css("font-size:15px;line-height:1.5;color:#3A4258;margin-top:4px")}>{e?.v}</div></div></div>)}</div>
 </section>
 <Showcase lang={lang} signal={$v?.signal} title={$v?.t?.wk_t} sub={$v?.t?.wk_s} />
 <section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
