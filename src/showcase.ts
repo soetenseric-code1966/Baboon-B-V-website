@@ -95,15 +95,6 @@ export const SHOWCASE: ShowcaseItem[] = [
     duur: 47400,
   },
   {
-    name: { nl: 'Bidderz', en: 'Bidderz' },
-    kind: { nl: 'Platform', en: 'Platform' },
-    stage: { nl: 'live · in ontwikkeling', en: 'live · in development' },
-    text: {
-      nl: 'Aanbod van gebruikte bedrijfsvoertuigen verzameld en ingedeeld, met marktanalyse en waardebepaling.',
-      en: 'Used commercial vehicle listings collected and classified, with market analysis and valuation.',
-    },
-  },
-  {
     // Vervangt de mockup "Verzekeringsportaal" (besluit 30-10-2026). Getekende animatie met verzonnen gegevens.
     name: { nl: 'Verzekerings- en schadeportaal', en: 'Insurance and claims portal' },
     kind: { nl: 'Platform', en: 'Platform' },

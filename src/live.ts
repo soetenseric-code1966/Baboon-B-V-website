@@ -83,6 +83,23 @@ export const LIVE = [
       en: ['Planning board per depot: needed by timetable versus available', 'Suggested transfers; issue the order in one click', 'Maintenance tracked per partner: waiting, started, ready', 'Own screen per role, demo with fictitious data'],
     },
   },
+  {
+    name: 'Qtyrez',
+    title: { nl: 'Qtyrez bandenmonitor', en: 'Qtyrez tyre monitor' },
+    url: 'https://qtyrez.datawerf.com/demo',
+    host: 'qtyrez.datawerf.com',
+    screen: '/showcase/qtyrez.jpg',
+    status: 'demo',
+    kind: { nl: 'Monitor · banden en kosten', en: 'Monitor · tyres and costs' },
+    text: {
+      nl: 'Wat kosten banden echt, per voertuig, vestiging en bandpositie? Qtyrez leest de facturen van de bandenleverancier, de km-standen en het budget, en rekent de kosten per km en per mm profiel uit. Zo is te zien welke band het voordeligst is en waar iets afwijkt.',
+      en: 'What do tyres really cost, per vehicle, depot and tyre position? Qtyrez reads the tyre supplier’s invoices, the odometer readings and the budget, and calculates the cost per km and per mm of tread. So you see which tyre is the most economical and where something is off.',
+    },
+    points: {
+      nl: ['Kosten per km en per mm, per merk, maat, positie en voertuig', 'Afwijkingen en ongelijke slijtage direct in beeld', 'Vervangplanning, budget en prognose'],
+      en: ['Cost per km and per mm, by brand, size, position and vehicle', 'Anomalies and uneven wear at a glance', 'Replacement planning, budget and forecast'],
+    },
+  },
 ] as const;
 
 export const LIVE_TEXT = {

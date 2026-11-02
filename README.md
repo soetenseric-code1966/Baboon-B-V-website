@@ -14,7 +14,6 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 | Home | `/` | `/en/` |
 | Wat we bouwen | `/wat-we-bouwen/` | `/en/what-we-build/` |
 | Hoe het werkt (sinds 02-11-2026) | `/hoe-het-werkt/` | `/en/how-it-works/` |
-| Apps | `/apps/` | `/en/apps/` |
 | Start gratis (lab) | `/start/` | `/en/start/` |
 | Lab (tabblad; eigen idee via geheime link `/lab/#id.sleutel`) | `/lab/` | `/en/lab/` |
 | Lab-beheer (niet in menu of sitemap) | `/lab/beheer/` | `/en/lab/admin/` |
@@ -23,6 +22,14 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 | Contact | `/contact/` | `/en/contact/` |
 | Juridisch | `/juridisch/` | `/en/legal/` |
 | Inloggen | `/inloggen/` | `/en/login/` |
+
+## Opbouw van de site (02-11-2026)
+
+Elke pagina beantwoordt één vraag, en elk project staat op één plek:
+- **Home**: wat is Datawerf (opening, "AI gebruiken is makkelijk. Erop kunnen bouwen niet.", carrousel Wat we bouwen, "Waarom Datawerf" met de zes usp-titels, ingangen, afsluiter).
+- **Wat we bouwen**: eerst "Opgeleverd en in gebruik" (`src/live.ts`: Qfleetz, Qeldr, Urenregistratie, Aardappelmonitor, Dagplanning, Qtyrez), daarna "Herkent u er een?" (ideeën, met knop naar het lab). Het blok met voorbeelddemo's is weg (de knoppen gingen naar Contact en de kaarten waren kopieën).
+- **Hoe het werkt**: van idee tot live, samenwerking, AI-agents programmeren / developers controleren, Europees van opzet, startstappen. De niveaus staan alleen bij Prijzen; "van losse AI naar eigen platform" zit in het vergelijkingsblok op de homepage.
+- Menu: Wat we bouwen · Hoe het werkt · Lab · Prijzen · Over ons · Contact. Bidderz staat niet in de carrousel.
 
 ## Korte homepage en tabblad Hoe het werkt (02-11-2026)
 
@@ -52,7 +59,7 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
 
 ## Apps en inloggen (29-10-2026)
 
-- Tabblad **Apps** (`src/pages/Apps.tsx`, handgeschreven op het sjabloon): kant-en-klare apps van Datawerf met "Probeer de demo". De lijst staat in `src/apps.ts` (naam, prijs/label, tekst, punten, scherm, demo- en inlogadres).
+- Het tabblad **Apps** is vervallen (besluit 02-11-2026): de apps zijn nog niet als product te koop en niet universeel inzetbaar. `/apps/` stuurt door naar Wat we bouwen (`public/_redirects`). `src/apps.ts` blijft de lijst voor **Inloggen** (tegels met Inloggen en Demo).
 - **Inloggen** (`src/pages/Inloggen.tsx`, handgeschreven, besluit 29-10-2026): direct een tegel per app (korte omschrijving `short` in `src/apps.ts`, knoppen **Inloggen** en **Demo**); één klik naar het inlogscherm van de app. Onderaan het klantportaal (binnenkort: één inlog voor alle apps).
 - Getekende animaties (30-10-2026): video's in `public/video/` (MP4 met muziek + WebM, poster-jpg, 1600 × 900, verzonnen gegevens). Component `src/Film.tsx`: speelt zonder geluid in een lus zodra hij in beeld komt (laadt pas dan), knop "Geluid aan", bij "beweging beperken" niet vanzelf. Qfleetz "van idee tot live" op de homepage in Hoe het werkt (`src/ProcesFilm.tsx`, sinds 30-10-2026 in plaats van het oude voorbeeldscherm per stap): de vier stappen bovenin lopen mee met de animatie, een klik op een stap laat de animatie bij het begin van die stap starten, links de tekst bij de stap, met Pauzeer en Geluid aan. Deze versie van de video heeft geen eigen fasebalk; in het slotbeeld staat een schermafbeelding van Qfleetz duidelijker op de achtergrond (31-10-2026: herkenbaar, tekst en namen onleesbaar); het schadeportaal en de Aardappelmonitor (31-10-2026: 235 bronnen in 1 monitor, weer, satelliet en percelen met verwachte ton per hectare, prijzen en export NL/BE/DE/FR, 20 jaar historie en verwachting; voorbeeldcijfers) de Dagplanning (01-11-2026: ochtendtelling, dienstregeling, planbord Gew./Nu, rode kaart met reden en partij, kaartkleuren gemeld/gestart/gereed, KPI stilstand en doorlooptijd, onderhoudsplanning, verplaatsingsvoorstel; namen zoals de demo, voorbeeldcijfers) en Qtyrez (01-11-2026: kosten per km en per mm, per merk en type band, per merk en type voertuig en per aspositie, veiligheid, afwijkingen, planning en prognose; voorbeeldcijfers; klik opent de demo) in de carrousel (`video` en `duur` in `src/showcase.ts`; een project met video blijft staan tot de animatie rond is).
 - Apps nu (niets is gratis, besluit 01-11-2026: prijs "Op aanvraag" tot die besloten is): Dagplanning, Wielen natrekken, **Qtyrez bandenmonitor** (01-11-2026, op aanvraag; Demo → `qtyrez.datawerf.com/demo`, Inloggen → `qtyrez.datawerf.com/`; scherm Kosten & analyse uit de demo in `public/showcase/qtyrez.jpg`), Urenregistratie (binnenkort).
@@ -64,7 +71,7 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
   met het ontwerp in een afgesloten kader, de teller (x van 10), de doorgestreepte waarde en "Maak het nauwkeuriger".
 - Achterkant, geheimen en regels: `supabase/lab/LEESMIJ.md`. Tests: `npm test`.
 - Inloggen zonder account: mail "Uw ontwerp staat klaar" met de link, en op Inloggen en /lab/ "Mail mijn links".
-- Tabblad **Lab** (29-10-2026, menu na Apps): `/lab/` zonder idee in het adres toont `src/pages/LabUitleg.tsx`: uitleg in vier stappen, voorbeelden uit het lab (live, via de actie `voorbeeld`; welke staat in `VOORBEELDEN` in `regels.ts` en `LAB_VOORBEELDEN` in `src/lab.ts`), veiligheid, "Uw ideeën" en "Mail mijn links". `/lab/` staat in de sitemap; alleen `/lab/beheer/` is uitgesloten in robots.txt.
+- Tabblad **Lab** (29-10-2026; menu sinds 02-11-2026 na Hoe het werkt): `/lab/` zonder idee in het adres toont `src/pages/LabUitleg.tsx`: uitleg in vier stappen, voorbeelden uit het lab (live, via de actie `voorbeeld`; welke staat in `VOORBEELDEN` in `regels.ts` en `LAB_VOORBEELDEN` in `src/lab.ts`), veiligheid, "Uw ideeën" en "Mail mijn links". `/lab/` staat in de sitemap; alleen `/lab/beheer/` is uitgesloten in robots.txt.
 - Hulpvragen (29-10-2026): op `/start/` de knop "Help mij mijn idee scherper te maken" (`src/LabVragen.tsx`). Een klein AI-model (actie `vragen`, standaard `claude-haiku-5-5`, instelbaar met `LAB_MODEL_VRAGEN`) stelt 3-5 vragen met keuzes die bij het getypte idee passen; lukt dat niet, dan algemene vragen (`STANDAARD_VRAGEN` in `src/lab.ts`). De vragen verschijnen één voor één (voortgang "1 van 4", Vorige/Volgende of Overslaan; bij één mogelijke keuze vanzelf door). De antwoorden komen als tekst in het ideevak en tellen niet als prompt.
 - Bestanden toevoegen (29-10-2026): bij Start en bij "Maak het nauwkeuriger" kan de bezoeker tot drie Excel- (.xlsx) of CSV-bestanden kiezen. `src/labBestanden.ts` leest ze in de browser; alleen de opbouw (bladnamen, kolomnamen, soort per kolom, aantal rijen) gaat mee, nooit de inhoud en niet de bestandsnaam. De bezoeker ziet vooraf wat er meegaat (`src/LabBestanden.tsx`).
 - Vaste app-stijl voor alle ontwerpen en apps: `docs/app-stijl.md`.

@@ -51,7 +51,7 @@ class Component extends DCLogic {
 // Nieuwe teksten (02-11-2026): korte homepage en het tabblad Hoe het werkt.
 const NTXT = {
   nl: {
-    meer: 'Zo werkt het', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt',
+    meer: 'Zo werkt het', us_eb: 'Waarom Datawerf', us_t: 'Zes redenen.', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt',
     hoe_h1: 'Van uw idee tot een applicatie die elke dag werkt.',
     hoe_s: 'U brengt de vakkennis. AI-agents bouwen snel, developers controleren elke stap en u keurt goed. Zo werkt dat, stap voor stap.',
     vg_t1: 'AI gebruiken is makkelijk.', vg_t2: 'Erop kunnen bouwen niet.',
@@ -63,7 +63,7 @@ const NTXT = {
     vg_chat1: 'Maak hier een app van', vg_chat2: 'Hier is uw app! (niet getest)', vg_app: 'Opdrachten', vg_s: ['Klaar', 'Bezig', 'Morgen'],
   },
   en: {
-    meer: 'How it works', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works',
+    meer: 'How it works', us_eb: 'Why Datawerf', us_t: 'Six reasons.', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works',
     hoe_h1: 'From your idea to an application that works every day.',
     hoe_s: 'You bring the know-how. AI agents build fast, developers check every step and you approve. This is how it works, step by step.',
     vg_t1: 'Using AI is easy.', vg_t2: 'Building on it is not.',
@@ -141,23 +141,10 @@ function Pagina({ lang, signal, deel }) {
 </div>
 </section>
 <section style={css("padding:0 48px 88px")}>
-<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.ft_eb}</div>
-<h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.ft_t}</h2>
-<p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{$v?.t?.ft_s}</p>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px;margin-top:36px")}>
-<div style={css("background:#F7F8FA;border-radius:20px;padding:28px")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378;text-transform:uppercase")}>{$v?.t?.fromT}</div>{($v?.t?.fromList || []).map((x, x__i) => <React.Fragment key={x__i}><div style={css("display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #E3E7EE;font-size:16px;color:#5C6378")}><span aria-hidden="true">✕</span>{x}</div></React.Fragment>)}</div>
-<div style={css("background:#14213D;color:#FFFFFF;border-radius:20px;padding:28px")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C7CEDB;text-transform:uppercase")}>{$v?.t?.toT}</div>{($v?.t?.toList || []).map((x, x__i) => <React.Fragment key={x__i}><div style={css("display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #2C3B5E;font-size:16px")}><span aria-hidden="true" style={css(`color:${$v?.signal ?? ""}`)}>✓</span>{x}</div></React.Fragment>)}</div>
-</div>
-<p style={css("margin:20px 0 0;font-size:16px;line-height:1.55;color:#3A4258;max-width:900px")}>{$v?.t?.ft_n}</p>
-</section>
-<section style={css("padding:0 48px 88px")}>
 <div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.bw_eb}</div>
 <h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.bw_t}</h2>
 <p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{$v?.t?.bw_s}</p>
 <div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:36px")}>{($v?.steps || []).map((s, s__i) => <React.Fragment key={s__i}><div style={css("border:1px solid #D5DAE3;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px")}><div style={css("display:flex;justify-content:space-between;align-items:center")}><span style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600")}>{s?.nr}</span><span style={css(`font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;${s?.whoStyle ?? ""}`)}>{s?.who}</span></div><div style={css("font-size:20px;font-weight:700")}>{s?.title}</div><p style={css("font-size:14px;line-height:1.5;color:#3A4258;margin:0")}>{s?.text}</p><p style={css("font-size:14px;line-height:1.5;margin:auto 0 0;padding-top:8px;border-top:1px dashed #D5DAE3")}><strong>{$v?.t?.gainL}:</strong> {s?.gain}</p></div></React.Fragment>)}</div>
-<h3 style={css("margin:56px 0 0;font-size:32px;letter-spacing:-0.8px")}>{$v?.t?.lv_t}</h3>
-<p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{$v?.t?.lv_s}</p>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:24px")}>{($v?.levels || []).map((v, v__i) => <React.Fragment key={v__i}><div style={css(v?.style)}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;opacity:0.85")}>{v?.lvl}</div><div style={css("font-size:28px;font-weight:700;margin-top:6px")}>{v?.name}</div><p style={css("font-size:15px;line-height:1.5;margin:8px 0 0;opacity:0.9")}>{v?.ex}</p><div style={css("margin-top:14px;font-weight:700;font-size:14px")}>{v?.check}</div></div></React.Fragment>)}</div>
 </section>
 <section style={css("background:#14213D;color:#FFFFFF;padding:80px 48px")}>
 <h2 style={css("margin:0;font-size:56px;letter-spacing:-2px;line-height:1")}>{$v?.t?.eu_t}</h2>
@@ -210,9 +197,8 @@ function Pagina({ lang, signal, deel }) {
 <Vergelijking N={N} signal={$v?.signal} />
 <Showcase lang={lang} signal={$v?.signal} title={$v?.t?.wk_t} sub={$v?.t?.wk_s} />
 <section style={css("padding:0 48px 88px")}>
-<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.us_eb}</div>
-<h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.us_t}</h2>
-<p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{$v?.t?.us_s}</p>
+<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{N.us_eb}</div>
+<h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{N.us_t}</h2>
 <div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:36px")}>{($v?.usps || []).map((u, u__i) => <React.Fragment key={u__i}><div style={css("border:1px solid #D5DAE3;border-radius:18px;padding:24px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:12px;color:${$v?.signal ?? ""};font-weight:600`)}>{u?.nr} · {u?.tag}</div><div style={css("font-size:22px;font-weight:700;margin-top:12px")}>{u?.title}</div></div></React.Fragment>)}</div>
 <a href={H("HoeHetWerkt.dc.html")} style={css(`display:inline-block;margin-top:22px;font-weight:700;color:${$v?.signal ?? ""};text-decoration:none`)}>{N.meer} →</a>
 </section>

@@ -2,10 +2,11 @@ import React from 'react';
 import { href, PAGES, PageName, Lang } from './routes';
 import { useFooterTexts } from './pages/Global';
 
-const NAV: PageName[] = ['Etalage', 'Apps', 'Lab', 'HoeHetWerkt', 'Prijslijst', 'OverOns', 'Contact'];
+const NAV: PageName[] = ['Etalage', 'HoeHetWerkt', 'Lab', 'Prijslijst', 'OverOns', 'Contact'];
+// Tabblad Apps vervallen (besluit 02-11-2026): de apps zijn nog niet als product te koop; ze staan bij Wat we bouwen.
 // Hoe het werkt is sinds 02-11-2026 een eigen tabblad (was een stuk van de homepage, #hoe).
 // Labels: Apps en Lab zijn nieuw (29-10-2026); de andere komen uit de teksten van de homepage (f.nav, zonder Apps en Lab).
-const EIGEN_LABEL: Partial<Record<PageName, string>> = { Apps: 'Apps', Lab: 'Lab' };
+const EIGEN_LABEL: Partial<Record<PageName, string>> = { Lab: 'Lab' };
 const navLabel = (p: PageName, nav: string[]) => EIGEN_LABEL[p] ?? nav[NAV.filter((x) => !EIGEN_LABEL[x]).indexOf(p)];
 const NAV_HASH: Partial<Record<PageName, string>> = {};
 
@@ -80,7 +81,6 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
           <nav aria-label="Product" style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
             <strong style={footHead}>PRODUCT</strong>
             <a href={href('Etalage', lang)} style={footLink}>{f.n1}</a>
-            <a href={href('Apps', lang)} style={footLink}>Apps</a>
             <a href={href('Lab', lang)} style={footLink}>Lab</a>
             <a href={href('HoeHetWerkt', lang)} style={footLink}>{f.n2}</a>
             <a href={href('Prijslijst', lang)} style={footLink}>{f.n3}</a>
