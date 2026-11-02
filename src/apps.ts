@@ -78,9 +78,8 @@ export const APPS: AppItem[] = [
     key: 'uren',
     name: { nl: 'Urenregistratie voor zzp’ers', en: 'Time tracking for freelancers' },
     kind: { nl: 'Zzp · uren en facturen', en: 'Freelance · hours and invoices' },
-    price: { nl: 'Binnenkort', en: 'Coming soon' },
+    price: { nl: 'Op aanvraag', en: 'On request' },
     free: false,
-    soon: true,
     text: {
       nl: 'Voor zzp’ers die de hele dag achter de computer werken. De app ziet welk programma en bestand openstaat en zet de tijd automatisch op het juiste project. Eén keer per dag goedkeuren, en de uren staan klaar voor de factuur.',
       en: 'For freelancers who work at a computer all day. The app sees which program and file are open and puts the time on the right project automatically. Approve once a day and the hours are ready for the invoice.',
