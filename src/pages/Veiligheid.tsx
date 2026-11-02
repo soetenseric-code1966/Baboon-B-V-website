@@ -4,7 +4,7 @@
 // elke wijziging gecontroleerd, afspraken en beheer. Alleen beloftes die ook elders op de site staan.
 // Nooit "gebouwd in Europa" of "uw gegevens verlaten de EU niet" (CLAUDE.md).
 import React from 'react';
-import { Lang, href } from '../routes';
+import { Lang } from '../routes';
 import { Pagina, Opening, Deel, Raster, Kaart, Label, Titel, Vinkjes, NAVY, GRIJS, TEKST, GROEN, mono } from '../Blok';
 
 const T = {
@@ -34,7 +34,6 @@ const T = {
     af_eb: 'Afspraken en beheer',
     af_h2: 'Geregeld en vastgelegd.',
     af: [['Verwerkersovereenkomst', 'Standaard bij elke opdracht, volgens de AVG.'], ['Versleuteling', 'Gegevens versleuteld opgeslagen en verstuurd.'], ['Toegang per rol', 'Iedereen ziet alleen wat bij zijn werk hoort.'], ['Logboek', 'Wijzigingen worden vastgelegd: wie, wat en wanneer.'], ['Dagelijkse back-ups', 'Van uw eigen omgeving, met herstel van elke versie.'], ['Maandelijks onderhoud', 'Updates en beveiliging blijven bij, ook na de livegang.']],
-    af_link: 'Privacy, voorwaarden en verwerkersovereenkomst',
   },
   en: {
     eb: 'Security',
@@ -62,7 +61,6 @@ const T = {
     af_eb: 'Agreements and management',
     af_h2: 'Arranged and on record.',
     af: [['Data processing agreement', 'Standard with every project, in line with the GDPR.'], ['Encryption', 'Data stored and sent encrypted.'], ['Access per role', 'Everyone sees only what belongs to their work.'], ['Audit log', 'Changes are recorded: who, what and when.'], ['Daily backups', 'Of your own environment, with restore of every version.'], ['Monthly maintenance', 'Updates and security stay current, also after go-live.']],
-    af_link: 'Privacy, terms and data processing agreement',
   },
 };
 
@@ -134,7 +132,6 @@ export default function Veiligheid({ lang, signal }: { lang: Lang; signal: strin
             </div>
           ))}
         </div>
-        <a href={href('Juridisch', lang)} style={{ display: 'inline-block', marginTop: 32, fontWeight: 700, fontSize: 16, color: signal, textDecoration: 'none' }}>{t.af_link} →</a>
       </section>
     </Pagina>
   );

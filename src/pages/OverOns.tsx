@@ -10,19 +10,18 @@ const T = {
   nl: {
     eb: 'Over ons',
     h1: 'Software uit de praktijk.|Gebouwd met de snelheid van AI.',
-    sub: 'Datawerf is ontstaan op de werkvloer van wagenparken en werkplaatsen. Daar zagen we hoeveel tijd verloren gaat aan Excel, losse systemen en overtypen. Die kennis zetten we nu om in software: voor ons eigen werk, en voor dat van u.',
+    sub: 'Datawerf is ontstaan uit de praktijk. In elk bedrijf zien we hetzelfde: veel tijd gaat verloren aan Excel, losse systemen en overtypen, terwijl de kennis om het beter te doen er al is. Die kennis zetten we om in software, voor elk vakgebied.',
     beeld: [['Praktijk', 'Uw vakkennis'], ['AI-agents', 'Bouwen snel'], ['Developers', 'Controleren elke stap']],
     beeldUit: 'Uw eigen applicatie',
     beeldOnder: 'Elke dag in gebruik',
     vh_eb: 'Ons verhaal',
     vh_h2: 'Eerst voor onszelf gebouwd.',
     vh: [
-      'Wij komen niet uit de softwarewereld, maar uit de praktijk: aftersales, onderdelen en wagenparkbeheer. We kennen de vragen waar een planner, werkplaats of wagenparkbeheerder elke dag mee zit, omdat we ze zelf hadden.',
-      'Met AI konden we die vragen eindelijk zelf oplossen, snel en zonder groot IT-project. Zo ontstonden onze eerste applicaties: voor vlootkosten, dagplanning en banden. Ze draaien elke dag, worden getest en zijn nagekeken door developers.',
-      'Diezelfde werkwijze en bouwstenen zetten we nu in voor andere bedrijven. Daarom heet het Datawerf: een werf is de plek waar iets gebouwd wordt en daarna te water gaat.',
+      ['Uit de praktijk', 'Wij begonnen niet in de softwarewereld, maar op de werkvloer. Daar zagen we dat vakmensen hun werk prima kennen, maar vastlopen in Excel, mailboxen en losse systemen.'],
+      ['Eerst voor onszelf', 'Met AI losten we die vragen eerst zelf op: snel en zonder groot IT-project. Zo ontstonden applicaties voor onder meer kosten, planning, marktprijzen en urenregistratie. Ze draaien elke dag, getest en nagekeken door developers.'],
+      ['Nu voor elk vakgebied', 'Deze werkwijze werkt overal waar vakkennis het verschil maakt: in logistiek, techniek, handel, landbouw of dienstverlening. U brengt de kennis van uw vak, wij bouwen de software. Daarom heet het Datawerf: een werf is de plek waar iets gebouwd wordt en daarna te water gaat.'],
     ],
     vh_link: 'Bekijk wat we bouwen',
-    cijfers: [['25+', 'jaar praktijk in aftersales, onderdelen en wagenpark'], ['6', 'projecten opgeleverd en in gebruik'], ['1', 'werkwijze: AI bouwt, developers controleren, u beslist']],
     vs_eb: 'Visie en strategie',
     vs_h2: 'Waar wij in geloven.',
     vs: [
@@ -51,19 +50,18 @@ const T = {
   en: {
     eb: 'About us',
     h1: 'Software from practice.|Built at the speed of AI.',
-    sub: 'Datawerf grew out of the shop floor of fleets and workshops. There we saw how much time is lost to Excel, separate systems and retyping. We now turn that knowledge into software: for our own work, and for yours.',
+    sub: 'Datawerf grew out of practice. In every company we see the same thing: a lot of time is lost to Excel, separate systems and retyping, while the knowledge to do it better is already there. We turn that knowledge into software, for every field.',
     beeld: [['Practice', 'Your expertise'], ['AI agents', 'Build fast'], ['Developers', 'Check every step']],
     beeldUit: 'Your own application',
     beeldOnder: 'In use every day',
     vh_eb: 'Our story',
     vh_h2: 'First built for ourselves.',
     vh: [
-      'We do not come from the software world but from practice: aftersales, parts and fleet management. We know the questions a planner, workshop or fleet manager faces every day, because they were our own.',
-      'With AI we could finally solve those questions ourselves, quickly and without a large IT project. That is how our first applications came about: for fleet costs, daily planning and tyres. They run every day, are tested and reviewed by developers.',
-      'We now use the same way of working and building blocks for other companies. Hence the name Datawerf: a "werf" is a shipyard, the place where something is built and then launched.',
+      ['From practice', 'We did not start in the software world but on the shop floor. There we saw that professionals know their work perfectly well, yet get stuck in Excel, mailboxes and separate systems.'],
+      ['First for ourselves', 'With AI we first solved those questions ourselves: fast and without a large IT project. That is how applications came about for costs, planning, market prices and time tracking, among others. They run every day, tested and reviewed by developers.'],
+      ['Now for every field', 'This way of working fits wherever expertise makes the difference: in logistics, engineering, trade, agriculture or services. You bring the knowledge of your trade, we build the software. Hence the name Datawerf: a "werf" is a shipyard, the place where something is built and then launched.'],
     ],
     vh_link: 'See what we build',
-    cijfers: [['25+', 'years of practice in aftersales, parts and fleets'], ['6', 'projects delivered and in use'], ['1', 'way of working: AI builds, developers check, you decide']],
     vs_eb: 'Vision and strategy',
     vs_h2: 'What we believe in.',
     vs: [
@@ -121,20 +119,15 @@ export default function OverOns({ lang, signal }: { lang: Lang; signal: string }
       <Opening eb={t.eb} h1={t.h1} sub={t.sub} signal={signal} rechts={<Samenkomen t={t} signal={signal} />} />
 
       <Deel eb={t.vh_eb} h2={t.vh_h2} signal={signal}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(420px,1fr))', gap: 20, alignItems: 'stretch' }}>
-          <Kaart>
-            {t.vh.map((p, i) => <Tekst key={i}>{p}</Tekst>)}
-            <Pijllink href={href('Etalage', lang)} signal={signal}>{t.vh_link}</Pijllink>
-          </Kaart>
-          <Kaart donker style={{ justifyContent: 'center', gap: 0 }}>
-            {t.cijfers.map(([g, s], i) => (
-              <div key={i} style={{ display: 'flex', gap: 20, alignItems: 'center', padding: '18px 0', borderTop: i ? '1px solid rgba(255,255,255,0.14)' : 'none' }}>
-                <div style={{ fontSize: 48, fontWeight: 700, letterSpacing: '-1.6px', color: signal, minWidth: 96 }}>{g}</div>
-                <div style={{ fontSize: 17, lineHeight: 1.45, color: '#DCE1EA' }}>{s}</div>
-              </div>
-            ))}
-          </Kaart>
-        </div>
+        <Raster>
+          {t.vh.map(([k, p], i) => (
+            <Kaart key={i}>
+              <Titel>{k}</Titel>
+              <Tekst>{p}</Tekst>
+              {i === t.vh.length - 1 ? <Pijllink href={href('Etalage', lang)} signal={signal}>{t.vh_link}</Pijllink> : null}
+            </Kaart>
+          ))}
+        </Raster>
       </Deel>
 
       <Deel eb={t.vs_eb} h2={t.vs_h2} signal={signal}>
