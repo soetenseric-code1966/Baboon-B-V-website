@@ -27,8 +27,9 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 
 Elke pagina beantwoordt één vraag, en elk project staat op één plek:
 - **Home**: wat is Datawerf (opening, "AI gebruiken is makkelijk. Erop kunnen bouwen niet.", carrousel Wat we bouwen, "Waarom Datawerf" met de zes usp-titels, ingangen, afsluiter).
-- **Wat we bouwen**: eerst "Opgeleverd en in gebruik" (`src/live.ts`: Qfleetz, Qeldr, Urenregistratie, Aardappelmonitor, Dagplanning, Qtyrez), daarna "Herkent u er een?" (ideeën, met knop naar het lab). Het blok met voorbeelddemo's is weg (de knoppen gingen naar Contact en de kaarten waren kopieën).
-- **Hoe het werkt**: van idee tot live, samenwerking, AI-agents programmeren / developers controleren, Europees van opzet, startstappen. De niveaus staan alleen bij Prijzen; "van losse AI naar eigen platform" zit in het vergelijkingsblok op de homepage.
+- **Wat we bouwen**: alleen "Opgeleverd en in gebruik" (`src/live.ts`: Qfleetz, Qeldr, Urenregistratie, Aardappelmonitor, Dagplanning, Qtyrez), elke kaart met een schermbeeld en de knop "Bekijk live" of "Bekijk de demo" onderaan op dezelfde hoogte; daarna "Wordt uw idee het volgende project?". Geen voorbeeldideeën ("Herkent u er een?") en geen voorbeelddemo's meer: we tonen wat echt gebouwd is.
+- **Lab**: uitleg in vier stappen, veiligheid, uw ideeën. Geen "Voorbeelden uit het lab" meer; de knop gaat naar Wat we bouwen.
+- **Hoe het werkt**: van idee tot live (met Qfleetz als echt voorbeeld), samenwerking, AI-agents programmeren / developers controleren, Europees van opzet. De startstappen staan bij het Lab. De niveaus staan alleen bij Prijzen; "van losse AI naar eigen platform" zit in het vergelijkingsblok op de homepage.
 - Menu: Wat we bouwen · Hoe het werkt · Lab · Prijzen · Over ons · Contact. Bidderz staat niet in de carrousel.
 
 ## Korte homepage en tabblad Hoe het werkt (02-11-2026)
@@ -71,7 +72,7 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
   met het ontwerp in een afgesloten kader, de teller (x van 10), de doorgestreepte waarde en "Maak het nauwkeuriger".
 - Achterkant, geheimen en regels: `supabase/lab/LEESMIJ.md`. Tests: `npm test`.
 - Inloggen zonder account: mail "Uw ontwerp staat klaar" met de link, en op Inloggen en /lab/ "Mail mijn links".
-- Tabblad **Lab** (29-10-2026; menu sinds 02-11-2026 na Hoe het werkt): `/lab/` zonder idee in het adres toont `src/pages/LabUitleg.tsx`: uitleg in vier stappen, voorbeelden uit het lab (live, via de actie `voorbeeld`; welke staat in `VOORBEELDEN` in `regels.ts` en `LAB_VOORBEELDEN` in `src/lab.ts`), veiligheid, "Uw ideeën" en "Mail mijn links". `/lab/` staat in de sitemap; alleen `/lab/beheer/` is uitgesloten in robots.txt.
+- Tabblad **Lab** (29-10-2026; menu sinds 02-11-2026 na Hoe het werkt): `/lab/` zonder idee in het adres toont `src/pages/LabUitleg.tsx`: uitleg in vier stappen, veiligheid (de voorbeelden uit het lab staan sinds 02-11-2026 niet meer op de pagina; de actie `voorbeeld` in de Edge Function en `LAB_VOORBEELDEN` bestaan nog), "Uw ideeën" en "Mail mijn links". `/lab/` staat in de sitemap; alleen `/lab/beheer/` is uitgesloten in robots.txt.
 - Hulpvragen (29-10-2026): op `/start/` de knop "Help mij mijn idee scherper te maken" (`src/LabVragen.tsx`). Een klein AI-model (actie `vragen`, standaard `claude-haiku-5-5`, instelbaar met `LAB_MODEL_VRAGEN`) stelt 3-5 vragen met keuzes die bij het getypte idee passen; lukt dat niet, dan algemene vragen (`STANDAARD_VRAGEN` in `src/lab.ts`). De vragen verschijnen één voor één (voortgang "1 van 4", Vorige/Volgende of Overslaan; bij één mogelijke keuze vanzelf door). De antwoorden komen als tekst in het ideevak en tellen niet als prompt.
 - Bestanden toevoegen (29-10-2026): bij Start en bij "Maak het nauwkeuriger" kan de bezoeker tot drie Excel- (.xlsx) of CSV-bestanden kiezen. `src/labBestanden.ts` leest ze in de browser; alleen de opbouw (bladnamen, kolomnamen, soort per kolom, aantal rijen) gaat mee, nooit de inhoud en niet de bestandsnaam. De bezoeker ziet vooraf wat er meegaat (`src/LabBestanden.tsx`).
 - Vaste app-stijl voor alle ontwerpen en apps: `docs/app-stijl.md`.
