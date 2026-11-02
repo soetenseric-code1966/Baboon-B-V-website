@@ -117,16 +117,6 @@ function Pagina({ lang, signal, deel }) {
   const N = NTXT[lang === 'en' ? 'en' : 'nl'];
   // Oude links naar /#hoe gaan naar het tabblad Hoe het werkt.
   React.useEffect(() => { if (deel === 'home' && window.location.hash === '#hoe') window.location.replace(H('HoeHetWerkt.dc.html')); }, [deel]);
-  if (deel === 'veilig') return (
-    <>
-<div style={css("font-family:'Space Grotesk',system-ui,sans-serif;color:#14213D;background:#FFFFFF")}>
-<section style={css("padding:80px 48px 64px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{N.ve_eb}</div><h1 style={css("margin:16px 0 0;font-size:64px;line-height:1;letter-spacing:-2.4px;font-weight:700;max-width:980px")}>{kop(N.ve_h1, $v?.signal)}</h1><p style={css("margin:16px 0 0;font-size:20px;line-height:1.55;color:#3A4258;max-width:780px")}>{N.ve_s}</p></section>
-<section style={css("padding:0 48px 88px")}>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:0")}>{($v?.trust || []).map((e, e__i) => <div key={e__i} style={css("background:#F3F5F8;border-radius:20px;padding:24px;display:flex;gap:12px")}><span style={css(`width:24px;height:24px;border-radius:50%;background:${$v?.signal ?? ""};color:#FFFFFF;display:grid;place-items:center;font-size:12px;flex:none;margin-top:2px`)}>✓</span><div><div style={css("font-size:19px;font-weight:700")}>{e?.k}</div><div style={css("font-size:15px;line-height:1.5;color:#3A4258;margin-top:4px")}>{e?.v}</div></div></div>)}</div>
-</section>
-</div>
-    </>
-  );
   if (deel === 'hoe') return (
     <>
 <div style={css("font-family:'Space Grotesk',system-ui,sans-serif;color:#14213D;background:#FFFFFF")}>
@@ -178,6 +168,5 @@ function Pagina({ lang, signal, deel }) {
 
 export default function Page({ lang, signal }) { return <Pagina lang={lang} signal={signal} deel="home" />; }
 export function HoeHetWerkt({ lang, signal }) { return <Pagina lang={lang} signal={signal} deel="hoe" />; }
-export function Veiligheid({ lang, signal }) { return <Pagina lang={lang} signal={signal} deel="veilig" />; }
 
 export function useFooterTexts(lang) { return FTXT[lang]; }

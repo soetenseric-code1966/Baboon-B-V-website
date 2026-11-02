@@ -1,50 +1,176 @@
-// @ts-nocheck
-// Gegenereerd uit het Design-canvas (OverOns.dc.html) door scripts/convert-design.mjs.
+// Over ons (opnieuw opgezet 02-11-2026, op verzoek van Eric los van de vorige versie).
+// Eén vraag: wie is Datawerf en waarom bestaat het? Opbouw: opening met "samenkomen"-beeld, ons verhaal,
+// visie en strategie, wie er aan uw idee werkt, waar wij voor staan. Geen persoonsnamen, developers niet bij
+// naam of locatie, geen afsluitblok met "Start gratis". Veiligheid staat op een eigen tabblad (alleen een link).
 import React from 'react';
-import { kop } from '../Kop';
-import { DCLogic, css, H, useDC } from '../dc';
+import { Lang, href } from '../routes';
+import { Pagina, Opening, Deel, Raster, Kaart, Label, Titel, Tekst, Pijllink, NAVY, GRIJS, TEKST, mono } from '../Blok';
 
+const T = {
+  nl: {
+    eb: 'Over ons',
+    h1: 'Software uit de praktijk.|Gebouwd met de snelheid van AI.',
+    sub: 'Datawerf is ontstaan op de werkvloer van wagenparken en werkplaatsen. Daar zagen we hoeveel tijd verloren gaat aan Excel, losse systemen en overtypen. Die kennis zetten we nu om in software: voor ons eigen werk, en voor dat van u.',
+    beeld: [['Praktijk', 'Uw vakkennis'], ['AI-agents', 'Bouwen snel'], ['Developers', 'Controleren elke stap']],
+    beeldUit: 'Uw eigen applicatie',
+    beeldOnder: 'Elke dag in gebruik',
+    vh_eb: 'Ons verhaal',
+    vh_h2: 'Eerst voor onszelf gebouwd.',
+    vh: [
+      'Wij komen niet uit de softwarewereld, maar uit de praktijk: aftersales, onderdelen en wagenparkbeheer. We kennen de vragen waar een planner, werkplaats of wagenparkbeheerder elke dag mee zit, omdat we ze zelf hadden.',
+      'Met AI konden we die vragen eindelijk zelf oplossen, snel en zonder groot IT-project. Zo ontstonden onze eerste applicaties: voor vlootkosten, dagplanning en banden. Ze draaien elke dag, worden getest en zijn nagekeken door developers.',
+      'Diezelfde werkwijze en bouwstenen zetten we nu in voor andere bedrijven. Daarom heet het Datawerf: een werf is de plek waar iets gebouwd wordt en daarna te water gaat.',
+    ],
+    vh_link: 'Bekijk wat we bouwen',
+    cijfers: [['25+', 'jaar praktijk in aftersales, onderdelen en wagenpark'], ['6', 'projecten opgeleverd en in gebruik'], ['1', 'werkwijze: AI bouwt, developers controleren, u beslist']],
+    vs_eb: 'Visie en strategie',
+    vs_h2: 'Waar wij in geloven.',
+    vs: [
+      ['Visie', 'De beste software komt uit de praktijk', 'Wie het werk elke dag doet, weet wat er beter moet. Die kennis zit nu vaak in Excel, in mailboxen of in het hoofd van één medewerker. Wij maken er software van die het hele team elke dag gebruikt.'],
+      ['Strategie', 'Kennis combineren', 'Uw vakkennis, AI-agents die snel bouwen en developers die elke stap controleren. Zo krijgt u de snelheid van AI met de zekerheid van vakwerk, in een eigen, beveiligde omgeving.'],
+      ['Ambitie', 'Minder werkdruk, minder fouten', 'Processen die nu handwerk zijn, worden eenvoudig, controleerbaar en voor iedereen in uw bedrijf te gebruiken. Dat bespaart tijd en kosten, elke dag opnieuw.'],
+    ],
+    tm_eb: 'Wie er aan uw idee werkt',
+    tm_h2: 'Vier partijen, één team.',
+    tm: [
+      ['U', 'U en uw team', 'U weet hoe het werk echt gaat. U geeft de wensen, test wat er gebouwd is en beslist wat live gaat.'],
+      ['D', 'Datawerf', 'Vertaalt uw praktijk naar duidelijke opdrachten, bewaakt de opbouw van uw applicatie en is uw vaste aanspreekpunt.'],
+      ['AI', 'AI-agents', 'Gespecialiseerde AI-programmeurs voor schermen, rekenregels en koppelingen. Zij bouwen snel; wij sturen.'],
+      ['</>', 'Developers', 'Ervaren developers controleren elke stap op kwaliteit en veiligheid, en nemen het over waar AI vastloopt.'],
+    ],
+    st_eb: 'Waar wij voor staan',
+    st_h2: 'Onze afspraken.',
+    st: [
+      ['Eerlijk', 'U ziet bij elke stap wat er gebouwd is en wat het kost.'],
+      ['Gecontroleerd', 'Niets gaat live zonder tests, controle door een developer en uw akkoord.'],
+      ['Veilig', 'Een eigen omgeving per klant, met uw data in Europa.'],
+      ['Betaalbaar', 'De snelheid van AI betekent minder uren, en dus lagere kosten.'],
+    ],
+    st_link: 'Lees meer over veiligheid',
+  },
+  en: {
+    eb: 'About us',
+    h1: 'Software from practice.|Built at the speed of AI.',
+    sub: 'Datawerf grew out of the shop floor of fleets and workshops. There we saw how much time is lost to Excel, separate systems and retyping. We now turn that knowledge into software: for our own work, and for yours.',
+    beeld: [['Practice', 'Your expertise'], ['AI agents', 'Build fast'], ['Developers', 'Check every step']],
+    beeldUit: 'Your own application',
+    beeldOnder: 'In use every day',
+    vh_eb: 'Our story',
+    vh_h2: 'First built for ourselves.',
+    vh: [
+      'We do not come from the software world but from practice: aftersales, parts and fleet management. We know the questions a planner, workshop or fleet manager faces every day, because they were our own.',
+      'With AI we could finally solve those questions ourselves, quickly and without a large IT project. That is how our first applications came about: for fleet costs, daily planning and tyres. They run every day, are tested and reviewed by developers.',
+      'We now use the same way of working and building blocks for other companies. Hence the name Datawerf: a "werf" is a shipyard, the place where something is built and then launched.',
+    ],
+    vh_link: 'See what we build',
+    cijfers: [['25+', 'years of practice in aftersales, parts and fleets'], ['6', 'projects delivered and in use'], ['1', 'way of working: AI builds, developers check, you decide']],
+    vs_eb: 'Vision and strategy',
+    vs_h2: 'What we believe in.',
+    vs: [
+      ['Vision', 'The best software comes from practice', 'Whoever does the work every day knows what needs to improve. That knowledge often lives in Excel, in mailboxes or in one person’s head. We turn it into software the whole team uses every day.'],
+      ['Strategy', 'Combining knowledge', 'Your expertise, AI agents that build fast and developers who check every step. You get the speed of AI with the certainty of craftsmanship, in your own secure environment.'],
+      ['Ambition', 'Less pressure, fewer mistakes', 'Processes that are manual work today become simple, verifiable and usable by everyone in your company. That saves time and money, every day.'],
+    ],
+    tm_eb: 'Who works on your idea',
+    tm_h2: 'Four parties, one team.',
+    tm: [
+      ['U', 'You and your team', 'You know how the work really goes. You give the wishes, test what has been built and decide what goes live.'],
+      ['D', 'Datawerf', 'Translates your practice into clear instructions, guards how your application is built and is your fixed point of contact.'],
+      ['AI', 'AI agents', 'Specialised AI programmers for screens, business rules and integrations. They build fast; we steer.'],
+      ['</>', 'Developers', 'Experienced developers check every step for quality and security, and take over where AI gets stuck.'],
+    ],
+    st_eb: 'What we stand for',
+    st_h2: 'Our commitments.',
+    st: [
+      ['Honest', 'At every step you see what has been built and what it costs.'],
+      ['Checked', 'Nothing goes live without tests, a developer’s review and your approval.'],
+      ['Secure', 'Your own environment per customer, with your data in Europe.'],
+      ['Affordable', 'The speed of AI means fewer hours, and therefore lower costs.'],
+    ],
+    st_link: 'Read more about security',
+  },
+};
 
-const TXT = {"nl": {"eb": "Over ons", "h1": "Waar praktijk en softwaredevelopment samenkomen,|met de snelheid van AI.", "sub": "U brengt de praktische kennis van uw branche; wij brengen AI-kennis, een beproefd platform en developers. Samen maken we software die past bij hoe u werkt.", "why_t": "Visie en strategie", "why": ["Onze visie: de beste software ontstaat waar praktijkkennis en softwaredevelopment samenkomen. Wie het werk elke dag doet, weet wat er beter moet. AI maakt het bouwen snel; developers zorgen dat het klopt, veilig is en blijft werken.", "Onze strategie: uw kennis combineren met AI-agents die snel bouwen en developers die elke stap controleren, in een eigen, beveiligde omgeving met uw data in Europa. Wij bouwden eerst voor onszelf: vlootbeheer, marktmonitors en de werkplaats. Diezelfde werkwijze en bouwstenen zetten we nu in voor uw idee."], "name_t": "Waarom de naam Datawerf?", "name_s": "Een werf is een scheepswerf: de plek waar schepen gebouwd en te water gelaten worden. Zo werken wij ook: uw idee wordt op onze werf gebouwd, met uw data als fundament, en daarna te water gelaten.", "facts": [["Kennis combineren", "Uw praktijk, AI-agents en developers samen."], ["Gecontroleerd", "Elke stap nagekeken door een developer."], ["Veilig", "Eigen, beveiligde omgeving met uw data in Europa."], ["Eén factuur", "AI, hosting en beheer op één factuur."]], "tm_eb": "Uw bouwers", "tm_t": "Wie er aan uw idee werkt", "team": [["U", "U en uw team", "praktische branchekennis", "U weet hoe het werk écht gaat: intern, met klanten en waar medewerkers tijd verliezen. U geeft de wensen, test de previews en beslist wat live gaat."], ["D", "Platformteam", "AI-kennis · platform · architectuur", "Vertaalt uw praktijk naar opdrachten voor de agents, bewaakt de opbouw van uw platform en is uw vaste aanspreekpunt."], ["</>", "Vaste developers", "controle en maatwerk", "Ervaren developers controleren elke bouwstap op kwaliteit en veiligheid en nemen over waar AI vastloopt. Van begin tot oplevering dezelfde mensen."], ["A", "AI-agents", "de beste agent per taak", "Gespecialiseerde AI-programmeurs voor code, tekst, berekeningen en ontwerp. Zij bouwen; wij sturen en controleren."]], "vl_eb": "Waar wij voor staan", "vl_t": "Vier afspraken met onszelf", "values": [["01", "Eerlijk", "U betaalt de werkelijke bouwtijd van de AI-agents en ziet per bouwstap wat het kostte."], ["02", "Snel", "Elke bouwstap staat na controle meteen als preview klaar."], ["03", "Veilig", "Een eigen, beveiligde omgeving per klant met uw data in Europa. Professionele AI-agents die niet trainen op uw data."], ["04", "Scherp geprijsd", "Wij gebruiken de snelheid van AI: minder uren, dus lagere kosten, met de kwaliteit van vaste developers."]], "cta_t": "Benieuwd wat we voor u kunnen bouwen?", "cta_b1": "Start gratis met uw idee", "cta_b2": "Eerst kennismaken", "_f": {"nav": ["Wat we bouwen", "Hoe het werkt", "Prijzen", "Over ons", "Contact"], "login": "Inloggen", "cta": "Start gratis", "eu": "Nederlandse regie · data in Europa", "company": "BEDRIJF", "legal": "JURIDISCH", "n1": "Wat we bouwen", "n2": "Hoe het werkt", "n3": "Prijzen", "n4": "Over ons", "n5": "Contact", "l1": "Privacyverklaring", "l2": "Algemene voorwaarden", "l3": "Verwerkersovereenkomst", "l4": "Cookies", "trade": "Datawerf is een handelsnaam van Baboon B.V.", "gdpr": "Data in Europa · AVG-conform"}}, "en": {"eb": "About", "h1": "Where practice meets software development,|at the speed of AI.", "sub": "You bring the hands-on knowledge of your industry; we bring AI expertise, a proven platform and developers. Together we make software that fits how you work.", "why_t": "Vision and strategy", "why": ["Our vision: the best software comes from where hands-on knowledge meets software development. The people who do the work every day know what needs to improve. AI makes building fast; developers make sure it is right, secure and keeps working.", "Our strategy: combine your knowledge with AI agents that build fast and developers who check every step, in your own secure environment with your data in Europe. We first built for ourselves: fleet management, market monitors and the workshop. We now use the same way of working and building blocks for your idea."], "name_t": "Why the name Datawerf?", "name_s": "“Werf” is Dutch for shipyard: the place where ships are built and launched. That is how we work: your idea is built in our yard, with your data as the foundation, and then launched.", "facts": [["Combining knowledge", "Your practice, AI agents and developers together."], ["Checked", "Every step reviewed by a developer."], ["Secure", "Your own secure environment with your data in Europe."], ["One invoice", "AI, hosting and management on one invoice."]], "tm_eb": "Your builders", "tm_t": "Who works on your idea", "team": [["Y", "You and your team", "hands-on industry know-how", "You know how the work really goes: internally, with customers and where people lose time. You give the requests, test the previews and decide what goes live."], ["D", "Platform team", "AI expertise · platform · architecture", "Turns your practice into briefs for the agents, guards the structure of your platform and is your fixed point of contact."], ["</>", "Dedicated developers", "review and custom work", "Experienced developers check every build step for quality and security and step in where AI gets stuck. The same people from start to delivery."], ["A", "AI agents", "the best agent per task", "Specialised AI programmers for code, text, calculations and design. They build; we steer and check."]], "vl_eb": "What we stand for", "vl_t": "Four promises to ourselves", "values": [["01", "Honest", "You pay the actual build time of the AI agents and see what every step cost."], ["02", "Fast", "Every step is ready as a preview right after review."], ["03", "Secure", "Your own secure environment per customer with your data in Europe. Professional AI agents that never train on your data."], ["04", "Sharply priced", "We use the speed of AI: fewer hours, so lower cost, with the quality of dedicated developers."]], "cta_t": "Curious what we could build for you?", "cta_b1": "Start free with your idea", "cta_b2": "Meet us first", "_f": {"nav": ["What we build", "How it works", "Pricing", "About", "Contact"], "login": "Log in", "cta": "Start free", "eu": "Dutch-led · data in Europe", "company": "COMPANY", "legal": "LEGAL", "n1": "What we build", "n2": "How it works", "n3": "Pricing", "n4": "About", "n5": "Contact", "l1": "Privacy statement", "l2": "Terms and conditions", "l3": "Data processing agreement", "l4": "Cookies", "trade": "Datawerf is a trade name of Baboon B.V.", "gdpr": "Data in Europe · GDPR compliant"}}};
-const NAVH = ["Etalage.dc.html", "Global.dc.html#hoe", "Prijslijst.dc.html", "OverOns.dc.html", "Contact.dc.html"];
-class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { lang: 'nl', f: 0, i: 0, t: 0 }; }
-  renderVals() {
-    const signal = this.props.signal ?? '#FF5A1F';
-    const L = this.state.lang; const t = TXT[L]; const f = t._f;
-    const langs = ['nl', 'en'].map((k) => { const on = k === L; return { label: k.toUpperCase(), on: on ? 'true' : 'false', pick: () => this.setState({ lang: k }), style: 'border:0;border-radius:999px;padding:6px 12px;font:600 13px Space Grotesk, sans-serif;cursor:pointer;' + (on ? 'background:#14213D;color:#FFFFFF' : 'background:transparent;color:#3A4258') }; });
-    const navs = f.nav.map((label, k) => ({ label, href: NAVH[k], style: 'text-decoration:none;' + (NAVH[k] === 'OverOns.dc.html' ? 'color:#14213D;font-weight:700;box-shadow:inset 0 -2px 0 ' + signal : 'color:#3A4258') }));
-    const out = { signal, t, f, langs, navs };
-    out.facts = t.facts.map((x) => ({ v: x[0], k: x[1] }));
-    const TS = ['background:#F3F5F8;color:#14213D', 'background:#F3F5F8;color:#14213D', 'background:#F3F5F8;color:#14213D', 'background:#14213D;color:#FFFFFF'];
-    const TB = ['background:#E2F4EA;color:#146C43', 'background:' + signal + ';color:#FFFFFF', 'background:#14213D;color:#FFFFFF', 'background:' + signal + ';color:#FFFFFF'];
-    out.team = t.team.map((m, i) => ({ i: m[0], n: m[1], r: m[2], d: m[3], style: 'border-radius:20px;padding:26px;' + TS[i], badge: TB[i] }));
-    out.values = t.values.map((v) => ({ nr: v[0], t: v[1], d: v[2] }));
-    return out;
-  }
-}
-
-export default function Page({ lang, signal }) {
-  const $v = useDC(Component, lang, signal);
+// Beeld bij de opening: drie soorten kennis komen samen in één applicatie.
+function Samenkomen({ t, signal }: { t: typeof T.nl; signal: string }) {
   return (
-    <>
-<div style={css("font-family:'Space Grotesk',system-ui,sans-serif;color:#14213D;background:#FFFFFF;line-height:1.5")}>
-<section style={css("padding:80px 48px 64px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.eb}</div><h1 style={css("margin:16px 0 0;font-size:64px;line-height:1;letter-spacing:-2.4px;font-weight:700;max-width:980px")}>{kop($v?.t?.h1, $v?.signal)}</h1><p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px;font-size:20px")}>{$v?.t?.sub}</p></section>
-<section style={css("padding:0 48px 88px")}>
-<h2 style={css("margin:0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.why_t}</h2>
-{($v?.t?.why || []).map((w, w__i) => <p key={w__i} style={css("margin:16px 0 0;font-size:18px;line-height:1.6;color:#3A4258;max-width:860px")}>{w}</p>)}
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:32px")}>{($v?.facts || []).map((x, x__i) => <div key={x__i} style={css("background:#F3F5F8;border-radius:20px;padding:24px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600`)}>0{x__i + 1}</div><div style={css("font-size:22px;font-weight:700;margin-top:6px")}>{x?.v}</div><p style={css("font-size:15px;line-height:1.55;color:#3A4258;margin:6px 0 0")}>{x?.k}</p></div>)}</div>
-<div style={css("margin-top:18px;background:#F3F5F8;border-radius:20px;padding:24px")}><div style={css("font-size:22px;font-weight:700")}>{$v?.t?.name_t}</div><p style={css("margin:6px 0 0;font-size:15px;line-height:1.55;color:#3A4258;max-width:860px")}>{$v?.t?.name_s}</p></div>
-</section>
-<section style={css("padding:0 48px 88px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.tm_eb}</div><h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.tm_t}</h2>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:32px")}>{($v?.team || []).map((m, m__i) => <React.Fragment key={m__i}><div style={css(m?.style)}><span aria-hidden="true" style={css(`width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;${m?.badge ?? ""}`)}>{m?.i}</span><div style={css("font-size:22px;font-weight:700;margin-top:16px")}>{m?.n}</div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;opacity:0.75;margin-top:2px")}>{m?.r}</div><p style={css("font-size:15px;line-height:1.55;margin:10px 0 0;opacity:0.9")}>{m?.d}</p></div></React.Fragment>)}</div>
-</section>
-<section style={css("padding:0 48px 88px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.vl_eb}</div><h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.vl_t}</h2>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:32px")}>{($v?.values || []).map((v, v__i) => <React.Fragment key={v__i}><div style={css("background:#F3F5F8;border-radius:20px;padding:24px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600`)}>{v?.nr}</div><div style={css("font-size:22px;font-weight:700;margin-top:6px")}>{v?.t}</div><p style={css("font-size:15px;line-height:1.55;color:#3A4258;margin:6px 0 0")}>{v?.d}</p></div></React.Fragment>)}</div>
-</section>
-</div>
-    </>
+    <div style={{ background: GRIJS, borderRadius: 20, padding: 28, display: 'flex', flexDirection: 'column', gap: 14 }} aria-hidden="true">
+      <div className="oo-drie" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,minmax(0,1fr))', gap: 12 }}>
+        {t.beeld.map(([a, b], i) => (
+          <div key={i} style={{ background: '#FFFFFF', borderRadius: 16, padding: '16px 14px', textAlign: 'center' }}>
+            <div style={{ ...mono, fontSize: 12, color: i === 0 ? signal : '#5C6378' }}>{a}</div>
+            <div style={{ fontWeight: 700, fontSize: 16, marginTop: 6, lineHeight: 1.25 }}>{b}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,minmax(0,1fr))', gap: 12 }}>
+        {[0, 1, 2].map((i) => <div key={i} style={{ height: 28, borderLeft: `2px dashed ${signal}`, marginLeft: '50%' }} />)}
+      </div>
+      <div style={{ background: NAVY, color: '#FFFFFF', borderRadius: 16, padding: '22px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+        <div style={{ fontWeight: 700, fontSize: 22 }}>{t.beeldUit}</div>
+        <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, padding: '4px 10px', borderRadius: 999, background: '#E7F6EF', color: '#0F7A55', fontWeight: 600, textTransform: 'uppercase' }}>● {t.beeldOnder}</span>
+      </div>
+    </div>
   );
 }
 
-export function useFooterTexts(lang) { return TXT[lang]?._f; }
+export default function OverOns({ lang, signal }: { lang: Lang; signal: string }) {
+  const t = T[lang];
+  return (
+    <Pagina>
+      <Opening eb={t.eb} h1={t.h1} sub={t.sub} signal={signal} rechts={<Samenkomen t={t} signal={signal} />} />
+
+      <Deel eb={t.vh_eb} h2={t.vh_h2} signal={signal}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(420px,1fr))', gap: 20, alignItems: 'stretch' }}>
+          <Kaart>
+            {t.vh.map((p, i) => <Tekst key={i}>{p}</Tekst>)}
+            <Pijllink href={href('Etalage', lang)} signal={signal}>{t.vh_link}</Pijllink>
+          </Kaart>
+          <Kaart donker style={{ justifyContent: 'center', gap: 0 }}>
+            {t.cijfers.map(([g, s], i) => (
+              <div key={i} style={{ display: 'flex', gap: 20, alignItems: 'center', padding: '18px 0', borderTop: i ? '1px solid rgba(255,255,255,0.14)' : 'none' }}>
+                <div style={{ fontSize: 48, fontWeight: 700, letterSpacing: '-1.6px', color: signal, minWidth: 96 }}>{g}</div>
+                <div style={{ fontSize: 17, lineHeight: 1.45, color: '#DCE1EA' }}>{s}</div>
+              </div>
+            ))}
+          </Kaart>
+        </div>
+      </Deel>
+
+      <Deel eb={t.vs_eb} h2={t.vs_h2} signal={signal}>
+        <Raster>
+          {t.vs.map(([l, k, s], i) => (
+            <Kaart key={i}><Label>{l}</Label><Titel>{k}</Titel><Tekst>{s}</Tekst></Kaart>
+          ))}
+        </Raster>
+      </Deel>
+
+      <Deel eb={t.tm_eb} h2={t.tm_h2} signal={signal}>
+        <Raster min={240}>
+          {t.tm.map(([ic, k, s], i) => (
+            <Kaart key={i}>
+              <span aria-hidden="true" style={{ width: 52, height: 52, borderRadius: '50%', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 17, background: i === 0 ? signal : NAVY, color: '#FFFFFF' }}>{ic}</span>
+              <Titel>{k}</Titel>
+              <Tekst>{s}</Tekst>
+            </Kaart>
+          ))}
+        </Raster>
+      </Deel>
+
+      <section className="dw-sec" style={{ padding: '56px 48px 96px' }}>
+        <div style={{ ...mono, color: signal }}>{t.st_eb}</div>
+        <h2 style={{ margin: '10px 0 0', fontSize: 48, letterSpacing: '-1.6px', lineHeight: 1.05 }}>{t.st_h2}</h2>
+        <div style={{ marginTop: 36, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 20 }}>
+          {t.st.map(([k, s], i) => (
+            <div key={i} style={{ borderTop: `3px solid ${i === 2 ? signal : NAVY}`, paddingTop: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <div style={{ ...mono, color: '#5C6378', fontSize: 12 }}>0{i + 1}</div>
+              <div style={{ fontSize: 22, fontWeight: 700 }}>{k}</div>
+              <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: TEKST }}>{s}</p>
+              {i === 2 ? <a href={href('Veiligheid', lang)} style={{ fontWeight: 700, color: signal, textDecoration: 'none', fontSize: 16 }}>{t.st_link} →</a> : null}
+            </div>
+          ))}
+        </div>
+      </section>
+    </Pagina>
+  );
+}
