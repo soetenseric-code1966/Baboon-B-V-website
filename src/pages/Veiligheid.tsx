@@ -1,7 +1,7 @@
 // Veiligheid (opnieuw opgezet 02-11-2026; compacter gemaakt 02-11-2026 op verzoek van Eric: alles één keer).
 // Eén vraag: is mijn applicatie en zijn mijn gegevens veilig, ook al is het met AI gebouwd?
-// Opbouw in drie blokken: opening met lagenbeeld · drie lagen (uw data, AI onder controle, gecontroleerde
-// software) met alle afspraken één keer · losse AI-tool tegenover Datawerf. Alleen beloftes die ook elders op de
+// Opbouw in drie blokken: opening met lagenbeeld · losse AI-tool tegenover Datawerf · drie lagen (uw data,
+// AI onder controle, gecontroleerde software) met alle afspraken één keer. Alleen beloftes die ook elders op de
 // site staan. Nooit "gebouwd in Europa" of "uw gegevens verlaten de EU niet" (CLAUDE.md).
 import React from 'react';
 import { Lang } from '../routes';
@@ -71,20 +71,20 @@ export default function Veiligheid({ lang, signal }: { lang: Lang; signal: strin
     <Pagina>
       <Opening eb={t.eb} h1={t.h1} sub={t.sub} signal={signal} rechts={<Lagen lagen={t.lagen} signal={signal} />} />
 
-      <Deel eb={t.dl_eb} h2={t.dl_h2} signal={signal}>
+      <Deel eb={t.vs_eb} h2={t.vs_h2} signal={signal}>
+        <Raster min={380}>
+          <Kaart><Label>{t.los}</Label><Vinkjes items={t.losL} signal={signal} kruis /></Kaart>
+          <Kaart donker><Label donker>{t.dw}</Label><Vinkjes items={t.dwL} signal={signal} donker /></Kaart>
+        </Raster>
+      </Deel>
+
+      <Deel eb={t.dl_eb} h2={t.dl_h2} signal={signal} laatste>
         <Raster>
           {t.dl.map(([l, k, items], i) => (
             <Kaart key={i}><Label>{l as string}</Label><Titel>{k as string}</Titel><Vinkjes items={items as string[]} signal={signal} /></Kaart>
           ))}
         </Raster>
         <p style={{ margin: '20px 0 0', fontSize: 16, color: TEKST }}>{t.avg}</p>
-      </Deel>
-
-      <Deel eb={t.vs_eb} h2={t.vs_h2} signal={signal} laatste>
-        <Raster min={380}>
-          <Kaart><Label>{t.los}</Label><Vinkjes items={t.losL} signal={signal} kruis /></Kaart>
-          <Kaart donker><Label donker>{t.dw}</Label><Vinkjes items={t.dwL} signal={signal} donker /></Kaart>
-        </Raster>
       </Deel>
     </Pagina>
   );
