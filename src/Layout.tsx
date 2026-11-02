@@ -30,6 +30,7 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
   const f = useFooterTexts(lang);
   const other: Lang = lang === 'nl' ? 'en' : 'nl';
   const footLink = { color: '#C7CEDB', textDecoration: 'none' };
+  // Voet in dezelfde maten als de kop (02-11-2026): links 15 px, merk 28 px.
   const footHead: React.CSSProperties = { color: '#FFFFFF', fontSize: 13, fontFamily: "'IBM Plex Mono',monospace" };
 
   return (
@@ -71,14 +72,14 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
         <div className="dw-foot">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, color: '#FFFFFF' }}>
-              <Logo color="#FFFFFF" signal={signal} size={30} />
-              <strong style={{ fontSize: 22, letterSpacing: '-0.6px' }}>Datawerf</strong>
+              <Logo color="#FFFFFF" signal={signal} size={34} />
+              <strong style={{ fontSize: 28, letterSpacing: '-0.8px' }}>Datawerf</strong>
             </span>
             <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, color: '#FFFFFF' }}>where ideas are built and launched.</span>
-            <span style={{ fontSize: 14 }}>Driven by data. Powered by cooperation.</span>
+            <span style={{ fontSize: 15 }}>Driven by data. Powered by cooperation.</span>
             <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, color: signal }}>{f.eu}</span>
           </div>
-          <nav aria-label="Product" style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
+          <nav aria-label="Product" style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 15 }}>
             <strong style={footHead}>PRODUCT</strong>
             <a href={href('Etalage', lang)} style={footLink}>{f.n1}</a>
             <a href={href('Lab', lang)} style={footLink}>Lab</a>
@@ -87,20 +88,20 @@ export default function Layout({ page, lang, signal, children }: { page: PageNam
             <a href={href('Prijslijst', lang)} style={footLink}>{f.n3}</a>
             <a href={href('Start', lang)} style={footLink}>{f.cta}</a>
           </nav>
-          <nav aria-label={lang === 'nl' ? 'Bedrijf' : 'Company'} style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
+          <nav aria-label={lang === 'nl' ? 'Bedrijf' : 'Company'} style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 15 }}>
             <strong style={footHead}>{f.company}</strong>
             <a href={href('OverOns', lang)} style={footLink}>{f.n4}</a>
             <a href={href('Contact', lang)} style={footLink}>{f.n5}</a>
             <a href={href('Inloggen', lang)} style={footLink}>{f.login}</a>
           </nav>
-          <nav aria-label={lang === 'nl' ? 'Juridisch' : 'Legal'} style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
+          <nav aria-label={lang === 'nl' ? 'Juridisch' : 'Legal'} style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 15 }}>
             <strong style={footHead}>{f.legal}</strong>
             <a href={href('Juridisch', lang, '#privacy')} style={footLink}>{f.l1}</a>
             <a href={href('Juridisch', lang, '#voorwaarden')} style={footLink}>{f.l2}</a>
             <a href={href('Juridisch', lang, '#verwerkers')} style={footLink}>{f.l3}</a>
             <a href={href('Juridisch', lang, '#cookies')} style={footLink}>{f.l4}</a>
           </nav>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 15 }}>
             <strong style={footHead}>CONTACT</strong>
             <a href="mailto:info@datawerf.com" style={footLink}>info@datawerf.com</a>
             <a href="https://www.linkedin.com/company/146888310/" target="_blank" rel="noopener me" style={footLink}>LinkedIn</a>

@@ -124,10 +124,6 @@ function Pagina({ lang, signal, deel }) {
 <section style={css("padding:0 48px 88px")}>
 <div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:0")}>{($v?.trust || []).map((e, e__i) => <div key={e__i} style={css("background:#F3F5F8;border-radius:20px;padding:24px;display:flex;gap:12px")}><span style={css(`width:24px;height:24px;border-radius:50%;background:${$v?.signal ?? ""};color:#FFFFFF;display:grid;place-items:center;font-size:12px;flex:none;margin-top:2px`)}>✓</span><div><div style={css("font-size:19px;font-weight:700")}>{e?.k}</div><div style={css("font-size:15px;line-height:1.5;color:#3A4258;margin-top:4px")}>{e?.v}</div></div></div>)}</div>
 </section>
-<section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
-<div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:40px;letter-spacing:-1.2px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>
-<a href={H("Aanmelden.dc.html")} style={css("padding:18px 28px;border-radius:999px;background:#FFFFFF;color:#14213D;font-weight:700;font-size:17px;white-space:nowrap;text-decoration:none")}>{$v?.t?.fin2} →</a>
-</section>
 </div>
     </>
   );
@@ -148,10 +144,6 @@ function Pagina({ lang, signal, deel }) {
 <div style={css("background:#F3F5F8;border-radius:20px;padding:28px")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378;text-transform:uppercase")}>{$v?.t?.yb}</div><div style={css("font-size:26px;font-weight:700;margin-top:6px")}>{$v?.t?.yb2}</div>{($v?.t?.yl || []).map((y, y__i) => <React.Fragment key={y__i}><div style={css("padding:12px 0;border-bottom:1px solid #E3E7EE;font-size:17px")}>{y}</div></React.Fragment>)}</div>
 <div style={css("background:#F3F5F8;border-radius:20px;padding:28px")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378;text-transform:uppercase")}>{$v?.t?.db}</div><div style={css("font-size:26px;font-weight:700;margin-top:6px")}>{$v?.t?.db2}</div>{($v?.t?.dl || []).map((d, d__i) => <React.Fragment key={d__i}><div style={css("padding:12px 0;border-bottom:1px solid #E3E7EE;font-size:17px")}>{d}</div></React.Fragment>)}</div>
 </div>
-</section>
-<section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
-<div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:40px;letter-spacing:-1.2px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>
-<a href={H("Aanmelden.dc.html")} style={css("padding:18px 28px;border-radius:999px;background:#FFFFFF;color:#14213D;font-weight:700;font-size:17px;white-space:nowrap;text-decoration:none")}>{$v?.t?.fin2} →</a>
 </section>
 </div>
     </>
@@ -179,10 +171,6 @@ function Pagina({ lang, signal, deel }) {
 </section>
 <Vergelijking N={N} signal={$v?.signal} />
 <Showcase lang={lang} signal={$v?.signal} title={$v?.t?.wk_t} sub={$v?.t?.wk_s} />
-<section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
-<div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:40px;letter-spacing:-1.2px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>
-<a href={H("Aanmelden.dc.html")} style={css("padding:18px 28px;border-radius:999px;background:#FFFFFF;color:#14213D;font-weight:700;font-size:17px;white-space:nowrap;text-decoration:none")}>{$v?.t?.fin2} →</a>
-</section>
 </div>
     </>
   );

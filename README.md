@@ -38,6 +38,7 @@ Elke pagina beantwoordt één vraag, en elk project staat op één plek:
 - **Tabblad Veiligheid** (02-11-2026, `/veiligheid/`, `/en/security/`): "Gebouwd met AI. Beheerd volgens de regels." met de zes kaarten (data in Europa, AVG, data is van u, AI alleen waar u het aanzet, gescheiden per klant, back-ups). Staat niet meer op de homepage. Komt uit `src/pages/Global.tsx` (`deel` = `veilig`). Menu: Wat we bouwen · Hoe het werkt · Veiligheid · Lab · Prijzen · Over ons · Contact.
 - **Grote kop bovenaan elke pagina** in twee delen: eerste deel donkerblauw, tweede deel oranje op een nieuwe regel (zoals "Uw vakkennis. / Draaiend als software."). In de teksten scheidt `|` de twee delen; `kop()` in `src/Kop.tsx` tekent het.
 - **Eén kaartstijl**: lichtgrijs (#F3F5F8), afgerond 20 px, geen rand; één kaart in een rij mag donkerblauw zijn als nadruk. Formulieren (Contact, Start, Lab) houden een rand.
+- **Geen oranje afsluitblok meer** onderaan de pagina's ("Heeft u een idee…", "Start gratis…"): oogde goedkoop (02-11-2026). **Voet** in dezelfde maten als de kop: links 15 px, merknaam 28 px met logo 34 px, onderregel 14 px.
 - **Consistentie** (02-11-2026): zelfde koppen (h1 64 px, h2 48 px, afsluiter 40 px), inleiding 20 px, zelfde knopteksten ("Start gratis met uw idee →" / "Eerst kennismaken"). Op de homepage zijn de twee ingangen ("U bouwt al met ons", "U wilt eerst rondlopen") vervallen: Inloggen staat in de kop en "Bekijk wat we bouwen" in de opening.
 - Menu: Wat we bouwen · Hoe het werkt · Lab · Prijzen · Over ons · Contact. Bidderz staat niet in de carrousel.
 
