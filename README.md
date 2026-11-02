@@ -26,7 +26,7 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 ## Opbouw van de site (02-11-2026)
 
 Elke pagina beantwoordt één vraag, en elk project staat op één plek:
-- **Home**: wat is Datawerf (opening, "AI gebruiken is makkelijk. Erop kunnen bouwen niet.", carrousel Wat we bouwen, "Waarom Datawerf" met de zes usp-titels, ingangen, afsluiter).
+- **Home**: wat is Datawerf (opening, "Waarom Datawerf: AI bouwt. Developers controleren. U heeft eigen software." met drie kaarten: AI bouwt · door AI geschreven code, gecontroleerd door developers · eigen omgeving, eigen data, eigen software, carrousel Wat we bouwen, ingangen, afsluiter; geen losse links "Zo werkt het" of "Wat kost het", die staan in het menu).
 - **Wat we bouwen**: alleen "Opgeleverd en in gebruik" (`src/live.ts`: Qfleetz, Qeldr, Urenregistratie, Aardappelmonitor, Dagplanning, Qtyrez), elke kaart met een schermbeeld en de knop "Bekijk live" of "Bekijk de demo" onderaan op dezelfde hoogte; daarna "Wordt uw idee het volgende project?". Geen voorbeeldideeën ("Herkent u er een?") en geen voorbeelddemo's meer: we tonen wat echt gebouwd is.
 - **Lab**: uitleg met de knop "Start met uw idee", de vier stappen en uw ideeën. Geen "Voorbeelden uit het lab", geen blok "Uw idee blijft van u" en geen tweede startknop onderaan (02-11-2026).
 - **Kop** blijft staan tijdens scrollen op schermen vanaf 900 px breed (`src/site.css`); op de telefoon niet, daar is de kop met menu ruim 180 px hoog.

@@ -54,40 +54,37 @@ const NTXT = {
     meer: 'Zo werkt het', us_eb: 'Waarom Datawerf', us_t: 'Zes redenen.', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt',
     hoe_h1: 'Van uw idee tot een applicatie die elke dag werkt.',
     hoe_s: 'U brengt de vakkennis. AI-agents bouwen snel, developers controleren elke stap en u keurt goed. Zo werkt dat, stap voor stap.',
-    vg_t1: 'AI gebruiken is makkelijk.', vg_t2: 'Erop kunnen bouwen niet.',
+    vg_eb: 'Waarom Datawerf', vg_t1: 'AI bouwt. Developers controleren.', vg_t2: 'U heeft eigen software.',
     vg: [
-      ['Nu', 'Excel, mail en bellen', ['Kost uren', 'Foutgevoelig', 'Hangt aan één persoon']],
-      ['Snel', 'Zelf iets in AI zetten', ['Gegevens op straat', 'Niet gecontroleerd', 'Geen echte applicatie']],
-      ['Datawerf', 'Uw eigen applicatie', ['Efficiënt en minder werkdruk', 'Veilig, data in Europa', 'Gecontroleerd en professioneel']],
+      ['01 · AI bouwt', 'Snel gebouwd door AI-agents', ['Uw vakkennis is het startpunt', 'Klikbaar ontwerp in minuten', 'Past bij hoe u werkt, geen standaardpakket']],
+      ['02 · Developers controleren', 'Door AI geschreven code, gecontroleerd door developers', ['Elke stap getest en nagekeken', 'U ziet elke stap en houdt de regie', 'Niets live zonder uw akkoord']],
+      ['03 · Eigen software', 'Eigen omgeving, eigen data, eigen software', ['Eigen beveiligde database-omgeving', 'Uw data in Europa, nooit gebruikt om AI te trainen', 'Professioneel, ook na de livegang']],
     ],
-    vg_chat1: 'Maak hier een app van', vg_chat2: 'Hier is uw app! (niet getest)', vg_app: 'Opdrachten', vg_s: ['Klaar', 'Bezig', 'Morgen'],
+    vg_ag: ['agent · schermen', 'agent · rekenregels', 'agent · koppelingen'], vg_ck: ['142 tests geslaagd', 'Nagekeken door developer', 'Goedgekeurd door u'],
+    vg_app: 'Opdrachten', vg_s: ['Klaar', 'Bezig', 'Morgen'],
   },
   en: {
     meer: 'How it works', us_eb: 'Why Datawerf', us_t: 'Six reasons.', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works',
     hoe_h1: 'From your idea to an application that works every day.',
     hoe_s: 'You bring the know-how. AI agents build fast, developers check every step and you approve. This is how it works, step by step.',
-    vg_t1: 'Using AI is easy.', vg_t2: 'Building on it is not.',
+    vg_eb: 'Why Datawerf', vg_t1: 'AI builds. Developers check.', vg_t2: 'You get your own software.',
     vg: [
-      ['Now', 'Excel, email and phone calls', ['Costs hours', 'Error-prone', 'Depends on one person']],
-      ['Quick', 'Putting it into AI yourself', ['Data out in the open', 'Not checked', 'No real application']],
-      ['Datawerf', 'Your own application', ['Efficient, less pressure', 'Secure, data in Europe', 'Checked and professional']],
+      ['01 · AI builds', 'Built fast by AI agents', ['Your expertise is the starting point', 'Clickable design in minutes', 'Fits how you work, no off-the-shelf package']],
+      ['02 · Developers check', 'Code written by AI, checked by developers', ['Every step tested and reviewed', 'You see every step and stay in control', 'Nothing goes live without your approval']],
+      ['03 · Your own software', 'Own environment, own data, own software', ['Your own secure database environment', 'Your data in Europe, never used to train AI', 'Professional, also after go-live']],
     ],
-    vg_chat1: 'Make this into an app', vg_chat2: 'Here is your app! (not tested)', vg_app: 'Jobs', vg_s: ['Done', 'In progress', 'Tomorrow'],
+    vg_ag: ['agent · screens', 'agent · business rules', 'agent · integrations'], vg_ck: ['142 tests passed', 'Reviewed by a developer', 'Approved by you'],
+    vg_app: 'Jobs', vg_s: ['Done', 'In progress', 'Tomorrow'],
   },
 };
 
 function Vergelijking({ N, signal }) {
   const plaatje = [
-    <div key="0" style={css("background:#FFFFFF;border:1px solid #E1E5EA;border-radius:8px;font-size:13px;transform:rotate(-2deg);overflow:hidden")}>
-      {[['A1', ''], ['2026-114', 'bellen!!'], ['2026-115', '??'], ['2026-116', '#REF!']].map((r, k) => (
-        <div key={k} style={css(`display:flex;border-top:${k ? '1px solid #E8EBF0' : '0'};${k ? '' : 'background:#E8F3E8;'}`)}>
-          <span style={css("flex:1;padding:5px 8px")}>{r[0]}</span>
-          <span style={css(`flex:1;padding:5px 8px;${k === 1 ? 'background:#FFF59D' : k > 1 ? 'color:#D7263D;font-weight:700' : ''}`)}>{r[1]}</span>
-        </div>))}
+    <div key="0" style={css("background:#14213D;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:6px")}>
+      {N.vg_ag.map((t, k) => <div key={k} style={css("display:flex;align-items:center;gap:8px;background:#1E2D50;border-radius:8px;padding:7px 10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#C7CEDB")}><i style={css(`width:8px;height:8px;border-radius:50%;flex:none;background:${k === 2 ? '#28C840' : signal}`)}></i>{t}</div>)}
     </div>,
-    <div key="1" style={css("display:flex;flex-direction:column;gap:8px;font-size:13px")}>
-      <div style={css("align-self:flex-end;background:#FFFFFF;border:1px solid #E1E5EA;border-radius:12px 12px 2px 12px;padding:8px 10px")}>📎 {N.vg_chat1}</div>
-      <div style={css("background:#E9ECF2;border-radius:12px 12px 12px 2px;padding:8px 10px")}>{N.vg_chat2}</div>
+    <div key="1" style={css("background:#FFFFFF;border:1px solid #E1E5EA;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;font-size:14px;color:#14213D")}>
+      {N.vg_ck.map((t, k) => <div key={k} style={css("display:flex;align-items:center;gap:10px")}><span style={css("width:20px;height:20px;border-radius:50%;background:#0F7A55;color:#FFFFFF;display:grid;place-items:center;font-size:11px;flex:none")}>✓</span>{t}</div>)}
     </div>,
     <div key="2" style={css("background:#FFFFFF;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;color:#14213D;font-size:13px")}>
       <div style={css("display:flex;justify-content:space-between")}><b>{N.vg_app}</b><span style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;background:#E7F6EF;color:#0F7A55;border-radius:999px;padding:1px 8px")}>live</span></div>
@@ -96,16 +93,17 @@ function Vergelijking({ N, signal }) {
   ];
   return (
 <section style={css("padding:72px 48px 88px")}>
+<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${signal};font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:10px`)}>{N.vg_eb}</div>
 <h2 style={css("margin:0;font-size:48px;letter-spacing:-1.6px;line-height:1.05")}>{N.vg_t1}<br /><span style={css(`color:${signal}`)}>{N.vg_t2}</span></h2>
 <div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:36px")}>
 {N.vg.map((v, i) => {
   const dw = i === 2;
   return (
-<div key={i} style={css(`border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:12px;background:${dw ? '#14213D' : '#F3F5F8'};color:${dw ? '#FFFFFF' : '#5C6378'}`)}>
-<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:${dw ? '#FFB08F' : '#8A90A0'}`)}>{v[0]}</div>
+<div key={i} style={css(`border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:12px;background:${dw ? '#14213D' : '#F3F5F8'};color:${dw ? '#FFFFFF' : '#14213D'}`)}>
+<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:${dw ? '#FFB08F' : signal}`)}>{v[0]}</div>
 <div style={css("font-size:22px;font-weight:700")}>{v[1]}</div>
 <div style={css("min-height:130px;display:flex;flex-direction:column;justify-content:center")}>{plaatje[i]}</div>
-{v[2].map((w, k) => <div key={k} style={css("display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700")}><span style={css(`width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;flex:none;${dw ? `background:${signal};color:#FFFFFF` : 'background:#E3E7EE;color:#8A90A0'}`)}>{dw ? '✓' : '✕'}</span>{w}</div>)}
+{v[2].map((w, k) => <div key={k} style={css("display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700")}><span style={css(`width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;flex:none;background:${signal};color:#FFFFFF`)}>✓</span>{w}</div>)}
 </div>);
 })}
 </div>
@@ -190,17 +188,10 @@ function Pagina({ lang, signal, deel }) {
 <section style={css("padding:22px 48px;border-top:1px solid #EEF0F4;border-bottom:1px solid #EEF0F4;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 40px")}>{($v?.t?.proof || []).map((p, p__i) => <React.Fragment key={p__i}><span style={css("display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:600")}><span aria-hidden="true" style={css(`width:24px;height:24px;border-radius:50%;background:${$v?.signal ?? ""};color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;font-size:13px`)}>✓</span>{p}</span></React.Fragment>)}</section>
 <Vergelijking N={N} signal={$v?.signal} />
 <Showcase lang={lang} signal={$v?.signal} title={$v?.t?.wk_t} sub={$v?.t?.wk_s} />
-<section style={css("padding:0 48px 88px")}>
-<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{N.us_eb}</div>
-<h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{N.us_t}</h2>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:36px")}>{($v?.usps || []).map((u, u__i) => <React.Fragment key={u__i}><div style={css("border:1px solid #D5DAE3;border-radius:18px;padding:24px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:12px;color:${$v?.signal ?? ""};font-weight:600`)}>{u?.nr} · {u?.tag}</div><div style={css("font-size:22px;font-weight:700;margin-top:12px")}>{u?.title}</div></div></React.Fragment>)}</div>
-<a href={H("HoeHetWerkt.dc.html")} style={css(`display:inline-block;margin-top:22px;font-weight:700;color:${$v?.signal ?? ""};text-decoration:none`)}>{N.meer} →</a>
-</section>
 <section style={css("padding:0 48px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px")}>
 <div style={css("border:1px solid #D5DAE3;border-radius:22px;padding:32px")}><div style={css("font-size:26px;font-weight:700")}>{$v?.t?.en1t}</div><p style={css("font-size:16px;line-height:1.5;color:#3A4258;margin:8px 0 18px")}>{$v?.t?.en1s}</p><a href={H("Inloggen.dc.html")} style={css("padding:12px 20px;border-radius:999px;background:#14213D;color:#FFFFFF;font-weight:700;text-decoration:none")}>{$v?.t?.en1c}</a></div>
 <div style={css("border:1px solid #D5DAE3;border-radius:22px;padding:32px")}><div style={css("font-size:26px;font-weight:700")}>{$v?.t?.en2t}</div><p style={css("font-size:16px;line-height:1.5;color:#3A4258;margin:8px 0 18px")}>{$v?.t?.en2s}</p><a href={H("Etalage.dc.html")} style={css("padding:10px 20px;border-radius:999px;border:2px solid #14213D;color:#14213D;font-weight:700;text-decoration:none")}>{$v?.t?.en2c}</a></div>
 </section>
-<section style={css("padding:0 48px 40px")}><a href={H("Prijslijst.dc.html")} style={css(`font-weight:700;font-size:18px;color:${$v?.signal ?? ""};text-decoration:none`)}>{N.prijs} →</a></section>
 <section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
 <div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:44px;letter-spacing:-1.4px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>
 <a href={H("Aanmelden.dc.html")} style={css("padding:18px 28px;border-radius:999px;background:#FFFFFF;color:#14213D;font-weight:700;font-size:18px;white-space:nowrap;text-decoration:none")}>{$v?.t?.fin2} →</a>
