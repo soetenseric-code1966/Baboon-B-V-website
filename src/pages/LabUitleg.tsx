@@ -44,19 +44,6 @@ export default function LabUitleg({ lang, signal }: { lang: Lang; signal: string
         </ol>
       </section>
 
-      <section className="dw-sec" style={{ padding: '72px 48px' }}>
-        <div style={{ ...mono, color: signal }}>{t.veiligEb}</div>
-        <h2 style={h2}>{t.veiligH}</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(280px,100%),1fr))', gap: 20, marginTop: 24 }}>
-          {t.veilig.map((v, i) => (
-            <div key={i} style={{ borderRadius: 20, padding: 24, background: '#F7F8FA', display: 'grid', gap: 8, alignContent: 'start' }}>
-              <strong style={{ fontSize: 20 }}>{v.t}</strong>
-              <span style={{ fontSize: 16, color: '#3A4258' }}>{v.s}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section className="dw-sec" style={{ padding: '0 48px 72px' }}>
         <div style={{ background: '#14213D', color: '#FFFFFF', borderRadius: 20, padding: 32, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(320px,100%),1fr))', gap: 28, alignItems: 'start' }}>
           <div style={{ display: 'grid', gap: 12 }}>
@@ -69,16 +56,6 @@ export default function LabUitleg({ lang, signal }: { lang: Lang; signal: string
             <div style={{ fontSize: 20, fontWeight: 700 }}>{LAB_TEXT[lang].linksT}</div>
             <LabLinks lang={lang} signal={signal} donker />
           </div>
-        </div>
-      </section>
-
-      <section className="dw-sec" style={{ padding: '0 48px 96px' }}>
-        <div style={{ background: signal, color: '#FFFFFF', borderRadius: 20, padding: '40px 36px', display: 'flex', gap: 24, alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-          <div>
-            <div style={{ fontSize: 36, fontWeight: 700, letterSpacing: '-1px', lineHeight: 1.1 }}>{t.slotH}</div>
-            <p style={{ margin: '8px 0 0', fontSize: 18 }}>{t.slotS}</p>
-          </div>
-          <a href={href('Start', lang)} style={pil('#14213D', '#FFFFFF')}>{t.start} →</a>
         </div>
       </section>
     </div>
