@@ -23,8 +23,8 @@ export default function LabUitleg({ lang, signal }: { lang: Lang; signal: string
     <div style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", color: '#14213D', background: '#FFFFFF', lineHeight: 1.5 }}>
       <section className="dw-sec" style={{ padding: '88px 48px 56px' }}>
         <div style={{ ...mono, color: signal }}>{t.eb}</div>
-        <h1 className="dw-h1" style={{ margin: '16px 0 0', fontSize: 72, lineHeight: 1, letterSpacing: '-2.6px', fontWeight: 700, maxWidth: 900 }}>{t.h1}</h1>
-        <p style={{ margin: '20px 0 0', fontSize: 21, lineHeight: 1.55, color: '#3A4258', maxWidth: 780 }}>{t.sub}</p>
+        <h1 className="dw-h1" style={{ margin: '16px 0 0', fontSize: 64, lineHeight: 1, letterSpacing: '-2.4px', fontWeight: 700, maxWidth: 900 }}>{t.h1}</h1>
+        <p style={{ margin: '20px 0 0', fontSize: 20, lineHeight: 1.55, color: '#3A4258', maxWidth: 780 }}>{t.sub}</p>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 28 }}>
           <a href={href('Start', lang)} style={pil(signal, '#FFFFFF')}>{t.start} →</a>
           <a href={href('Etalage', lang)} style={pil('#FFFFFF', '#14213D', '#14213D')}>{t.bekijk}</a>
