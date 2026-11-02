@@ -107,7 +107,6 @@ function Vergelijking({ N, signal }) {
 </div>);
 })}
 </div>
-<a href={H("HoeHetWerkt.dc.html")} style={css(`display:inline-block;margin-top:22px;font-weight:700;color:${signal};text-decoration:none`)}>{N.meer} →</a>
 </section>
   );
 }
@@ -193,7 +192,6 @@ function Pagina({ lang, signal, deel }) {
 <div style={css("border:1px solid #D5DAE3;border-radius:22px;padding:32px")}><div style={css("font-size:26px;font-weight:700")}>{$v?.t?.en1t}</div><p style={css("font-size:16px;line-height:1.5;color:#3A4258;margin:8px 0 18px")}>{$v?.t?.en1s}</p><a href={H("Inloggen.dc.html")} style={css("padding:12px 20px;border-radius:999px;background:#14213D;color:#FFFFFF;font-weight:700;text-decoration:none")}>{$v?.t?.en1c}</a></div>
 <div style={css("border:1px solid #D5DAE3;border-radius:22px;padding:32px")}><div style={css("font-size:26px;font-weight:700")}>{$v?.t?.en2t}</div><p style={css("font-size:16px;line-height:1.5;color:#3A4258;margin:8px 0 18px")}>{$v?.t?.en2s}</p><a href={H("Etalage.dc.html")} style={css("padding:10px 20px;border-radius:999px;border:2px solid #14213D;color:#14213D;font-weight:700;text-decoration:none")}>{$v?.t?.en2c}</a></div>
 </section>
-<section style={css("padding:0 48px 40px")}><a href={H("Prijslijst.dc.html")} style={css(`font-weight:700;font-size:18px;color:${$v?.signal ?? ""};text-decoration:none`)}>{N.prijs} →</a></section>
 <section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
 <div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:44px;letter-spacing:-1.4px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>
 <a href={H("Aanmelden.dc.html")} style={css("padding:18px 28px;border-radius:999px;background:#FFFFFF;color:#14213D;font-weight:700;font-size:18px;white-space:nowrap;text-decoration:none")}>{$v?.t?.fin2} →</a>
