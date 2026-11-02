@@ -57,8 +57,8 @@ const NTXT = {
     vg_eb: 'Waarom Datawerf', vg_t1: 'AI bouwt. Developers controleren.', vg_t2: 'U heeft eigen software.',
     vg: [
       ['01 · AI bouwt', 'Snel gebouwd door AI-agents', ['Uw vakkennis is het startpunt', 'Klikbaar ontwerp in minuten', 'Past bij hoe u werkt, geen standaardpakket']],
-      ['02 · Developers controleren', 'Gecontroleerd door developers', ['Elke stap getest en nagekeken', 'U ziet elke stap en houdt de regie', 'Niets live zonder uw akkoord']],
-      ['03 · Eigen software', 'Uw eigen applicatie', ['Veilig, data in Europa', 'Professioneel, ook na de livegang', 'Bewezen in de praktijk']],
+      ['02 · Developers controleren', 'Door AI geschreven code, gecontroleerd door developers', ['Elke stap getest en nagekeken', 'U ziet elke stap en houdt de regie', 'Niets live zonder uw akkoord']],
+      ['03 · Eigen software', 'Eigen omgeving, eigen data, eigen software', ['Eigen beveiligde database-omgeving', 'Uw data in Europa, nooit gebruikt om AI te trainen', 'Professioneel, ook na de livegang']],
     ],
     vg_ag: ['agent · schermen', 'agent · rekenregels', 'agent · koppelingen'], vg_ck: ['142 tests geslaagd', 'Nagekeken door developer', 'Goedgekeurd door u'],
     vg_app: 'Opdrachten', vg_s: ['Klaar', 'Bezig', 'Morgen'],
@@ -70,8 +70,8 @@ const NTXT = {
     vg_eb: 'Why Datawerf', vg_t1: 'AI builds. Developers check.', vg_t2: 'You get your own software.',
     vg: [
       ['01 · AI builds', 'Built fast by AI agents', ['Your expertise is the starting point', 'Clickable design in minutes', 'Fits how you work, no off-the-shelf package']],
-      ['02 · Developers check', 'Checked by developers', ['Every step tested and reviewed', 'You see every step and stay in control', 'Nothing goes live without your approval']],
-      ['03 · Your own software', 'Your own application', ['Secure, data in Europe', 'Professional, also after go-live', 'Proven in practice']],
+      ['02 · Developers check', 'Code written by AI, checked by developers', ['Every step tested and reviewed', 'You see every step and stay in control', 'Nothing goes live without your approval']],
+      ['03 · Your own software', 'Own environment, own data, own software', ['Your own secure database environment', 'Your data in Europe, never used to train AI', 'Professional, also after go-live']],
     ],
     vg_ag: ['agent · screens', 'agent · business rules', 'agent · integrations'], vg_ck: ['142 tests passed', 'Reviewed by a developer', 'Approved by you'],
     vg_app: 'Jobs', vg_s: ['Done', 'In progress', 'Tomorrow'],
