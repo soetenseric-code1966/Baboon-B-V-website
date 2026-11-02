@@ -34,9 +34,9 @@ export function Opening({ eb, h1, sub, signal, rechts }: { eb: string; h1: strin
   );
 }
 
-export function Deel({ eb, h2, sub, signal, children, id }: { eb: string; h2: string; sub?: string; signal: string; children: React.ReactNode; id?: string }) {
+export function Deel({ eb, h2, sub, signal, children, id, laatste }: { eb: string; h2: string; sub?: string; signal: string; children: React.ReactNode; id?: string; laatste?: boolean }) {
   return (
-    <section id={id} className="dw-sec" style={{ padding: '56px 48px' }}>
+    <section id={id} className="dw-sec" style={{ padding: laatste ? '56px 48px 96px' : '56px 48px' }}>
       <div style={{ ...mono, color: signal }}>{eb}</div>
       <h2 style={{ margin: '10px 0 0', fontSize: 48, letterSpacing: '-1.6px', lineHeight: 1.05, maxWidth: 900 }}>{h2}</h2>
       {sub ? <p style={{ margin: '16px 0 0', fontSize: 19, lineHeight: 1.55, color: TEKST, maxWidth: 780 }}>{sub}</p> : null}
