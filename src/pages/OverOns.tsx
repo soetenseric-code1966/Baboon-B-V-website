@@ -42,10 +42,6 @@ export default function Page({ lang, signal }) {
 <section style={css("padding:0 48px 88px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.vl_eb}</div><h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.vl_t}</h2>
 <div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:32px")}>{($v?.values || []).map((v, v__i) => <React.Fragment key={v__i}><div style={css("background:#F3F5F8;border-radius:20px;padding:24px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600`)}>{v?.nr}</div><div style={css("font-size:22px;font-weight:700;margin-top:6px")}>{v?.t}</div><p style={css("font-size:15px;line-height:1.55;color:#3A4258;margin:6px 0 0")}>{v?.d}</p></div></React.Fragment>)}</div>
 </section>
-<section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:56px 64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
-<div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:40px;letter-spacing:-1.2px;max-width:760px;line-height:1.08")}>{$v?.t?.cta_t}</h2></div>
-<div style={css("display:flex;flex-wrap:wrap;gap:12px")}><a href={H("Aanmelden.dc.html")} style={css("padding:18px 28px;border-radius:999px;background:#FFFFFF;color:#14213D;font-weight:700;font-size:17px;white-space:nowrap;text-decoration:none")}>{$v?.t?.cta_b1} →</a><a href={H("Contact.dc.html")} style={css("padding:16px 26px;border-radius:999px;border:2px solid #FFFFFF;color:#FFFFFF;font-weight:700;font-size:17px;white-space:nowrap;text-decoration:none")}>{$v?.t?.cta_b2}</a></div>
-</section>
 </div>
     </>
   );
