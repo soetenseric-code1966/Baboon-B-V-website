@@ -48,38 +48,81 @@ class Component extends DCLogic {
   }
 }
 
-export default function Page({ lang, signal }) {
-  const $v = useDC(Component, lang, signal);
+// Nieuwe teksten (02-11-2026): korte homepage en het tabblad Hoe het werkt.
+const NTXT = {
+  nl: {
+    meer: 'Zo werkt het', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt',
+    hoe_h1: 'Van uw idee tot een applicatie die elke dag werkt.',
+    hoe_s: 'U brengt de vakkennis. AI-agents bouwen snel, developers controleren elke stap en u keurt goed. Zo werkt dat, stap voor stap.',
+    vg_t1: 'AI gebruiken is makkelijk.', vg_t2: 'Erop kunnen bouwen niet.',
+    vg: [
+      ['Nu', 'Excel, mail en bellen', ['Kost uren', 'Foutgevoelig', 'Hangt aan één persoon']],
+      ['Snel', 'Zelf iets in AI zetten', ['Gegevens op straat', 'Niet gecontroleerd', 'Geen echte applicatie']],
+      ['Datawerf', 'Uw eigen applicatie', ['Efficiënt en minder werkdruk', 'Veilig, data in Europa', 'Gecontroleerd en professioneel']],
+    ],
+    vg_chat1: 'Maak hier een app van', vg_chat2: 'Hier is uw app! (niet getest)', vg_app: 'Opdrachten', vg_s: ['Klaar', 'Bezig', 'Morgen'],
+  },
+  en: {
+    meer: 'How it works', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works',
+    hoe_h1: 'From your idea to an application that works every day.',
+    hoe_s: 'You bring the know-how. AI agents build fast, developers check every step and you approve. This is how it works, step by step.',
+    vg_t1: 'Using AI is easy.', vg_t2: 'Building on it is not.',
+    vg: [
+      ['Now', 'Excel, email and phone calls', ['Costs hours', 'Error-prone', 'Depends on one person']],
+      ['Quick', 'Putting it into AI yourself', ['Data out in the open', 'Not checked', 'No real application']],
+      ['Datawerf', 'Your own application', ['Efficient, less pressure', 'Secure, data in Europe', 'Checked and professional']],
+    ],
+    vg_chat1: 'Make this into an app', vg_chat2: 'Here is your app! (not tested)', vg_app: 'Jobs', vg_s: ['Done', 'In progress', 'Tomorrow'],
+  },
+};
+
+function Vergelijking({ N, signal }) {
+  const plaatje = [
+    <div key="0" style={css("background:#FFFFFF;border:1px solid #E1E5EA;border-radius:8px;font-size:13px;transform:rotate(-2deg);overflow:hidden")}>
+      {[['A1', ''], ['2026-114', 'bellen!!'], ['2026-115', '??'], ['2026-116', '#REF!']].map((r, k) => (
+        <div key={k} style={css(`display:flex;border-top:${k ? '1px solid #E8EBF0' : '0'};${k ? '' : 'background:#E8F3E8;'}`)}>
+          <span style={css("flex:1;padding:5px 8px")}>{r[0]}</span>
+          <span style={css(`flex:1;padding:5px 8px;${k === 1 ? 'background:#FFF59D' : k > 1 ? 'color:#D7263D;font-weight:700' : ''}`)}>{r[1]}</span>
+        </div>))}
+    </div>,
+    <div key="1" style={css("display:flex;flex-direction:column;gap:8px;font-size:13px")}>
+      <div style={css("align-self:flex-end;background:#FFFFFF;border:1px solid #E1E5EA;border-radius:12px 12px 2px 12px;padding:8px 10px")}>📎 {N.vg_chat1}</div>
+      <div style={css("background:#E9ECF2;border-radius:12px 12px 12px 2px;padding:8px 10px")}>{N.vg_chat2}</div>
+    </div>,
+    <div key="2" style={css("background:#FFFFFF;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;color:#14213D;font-size:13px")}>
+      <div style={css("display:flex;justify-content:space-between")}><b>{N.vg_app}</b><span style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;background:#E7F6EF;color:#0F7A55;border-radius:999px;padding:1px 8px")}>live</span></div>
+      {N.vg_s.map((s, k) => <div key={k} style={css("display:flex;align-items:center;gap:8px;border:1px solid #EEF0F4;border-radius:6px;padding:5px 8px")}><i style={css(`width:10px;height:10px;border-radius:50%;background:${['#0F7A55', signal, '#C7CEDB'][k]}`)}></i>{s}</div>)}
+    </div>,
+  ];
   return (
-    <>
-<div style={css("font-family:'Space Grotesk',system-ui,sans-serif;color:#14213D;background:#FFFFFF")}>
-<section style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(520px,1fr));gap:48px;padding:72px 48px 56px;align-items:center")}>
-<div>
-<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.eyebrow}</div>
-<h1 style={css("margin:16px 0 0;font-size:76px;line-height:0.98;letter-spacing:-3px;font-weight:700")}>{$v?.t?.h1a}<br /><span style={css(`color:${$v?.signal ?? ""}`)}>{$v?.t?.h1b}</span></h1>
-<p style={css("margin:24px 0 0;font-size:20px;line-height:1.5;color:#3A4258;max-width:580px")}>{$v?.t?.sub}</p>
-<div style={css("display:flex;flex-wrap:wrap;gap:12px;margin-top:32px")}><a href={H("Aanmelden.dc.html")} style={css(`padding:16px 24px;border-radius:999px;background:${$v?.signal ?? ""};color:#FFFFFF;font-weight:700;font-size:17px;text-decoration:none`)}>{$v?.t?.c1} →</a><a href={H("#werk")} style={css("padding:14px 24px;border-radius:999px;border:2px solid #14213D;color:#14213D;font-weight:700;font-size:17px;text-decoration:none")}>{$v?.t?.c2}</a></div>
-<div style={css("margin-top:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378")}>Where ideas are built and launched.</div>
-</div>
-<div style={css("position:relative;height:500px")}>
-<div style={css("position:absolute;inset:20px 0 0 30px;background:#14213D;border-radius:22px;padding:18px;box-shadow:0 30px 60px -20px rgba(20,33,61,0.45)")}>
-<div style={css("display:flex;gap:6px;margin-bottom:12px")}><i style={css("width:10px;height:10px;border-radius:50%;background:#FF5F57")}></i><i style={css("width:10px;height:10px;border-radius:50%;background:#FEBC2E")}></i><i style={css("width:10px;height:10px;border-radius:50%;background:#28C840")}></i></div>
-<div style={css("display:grid;grid-template-columns:150px 1fr;gap:12px;height:420px")}>
-<div style={css("background:#1E2D50;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px")}><div style={css("height:10px;width:70%;background:#3A4B72;border-radius:4px")}></div><div style={css(`height:28px;background:${$v?.signal ?? ""};border-radius:6px`)}></div><div style={css("height:10px;width:80%;background:#3A4B72;border-radius:4px")}></div><div style={css("height:10px;width:60%;background:#3A4B72;border-radius:4px")}></div><div style={css("height:10px;width:75%;background:#3A4B72;border-radius:4px")}></div></div>
-<div style={css("background:#FFFFFF;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px")}>
-<div style={css("display:flex;justify-content:space-between;align-items:center")}><strong style={css("font-size:15px")}>{$v?.hero?.title}</strong><span style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 8px;border-radius:999px;background:#E7F6EF;color:#0F7A55")}>live</span></div>
-<div style={css("display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px")}>{($v?.hero?.tiles || []).map((h, h__i) => <React.Fragment key={h__i}><div style={css("background:#F7F8FA;border-radius:8px;padding:10px")}><div style={css("font-size:11px;color:#5C6378")}>{h?.k}</div><div style={css("font-size:22px;font-weight:700")}>{h?.v}</div></div></React.Fragment>)}</div>
-<svg viewBox="0 0 300 90" style={css("width:100%;height:96px")} aria-hidden="true"><g fill="#D5DAE3"><rect x="4" y="50" width="22" height="40" rx="3"></rect><rect x="34" y="38" width="22" height="52" rx="3"></rect><rect x="64" y="44" width="22" height="46" rx="3"></rect><rect x="94" y="28" width="22" height="62" rx="3"></rect><rect x="124" y="34" width="22" height="56" rx="3"></rect><rect x="154" y="20" width="22" height="70" rx="3"></rect><rect x="184" y="26" width="22" height="64" rx="3"></rect><rect x="214" y="14" width="22" height="76" rx="3"></rect></g><rect x="244" y="6" width="22" height="84" rx="3" fill={$v?.signal}></rect></svg>
-{($v?.hero?.rows || []).map((r, r__i) => <React.Fragment key={r__i}><div style={css("display:flex;gap:10px;font-size:12px;padding:7px 10px;border:1px solid #EEF0F4;border-radius:6px")}><span style={css("font-family:'IBM Plex Mono',monospace;color:#5C6378")}>{r?.a}</span><span style={css("flex:1")}>{r?.b}</span><strong>{r?.c}</strong></div></React.Fragment>)}
-</div>
-</div>
-</div>
-<div style={css("position:absolute;left:0;top:300px;background:#FFFFFF;border-radius:14px;padding:12px 16px;box-shadow:0 12px 30px -10px rgba(20,33,61,0.35)")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5C6378")}>{$v?.hero?.step}</div><div style={css("font-weight:700;font-size:16px;margin-top:2px")}>€ 38,40</div></div>
-<div style={css(`position:absolute;right:30px;bottom:-14px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:14px;padding:10px 14px;font-size:13px;font-weight:700`)}>Data in the EU</div>
+<section style={css("padding:72px 48px 88px")}>
+<h2 style={css("margin:0;font-size:48px;letter-spacing:-1.6px;line-height:1.05")}>{N.vg_t1}<br /><span style={css(`color:${signal}`)}>{N.vg_t2}</span></h2>
+<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:36px")}>
+{N.vg.map((v, i) => {
+  const dw = i === 2;
+  return (
+<div key={i} style={css(`border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:12px;background:${dw ? '#14213D' : '#F3F5F8'};color:${dw ? '#FFFFFF' : '#5C6378'}`)}>
+<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:${dw ? '#FFB08F' : '#8A90A0'}`)}>{v[0]}</div>
+<div style={css("font-size:22px;font-weight:700")}>{v[1]}</div>
+<div style={css("min-height:130px;display:flex;flex-direction:column;justify-content:center")}>{plaatje[i]}</div>
+{v[2].map((w, k) => <div key={k} style={css("display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700")}><span style={css(`width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;flex:none;${dw ? `background:${signal};color:#FFFFFF` : 'background:#E3E7EE;color:#8A90A0'}`)}>{dw ? '✓' : '✕'}</span>{w}</div>)}
+</div>);
+})}
 </div>
 </section>
-<section style={css("padding:22px 48px;border-top:1px solid #EEF0F4;border-bottom:1px solid #EEF0F4;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 40px")}>{($v?.t?.proof || []).map((p, p__i) => <React.Fragment key={p__i}><span style={css("display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:600")}><span aria-hidden="true" style={css(`width:24px;height:24px;border-radius:50%;background:${$v?.signal ?? ""};color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;font-size:13px`)}>✓</span>{p}</span></React.Fragment>)}</section>
-<section id="hoe" style={css("padding:88px 48px 72px")}>
+  );
+}
+
+function Pagina({ lang, signal, deel }) {
+  const $v = useDC(Component, lang, signal);
+  const N = NTXT[lang === 'en' ? 'en' : 'nl'];
+  // Oude links naar /#hoe gaan naar het tabblad Hoe het werkt.
+  React.useEffect(() => { if (deel === 'home' && window.location.hash === '#hoe') window.location.replace(H('HoeHetWerkt.dc.html')); }, [deel]);
+  if (deel === 'hoe') return (
+    <>
+<div style={css("font-family:'Space Grotesk',system-ui,sans-serif;color:#14213D;background:#FFFFFF")}>
+<section style={css("padding:80px 48px 8px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{N.hoe_eb}</div><h1 style={css("margin:16px 0 0;font-size:64px;line-height:1;letter-spacing:-2.4px;font-weight:700;max-width:980px")}>{N.hoe_h1}</h1><p style={css("margin:16px 0 0;font-size:20px;line-height:1.55;color:#3A4258;max-width:780px")}>{N.hoe_s}</p></section>
+<section id="hoe" style={css("padding:56px 48px 72px")}>
 <div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.ph_eb}</div>
 <h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.ph_t}</h2>
 <p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{$v?.t?.ph_s}</p>
@@ -96,13 +139,6 @@ export default function Page({ lang, signal }) {
 </div>
 <div style={css("margin-top:24px;background:#14213D;color:#FFFFFF;border-radius:16px;padding:20px 24px;font-size:19px;line-height:1.45")}><span style={css(`color:${$v?.signal ?? ""};font-weight:700`)}>= </span>{$v?.t?.co_r}</div>
 </div>
-</section>
-<Showcase lang={lang} signal={$v?.signal} title={$v?.t?.wk_t} sub={$v?.t?.wk_s} />
-<section style={css("padding:0 48px 88px")}>
-<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.us_eb}</div>
-<h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.us_t}</h2>
-<p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{$v?.t?.us_s}</p>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;margin-top:36px")}>{($v?.usps || []).map((u, u__i) => <React.Fragment key={u__i}><div style={css("border:1px solid #D5DAE3;border-radius:18px;padding:24px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:12px;color:${$v?.signal ?? ""};font-weight:600`)}>{u?.nr} · {u?.tag}</div><div style={css("font-size:22px;font-weight:700;margin-top:12px")}>{u?.title}</div><p style={css("font-size:15px;line-height:1.55;color:#3A4258;margin:8px 0 0")}>{u?.text}</p></div></React.Fragment>)}</div>
 </section>
 <section style={css("padding:0 48px 88px")}>
 <div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.ft_eb}</div>
@@ -134,18 +170,57 @@ export default function Page({ lang, signal }) {
 <div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:36px")}>{($v?.ob || []).map((o, o__i) => <React.Fragment key={o__i}><div style={css(o?.style)}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600")}>{o?.nr}</div><div style={css("font-size:21px;font-weight:700;margin-top:14px")}>{o?.title}</div><p style={css("font-size:14px;line-height:1.5;margin:8px 0 0;opacity:0.9")}>{o?.text}</p><div style={css("margin-top:auto;padding-top:14px;font-size:13px;font-weight:700")}>→ {o?.result}</div></div></React.Fragment>)}</div>
 <p style={css("margin:20px 0 0;font-size:15px;color:#3A4258")}>{$v?.t?.ob_n}</p>
 </section>
+<section style={css("padding:0 48px 48px")}><a href={H("Prijslijst.dc.html")} style={css(`font-weight:700;font-size:20px;color:${$v?.signal ?? ""};text-decoration:none`)}>{N.prijs} →</a></section>
+<section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
+<div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:44px;letter-spacing:-1.4px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>
+<a href={H("Aanmelden.dc.html")} style={css("padding:18px 28px;border-radius:999px;background:#FFFFFF;color:#14213D;font-weight:700;font-size:18px;white-space:nowrap;text-decoration:none")}>{$v?.t?.fin2} →</a>
+</section>
+</div>
+    </>
+  );
+  return (
+    <>
+<div style={css("font-family:'Space Grotesk',system-ui,sans-serif;color:#14213D;background:#FFFFFF")}>
+<section style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(520px,1fr));gap:48px;padding:72px 48px 56px;align-items:center")}>
+<div>
+<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.eyebrow}</div>
+<h1 style={css("margin:16px 0 0;font-size:76px;line-height:0.98;letter-spacing:-3px;font-weight:700")}>{$v?.t?.h1a}<br /><span style={css(`color:${$v?.signal ?? ""}`)}>{$v?.t?.h1b}</span></h1>
+<p style={css("margin:24px 0 0;font-size:20px;line-height:1.5;color:#3A4258;max-width:580px")}>{$v?.t?.sub}</p>
+<div style={css("display:flex;flex-wrap:wrap;gap:12px;margin-top:32px")}><a href={H("Aanmelden.dc.html")} style={css(`padding:16px 24px;border-radius:999px;background:${$v?.signal ?? ""};color:#FFFFFF;font-weight:700;font-size:17px;text-decoration:none`)}>{$v?.t?.c1} →</a><a href={H("#werk")} style={css("padding:14px 24px;border-radius:999px;border:2px solid #14213D;color:#14213D;font-weight:700;font-size:17px;text-decoration:none")}>{$v?.t?.c2}</a></div>
+<div style={css("margin-top:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378")}>Where ideas are built and launched.</div>
+</div>
+<div style={css("position:relative;height:500px")}>
+<div style={css("position:absolute;inset:20px 0 0 30px;background:#14213D;border-radius:22px;padding:18px;box-shadow:0 30px 60px -20px rgba(20,33,61,0.45)")}>
+<div style={css("display:flex;gap:6px;margin-bottom:12px")}><i style={css("width:10px;height:10px;border-radius:50%;background:#FF5F57")}></i><i style={css("width:10px;height:10px;border-radius:50%;background:#FEBC2E")}></i><i style={css("width:10px;height:10px;border-radius:50%;background:#28C840")}></i></div>
+<div style={css("display:grid;grid-template-columns:150px 1fr;gap:12px;height:420px")}>
+<div style={css("background:#1E2D50;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px")}><div style={css("height:10px;width:70%;background:#3A4B72;border-radius:4px")}></div><div style={css(`height:28px;background:${$v?.signal ?? ""};border-radius:6px`)}></div><div style={css("height:10px;width:80%;background:#3A4B72;border-radius:4px")}></div><div style={css("height:10px;width:60%;background:#3A4B72;border-radius:4px")}></div><div style={css("height:10px;width:75%;background:#3A4B72;border-radius:4px")}></div></div>
+<div style={css("background:#FFFFFF;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px")}>
+<div style={css("display:flex;justify-content:space-between;align-items:center")}><strong style={css("font-size:15px")}>{$v?.hero?.title}</strong><span style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;padding:3px 8px;border-radius:999px;background:#E7F6EF;color:#0F7A55")}>live</span></div>
+<div style={css("display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px")}>{($v?.hero?.tiles || []).map((h, h__i) => <React.Fragment key={h__i}><div style={css("background:#F7F8FA;border-radius:8px;padding:10px")}><div style={css("font-size:11px;color:#5C6378")}>{h?.k}</div><div style={css("font-size:22px;font-weight:700")}>{h?.v}</div></div></React.Fragment>)}</div>
+<svg viewBox="0 0 300 90" style={css("width:100%;height:96px")} aria-hidden="true"><g fill="#D5DAE3"><rect x="4" y="50" width="22" height="40" rx="3"></rect><rect x="34" y="38" width="22" height="52" rx="3"></rect><rect x="64" y="44" width="22" height="46" rx="3"></rect><rect x="94" y="28" width="22" height="62" rx="3"></rect><rect x="124" y="34" width="22" height="56" rx="3"></rect><rect x="154" y="20" width="22" height="70" rx="3"></rect><rect x="184" y="26" width="22" height="64" rx="3"></rect><rect x="214" y="14" width="22" height="76" rx="3"></rect></g><rect x="244" y="6" width="22" height="84" rx="3" fill={$v?.signal}></rect></svg>
+{($v?.hero?.rows || []).map((r, r__i) => <React.Fragment key={r__i}><div style={css("display:flex;gap:10px;font-size:12px;padding:7px 10px;border:1px solid #EEF0F4;border-radius:6px")}><span style={css("font-family:'IBM Plex Mono',monospace;color:#5C6378")}>{r?.a}</span><span style={css("flex:1")}>{r?.b}</span><strong>{r?.c}</strong></div></React.Fragment>)}
+</div>
+</div>
+</div>
+<div style={css("position:absolute;left:0;top:300px;background:#FFFFFF;border-radius:14px;padding:12px 16px;box-shadow:0 12px 30px -10px rgba(20,33,61,0.35)")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5C6378")}>{$v?.hero?.step}</div><div style={css("font-weight:700;font-size:16px;margin-top:2px")}>€ 38,40</div></div>
+<div style={css(`position:absolute;right:30px;bottom:-14px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:14px;padding:10px 14px;font-size:13px;font-weight:700`)}>Data in the EU</div>
+</div>
+</section>
+<section style={css("padding:22px 48px;border-top:1px solid #EEF0F4;border-bottom:1px solid #EEF0F4;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 40px")}>{($v?.t?.proof || []).map((p, p__i) => <React.Fragment key={p__i}><span style={css("display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:600")}><span aria-hidden="true" style={css(`width:24px;height:24px;border-radius:50%;background:${$v?.signal ?? ""};color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;font-size:13px`)}>✓</span>{p}</span></React.Fragment>)}</section>
+<Vergelijking N={N} signal={$v?.signal} />
+<Showcase lang={lang} signal={$v?.signal} title={$v?.t?.wk_t} sub={$v?.t?.wk_s} />
 <section style={css("padding:0 48px 88px")}>
-<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.pr_eb}</div>
-<h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.pr_t}</h2>
-<p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{$v?.t?.pr_s}</p>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-top:36px")}>{($v?.prices || []).map((p, p__i) => <React.Fragment key={p__i}><div style={css("border:2px solid #14213D;border-radius:20px;padding:28px")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#5C6378;text-transform:uppercase")}>{p?.name}</div><div style={css("font-size:40px;font-weight:700;letter-spacing:-1px;margin-top:10px")}>{p?.v}</div><div style={css("font-size:14px;color:#5C6378")}>{p?.unit}</div><p style={css("font-size:15px;line-height:1.5;color:#3A4258;margin:14px 0 0")}>{p?.d}</p></div></React.Fragment>)}</div>
-<p style={css("margin:20px 0 0;font-size:15px;line-height:1.55;color:#3A4258;max-width:900px")}>{$v?.t?.pr_n}</p>
-<a href={H("Prijslijst.dc.html")} style={css(`display:inline-block;margin-top:14px;font-weight:700;color:${$v?.signal ?? ""};text-decoration:none`)}>{$v?.t?.pr_c} →</a>
+<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.us_eb}</div>
+<h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.us_t}</h2>
+<p style={css("margin:16px 0 0;font-size:19px;line-height:1.55;color:#3A4258;max-width:780px")}>{$v?.t?.us_s}</p>
+<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:36px")}>{($v?.usps || []).map((u, u__i) => <React.Fragment key={u__i}><div style={css("border:1px solid #D5DAE3;border-radius:18px;padding:24px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:12px;color:${$v?.signal ?? ""};font-weight:600`)}>{u?.nr} · {u?.tag}</div><div style={css("font-size:22px;font-weight:700;margin-top:12px")}>{u?.title}</div></div></React.Fragment>)}</div>
+<a href={H("HoeHetWerkt.dc.html")} style={css(`display:inline-block;margin-top:22px;font-weight:700;color:${$v?.signal ?? ""};text-decoration:none`)}>{N.meer} →</a>
 </section>
 <section style={css("padding:0 48px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px")}>
 <div style={css("border:1px solid #D5DAE3;border-radius:22px;padding:32px")}><div style={css("font-size:26px;font-weight:700")}>{$v?.t?.en1t}</div><p style={css("font-size:16px;line-height:1.5;color:#3A4258;margin:8px 0 18px")}>{$v?.t?.en1s}</p><a href={H("Inloggen.dc.html")} style={css("padding:12px 20px;border-radius:999px;background:#14213D;color:#FFFFFF;font-weight:700;text-decoration:none")}>{$v?.t?.en1c}</a></div>
 <div style={css("border:1px solid #D5DAE3;border-radius:22px;padding:32px")}><div style={css("font-size:26px;font-weight:700")}>{$v?.t?.en2t}</div><p style={css("font-size:16px;line-height:1.5;color:#3A4258;margin:8px 0 18px")}>{$v?.t?.en2s}</p><a href={H("Etalage.dc.html")} style={css("padding:10px 20px;border-radius:999px;border:2px solid #14213D;color:#14213D;font-weight:700;text-decoration:none")}>{$v?.t?.en2c}</a></div>
 </section>
+<section style={css("padding:0 48px 40px")}><a href={H("Prijslijst.dc.html")} style={css(`font-weight:700;font-size:18px;color:${$v?.signal ?? ""};text-decoration:none`)}>{N.prijs} →</a></section>
 <section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
 <div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:44px;letter-spacing:-1.4px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>
 <a href={H("Aanmelden.dc.html")} style={css("padding:18px 28px;border-radius:999px;background:#FFFFFF;color:#14213D;font-weight:700;font-size:18px;white-space:nowrap;text-decoration:none")}>{$v?.t?.fin2} →</a>
@@ -154,5 +229,8 @@ export default function Page({ lang, signal }) {
     </>
   );
 }
+
+export default function Page({ lang, signal }) { return <Pagina lang={lang} signal={signal} deel="home" />; }
+export function HoeHetWerkt({ lang, signal }) { return <Pagina lang={lang} signal={signal} deel="hoe" />; }
 
 export function useFooterTexts(lang) { return FTXT[lang]; }

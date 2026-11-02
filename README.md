@@ -13,6 +13,7 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 |---|---|---|
 | Home | `/` | `/en/` |
 | Wat we bouwen | `/wat-we-bouwen/` | `/en/what-we-build/` |
+| Hoe het werkt (sinds 02-11-2026) | `/hoe-het-werkt/` | `/en/how-it-works/` |
 | Apps | `/apps/` | `/en/apps/` |
 | Start gratis (lab) | `/start/` | `/en/start/` |
 | Lab (tabblad; eigen idee via geheime link `/lab/#id.sleutel`) | `/lab/` | `/en/lab/` |
@@ -22,6 +23,10 @@ De openbare website van Datawerf (een handelsnaam van Baboon B.V.), op datawerf.
 | Contact | `/contact/` | `/en/contact/` |
 | Juridisch | `/juridisch/` | `/en/legal/` |
 | Inloggen | `/inloggen/` | `/en/login/` |
+
+## Korte homepage en tabblad Hoe het werkt (02-11-2026)
+
+De homepage is kort (± 480 woorden in plaats van ± 1.700): opening, strook, "AI gebruiken is makkelijk. Erop kunnen bouwen niet." (drie kaarten: Excel, zelf met AI, Datawerf), Wat we bouwen, de zes usp's (alleen titels), twee ingangen, link naar Prijzen en de afsluiter. De uitleg staat op het tabblad **Hoe het werkt**: van idee tot live, samenwerking, van losse AI naar eigen platform, acht bouwstappen en drie niveaus, Europees van opzet, startstappen. Beide komen uit `src/pages/Global.tsx` (`Pagina` met `deel` = `home` of `hoe`; nieuwe teksten in `NTXT`). Oude links naar `/#hoe` gaan door naar het tabblad.
 
 ## Zes usp's op de homepage (01-11-2026)
 
