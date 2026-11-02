@@ -116,14 +116,14 @@ export const APPS_TEXT = {
 
 export const LOGIN_APPS_TEXT = {
   nl: {
-    eb: 'Inloggen', h1: 'Kies uw app', sub: 'Log direct in op uw app, of probeer eerst de demo met verzonnen gegevens.',
+    eb: 'Inloggen', h1: 'Inloggen.|Kies uw app.', sub: 'Log direct in op uw app, of probeer eerst de demo met verzonnen gegevens.',
     login: 'Inloggen', demo: 'Demo', soon: 'Binnenkort', list: 'Zet mij op de lijst',
     portalEb: 'Klantportaal', portalT: 'Eén inlog voor al uw apps en uw eigen bouwplaats',
     portalS: 'Het klantportaal opent binnenkort. Al klant of een vraag? Mail ons, dan helpen wij u direct.',
     newT: 'Een eigen app laten bouwen?', newB: 'Start gratis met uw idee',
   },
   en: {
-    eb: 'Log in', h1: 'Choose your app', sub: 'Log in to your app straight away, or try the demo with made-up data first.',
+    eb: 'Log in', h1: 'Log in.|Choose your app.', sub: 'Log in to your app straight away, or try the demo with made-up data first.',
     login: 'Log in', demo: 'Demo', soon: 'Coming soon', list: 'Put me on the list',
     portalEb: 'Customer portal', portalT: 'One login for all your apps and your own build site',
     portalS: 'The customer portal opens soon. Already a customer or a question? Email us and we will help you right away.',

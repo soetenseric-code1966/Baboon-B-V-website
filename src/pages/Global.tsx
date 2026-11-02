@@ -2,6 +2,7 @@
 // Gegenereerd uit het Design-canvas (Global.dc.html) door scripts/convert-design.mjs.
 import React from 'react';
 import { DCLogic, css, H, useDC } from '../dc';
+import { kop } from '../Kop';
 import Showcase from '../Showcase';
 import ProcesFilm from '../ProcesFilm';
 
@@ -51,8 +52,8 @@ class Component extends DCLogic {
 // Nieuwe teksten (02-11-2026): korte homepage en het tabblad Hoe het werkt.
 const NTXT = {
   nl: {
-    meer: 'Zo werkt het', us_eb: 'Waarom Datawerf', us_t: 'Zes redenen.', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt', held_ck: ['Uw vakkennis', 'Gebouwd door AI-agents', 'Gecontroleerd door developer', '142 tests geslaagd', 'Data veilig in Europa'], held_omg: 'Eigen omgeving', held_alt: 'Qtyrez bandenmonitor, gebouwd door Datawerf (demo)', sa_t: 'Uw kennis. Onze AI-agents. Developers controleren.',
-    hoe_h1: 'Van uw idee tot een applicatie die elke dag werkt.',
+    meer: 'Zo werkt het', us_eb: 'Waarom Datawerf', us_t: 'Zes redenen.', prijs: 'Wat kost het? Bekijk de prijzen', hoe_eb: 'Hoe het werkt', ve_eb: 'Veiligheid · Europees van opzet', ve_h1: 'Gebouwd met AI.|Beheerd volgens de regels.', ve_s: 'Uw eigen, beveiligde omgeving met uw data in Europa. U bepaalt waar AI uw gegevens gebruikt.', held_ck: ['Uw vakkennis', 'Gebouwd door AI-agents', 'Gecontroleerd door developer', '142 tests geslaagd', 'Data veilig in Europa'], held_omg: 'Eigen omgeving', held_alt: 'Qtyrez bandenmonitor, gebouwd door Datawerf (demo)', sa_t: 'Uw kennis. Onze AI-agents. Developers controleren.',
+    hoe_h1: 'Van uw idee|tot een applicatie die elke dag werkt.',
     hoe_s: 'U brengt de vakkennis. AI-agents bouwen snel, developers controleren elke stap en u keurt goed. Zo werkt dat, stap voor stap.',
     vg_eb: 'Waarom Datawerf', vg_t1: 'AI bouwt. Developers controleren.', vg_t2: 'U heeft eigen software.',
     vg: [
@@ -64,8 +65,8 @@ const NTXT = {
     vg_app: 'Opdrachten', vg_s: ['Klaar', 'Bezig', 'Morgen'],
   },
   en: {
-    meer: 'How it works', us_eb: 'Why Datawerf', us_t: 'Six reasons.', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works', held_ck: ['Your expertise', 'Built by AI agents', 'Reviewed by a developer', '142 tests passed', 'Data secure in Europe'], held_omg: 'Own environment', held_alt: 'Qtyrez tyre monitor, built by Datawerf (demo)', sa_t: 'Your know-how. Our AI agents. Developers check.',
-    hoe_h1: 'From your idea to an application that works every day.',
+    meer: 'How it works', us_eb: 'Why Datawerf', us_t: 'Six reasons.', prijs: 'What does it cost? See pricing', hoe_eb: 'How it works', ve_eb: 'Security · European by design', ve_h1: 'Built with AI.|Run by the rules.', ve_s: 'Your own secure environment with your data in Europe. You decide where AI uses your data.', held_ck: ['Your expertise', 'Built by AI agents', 'Reviewed by a developer', '142 tests passed', 'Data secure in Europe'], held_omg: 'Own environment', held_alt: 'Qtyrez tyre monitor, built by Datawerf (demo)', sa_t: 'Your know-how. Our AI agents. Developers check.',
+    hoe_h1: 'From your idea|to an application that works every day.',
     hoe_s: 'You bring the know-how. AI agents build fast, developers check every step and you approve. This is how it works, step by step.',
     vg_eb: 'Why Datawerf', vg_t1: 'AI builds. Developers check.', vg_t2: 'You get your own software.',
     vg: [
@@ -116,10 +117,24 @@ function Pagina({ lang, signal, deel }) {
   const N = NTXT[lang === 'en' ? 'en' : 'nl'];
   // Oude links naar /#hoe gaan naar het tabblad Hoe het werkt.
   React.useEffect(() => { if (deel === 'home' && window.location.hash === '#hoe') window.location.replace(H('HoeHetWerkt.dc.html')); }, [deel]);
+  if (deel === 'veilig') return (
+    <>
+<div style={css("font-family:'Space Grotesk',system-ui,sans-serif;color:#14213D;background:#FFFFFF")}>
+<section style={css("padding:80px 48px 64px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{N.ve_eb}</div><h1 style={css("margin:16px 0 0;font-size:64px;line-height:1;letter-spacing:-2.4px;font-weight:700;max-width:980px")}>{kop(N.ve_h1, $v?.signal)}</h1><p style={css("margin:16px 0 0;font-size:20px;line-height:1.55;color:#3A4258;max-width:780px")}>{N.ve_s}</p></section>
+<section style={css("padding:0 48px 88px")}>
+<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:0")}>{($v?.trust || []).map((e, e__i) => <div key={e__i} style={css("background:#F3F5F8;border-radius:20px;padding:24px;display:flex;gap:12px")}><span style={css(`width:24px;height:24px;border-radius:50%;background:${$v?.signal ?? ""};color:#FFFFFF;display:grid;place-items:center;font-size:12px;flex:none;margin-top:2px`)}>✓</span><div><div style={css("font-size:19px;font-weight:700")}>{e?.k}</div><div style={css("font-size:15px;line-height:1.5;color:#3A4258;margin-top:4px")}>{e?.v}</div></div></div>)}</div>
+</section>
+<section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
+<div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:40px;letter-spacing:-1.2px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>
+<a href={H("Aanmelden.dc.html")} style={css("padding:18px 28px;border-radius:999px;background:#FFFFFF;color:#14213D;font-weight:700;font-size:17px;white-space:nowrap;text-decoration:none")}>{$v?.t?.fin2} →</a>
+</section>
+</div>
+    </>
+  );
   if (deel === 'hoe') return (
     <>
 <div style={css("font-family:'Space Grotesk',system-ui,sans-serif;color:#14213D;background:#FFFFFF")}>
-<section style={css("padding:80px 48px 8px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{N.hoe_eb}</div><h1 style={css("margin:16px 0 0;font-size:64px;line-height:1;letter-spacing:-2.4px;font-weight:700;max-width:980px")}>{N.hoe_h1}</h1><p style={css("margin:16px 0 0;font-size:20px;line-height:1.55;color:#3A4258;max-width:780px")}>{N.hoe_s}</p></section>
+<section style={css("padding:80px 48px 8px")}><div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{N.hoe_eb}</div><h1 style={css("margin:16px 0 0;font-size:64px;line-height:1;letter-spacing:-2.4px;font-weight:700;max-width:980px")}>{kop(N.hoe_h1, $v?.signal)}</h1><p style={css("margin:16px 0 0;font-size:20px;line-height:1.55;color:#3A4258;max-width:780px")}>{N.hoe_s}</p></section>
 <section id="hoe" style={css("padding:56px 48px 72px")}>
 <div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.ph_eb}</div>
 <h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{$v?.t?.ph_t}</h2>
@@ -130,8 +145,8 @@ function Pagina({ lang, signal, deel }) {
 <div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase`)}>{$v?.t?.bw_eb}</div>
 <h2 style={css("margin:10px 0 0;font-size:48px;letter-spacing:-1.6px;line-height:1.05;max-width:900px")}>{N.sa_t}</h2>
 <div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:20px;margin-top:36px")}>
-<div style={css("background:#FFFFFF;border-radius:20px;padding:28px;border:2px solid #14213D")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378;text-transform:uppercase")}>{$v?.t?.yb}</div><div style={css("font-size:26px;font-weight:700;margin-top:6px")}>{$v?.t?.yb2}</div>{($v?.t?.yl || []).map((y, y__i) => <React.Fragment key={y__i}><div style={css("padding:12px 0;border-bottom:1px solid #E3E7EE;font-size:17px")}>{y}</div></React.Fragment>)}</div>
-<div style={css(`background:#FFFFFF;border-radius:20px;padding:28px;border:2px solid ${$v?.signal ?? ""}`)}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378;text-transform:uppercase")}>{$v?.t?.db}</div><div style={css("font-size:26px;font-weight:700;margin-top:6px")}>{$v?.t?.db2}</div>{($v?.t?.dl || []).map((d, d__i) => <React.Fragment key={d__i}><div style={css("padding:12px 0;border-bottom:1px solid #E3E7EE;font-size:17px")}>{d}</div></React.Fragment>)}</div>
+<div style={css("background:#F3F5F8;border-radius:20px;padding:28px")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378;text-transform:uppercase")}>{$v?.t?.yb}</div><div style={css("font-size:26px;font-weight:700;margin-top:6px")}>{$v?.t?.yb2}</div>{($v?.t?.yl || []).map((y, y__i) => <React.Fragment key={y__i}><div style={css("padding:12px 0;border-bottom:1px solid #E3E7EE;font-size:17px")}>{y}</div></React.Fragment>)}</div>
+<div style={css("background:#F3F5F8;border-radius:20px;padding:28px")}><div style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5C6378;text-transform:uppercase")}>{$v?.t?.db}</div><div style={css("font-size:26px;font-weight:700;margin-top:6px")}>{$v?.t?.db2}</div>{($v?.t?.dl || []).map((d, d__i) => <React.Fragment key={d__i}><div style={css("padding:12px 0;border-bottom:1px solid #E3E7EE;font-size:17px")}>{d}</div></React.Fragment>)}</div>
 </div>
 </section>
 <section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
@@ -163,12 +178,6 @@ function Pagina({ lang, signal, deel }) {
 </div>
 </section>
 <Vergelijking N={N} signal={$v?.signal} />
-<section style={css("padding:0 48px 88px")}>
-<div style={css(`font-family:'IBM Plex Mono',monospace;font-size:13px;color:${$v?.signal ?? ""};font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:10px`)}>{$v?.t?.eu_eb}</div>
-<h2 style={css("margin:0;font-size:48px;letter-spacing:-1.6px;line-height:1.05")}>{$v?.t?.eu_t}</h2>
-<p style={css("margin:16px 0 0;font-size:20px;line-height:1.5;color:#3A4258;max-width:780px")}>{$v?.t?.eu_s}</p>
-<div style={css("display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:32px")}>{($v?.trust || []).map((e, e__i) => <div key={e__i} style={css("background:#F3F5F8;border-radius:20px;padding:24px;display:flex;gap:12px")}><span style={css(`width:24px;height:24px;border-radius:50%;background:${$v?.signal ?? ""};color:#FFFFFF;display:grid;place-items:center;font-size:12px;flex:none;margin-top:2px`)}>✓</span><div><div style={css("font-size:19px;font-weight:700")}>{e?.k}</div><div style={css("font-size:15px;line-height:1.5;color:#3A4258;margin-top:4px")}>{e?.v}</div></div></div>)}</div>
-</section>
 <Showcase lang={lang} signal={$v?.signal} title={$v?.t?.wk_t} sub={$v?.t?.wk_s} />
 <section style={css(`margin:0 48px 64px;background:${$v?.signal ?? ""};color:#FFFFFF;border-radius:28px;padding:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px`)}>
 <div><div style={css("font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;opacity:0.9")}>Driven by data. Powered by cooperation.</div><h2 style={css("margin:8px 0 0;font-size:40px;letter-spacing:-1.2px;max-width:720px;line-height:1.05")}>{$v?.t?.fin}</h2></div>
@@ -181,5 +190,6 @@ function Pagina({ lang, signal, deel }) {
 
 export default function Page({ lang, signal }) { return <Pagina lang={lang} signal={signal} deel="home" />; }
 export function HoeHetWerkt({ lang, signal }) { return <Pagina lang={lang} signal={signal} deel="hoe" />; }
+export function Veiligheid({ lang, signal }) { return <Pagina lang={lang} signal={signal} deel="veilig" />; }
 
 export function useFooterTexts(lang) { return FTXT[lang]; }

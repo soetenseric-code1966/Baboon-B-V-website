@@ -48,7 +48,7 @@ export function bewaarIdee(b: Bewaard) {
 
 export const LAB_TEXT = {
   nl: {
-    eb: 'Datawerf lab', h1: 'Start met uw idee', sub: 'Omschrijf wat u wilt laten bouwen en druk op Start. Binnen een paar minuten staat uw eerste klikbare ontwerp klaar, met verzonnen gegevens. Daarna kunt u het tien keer gratis bijsturen.',
+    eb: 'Datawerf lab', h1: 'Start met|uw idee.', sub: 'Omschrijf wat u wilt laten bouwen en druk op Start. Binnen een paar minuten staat uw eerste klikbare ontwerp klaar, met verzonnen gegevens. Daarna kunt u het tien keer gratis bijsturen.',
     idee: 'Uw idee', ideeHint: 'Bijvoorbeeld: een overzicht van onze bandenkosten per voertuig en per positie, met afwijkingen en uploads van prijslijsten.',
     naam: 'Naam', email: 'Zakelijk e-mailadres', bedrijf: 'Bedrijf (optioneel)', start: 'Start gratis', bezig: 'Bezig…',
     privacy: 'Gebruik geen echte klant- of persoonsgegevens: het ontwerp werkt altijd met verzonnen gegevens. Uw idee wordt niet gebruikt om AI te trainen.',
@@ -68,7 +68,7 @@ export const LAB_TEXT = {
     linksT: 'Terug naar uw ideeën', linksS: 'Vul uw e-mailadres in; we mailen u de links naar al uw ideeën in het lab.', linksB: 'Mail mijn links',
   },
   en: {
-    eb: 'Datawerf lab', h1: 'Start with your idea', sub: 'Describe what you want built and press Start. Within a few minutes your first clickable design is ready, with made-up data. You can then refine it ten times for free.',
+    eb: 'Datawerf lab', h1: 'Start with|your idea.', sub: 'Describe what you want built and press Start. Within a few minutes your first clickable design is ready, with made-up data. You can then refine it ten times for free.',
     idee: 'Your idea', ideeHint: 'For example: an overview of our tyre costs per vehicle and per position, with deviations and price list uploads.',
     naam: 'Name', email: 'Business email', bedrijf: 'Company (optional)', start: 'Start free', bezig: 'Working…',
     privacy: 'Do not use real customer or personal data: the design always works with made-up data. Your idea is not used to train AI.',
@@ -97,7 +97,7 @@ export const LAB_VOORBEELDEN = [
 
 export const LAB_INFO = {
   nl: {
-    eb: 'Datawerf lab · gratis', h1: 'Zie uw idee werken. Vandaag nog.',
+    eb: 'Datawerf lab · gratis', h1: 'Zie uw idee werken.|Vandaag nog.',
     sub: 'Omschrijf wat u wilt laten bouwen. Binnen een paar minuten klikt u door een eerste ontwerp van uw eigen software, met verzonnen gegevens. Daarna stuurt u het tien keer gratis bij.',
     start: 'Start gratis met uw idee', bekijk: 'Bekijk wat we bouwden',
     stappenEb: 'Zo werkt het',
@@ -118,7 +118,7 @@ export const LAB_INFO = {
     mijnH: 'Uw ideeën', slotH: 'Klaar om te beginnen?', slotS: 'Tien prompts gratis per idee. Geen account, geen creditcard.',
   },
   en: {
-    eb: 'Datawerf lab · free', h1: 'See your idea work. Today.',
+    eb: 'Datawerf lab · free', h1: 'See your idea work.|Today.',
     sub: 'Describe what you want built. Within a few minutes you click through a first design of your own software, with made-up data. Then you refine it ten times for free.',
     start: 'Start free with your idea', bekijk: 'See what we built',
     stappenEb: 'How it works',

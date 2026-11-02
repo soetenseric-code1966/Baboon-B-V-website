@@ -1,5 +1,6 @@
 // Start gratis (lab, besluit 29-10-2026): idee invoeren; daarna door naar /lab/ waar het ontwerp verschijnt.
 import React, { useEffect, useRef, useState } from 'react';
+import { kop } from '../Kop';
 import { Lang, href } from '../routes';
 import { LAB_TEXT, TURNSTILE_SITEKEY, bewaarIdee, labApi } from '../lab';
 import LabBestanden from '../LabBestanden';
@@ -44,7 +45,7 @@ export default function Start({ lang, signal }: { lang: Lang; signal: string }) 
     <div style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", color: '#14213D', background: '#FFFFFF', lineHeight: 1.5 }}>
       <section className="dw-sec" style={{ padding: '72px 48px 32px' }}>
         <div style={{ ...mono, color: signal }}>{t.eb} · {t.tegoed}</div>
-        <h1 className="dw-h1" style={{ margin: '16px 0 0', fontSize: 64, lineHeight: 1, letterSpacing: '-2.4px', fontWeight: 700 }}>{t.h1}</h1>
+        <h1 className="dw-h1" style={{ margin: '16px 0 0', fontSize: 64, lineHeight: 1, letterSpacing: '-2.4px', fontWeight: 700 }}>{kop(t.h1, signal)}</h1>
         <p style={{ margin: '16px 0 0', fontSize: 20, lineHeight: 1.55, color: '#3A4258', maxWidth: 780 }}>{t.sub}</p>
       </section>
       <section className="dw-sec" style={{ padding: '0 48px 88px' }}>

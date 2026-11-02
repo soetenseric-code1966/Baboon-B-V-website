@@ -120,7 +120,7 @@ export default function ProcesFilm({ lang, signal, phases }: { lang: Lang; signa
       <div className="pf-raster" style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,1.6fr)', gap: 32, marginTop: 24, alignItems: 'start' }}>
         <div style={{ padding: '8px 0' }} aria-live="polite">
           <p style={{ margin: 0, fontSize: 22, lineHeight: 1.45, fontWeight: 500 }}>{phases[fase]?.[2]}</p>
-          <div style={{ marginTop: 26, background: '#F7F8FA', borderRadius: 16, padding: '20px 22px' }}>
+          <div style={{ marginTop: 26, background: '#F3F5F8', borderRadius: 16, padding: '20px 22px' }}>
             <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: signal, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t.bij}</div>
             <div style={{ fontSize: 18, lineHeight: 1.5, marginTop: 6 }}>{t.qf[fase]}</div>
           </div>

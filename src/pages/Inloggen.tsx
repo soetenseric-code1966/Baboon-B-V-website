@@ -3,6 +3,7 @@
 // Handgeschreven op het homepagesjabloon (zelfde kop, voet, labels, ronde knoppen en kaarten als Apps).
 // Later: één inlog via het klantportaal (blok onderaan).
 import React from 'react';
+import { kop } from '../Kop';
 import { Lang, href } from '../routes';
 import { APPS, LOGIN_APPS_TEXT } from '../apps';
 import { LAB_TEXT } from '../lab';
@@ -21,13 +22,13 @@ export default function Inloggen({ lang, signal }: { lang: Lang; signal: string 
     <div style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", color: '#14213D', background: '#FFFFFF', lineHeight: 1.5 }}>
       <section className="dw-sec" style={{ padding: '80px 48px 40px' }}>
         <div style={{ ...mono, color: signal }}>{t.eb}</div>
-        <h1 className="dw-h1" style={{ margin: '16px 0 0', fontSize: 64, lineHeight: 1, letterSpacing: '-2.4px', fontWeight: 700 }}>{t.h1}</h1>
+        <h1 className="dw-h1" style={{ margin: '16px 0 0', fontSize: 64, lineHeight: 1, letterSpacing: '-2.4px', fontWeight: 700 }}>{kop(t.h1, signal)}</h1>
         <p style={{ margin: '16px 0 0', fontSize: 20, lineHeight: 1.55, color: '#3A4258', maxWidth: 780 }}>{t.sub}</p>
       </section>
 
       <section className="dw-sec" style={{ padding: '0 48px 56px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 24, alignItems: 'stretch' }}>
         {APPS.map((a) => (
-          <article key={a.key} style={{ border: '2px solid #14213D', borderRadius: 20, padding: 28, display: 'flex', flexDirection: 'column', gap: 12, opacity: a.soon ? 0.85 : 1 }}>
+          <article key={a.key} style={{ background: '#F3F5F8', borderRadius: 20, padding: 28, display: 'flex', flexDirection: 'column', gap: 12, opacity: a.soon ? 0.85 : 1 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
               <span style={{ ...chip, background: '#14213D', color: '#FFFFFF' }}>{a.kind[lang]}</span>
               <span style={{ ...chip, background: a.free ? '#E7F6EF' : '#FFF1EB', color: a.free ? '#0F7A55' : '#B23C0E' }}>{a.price[lang]}</span>
@@ -54,7 +55,7 @@ export default function Inloggen({ lang, signal }: { lang: Lang; signal: string 
       </section>
 
       <section className="dw-sec" style={{ padding: '0 48px 88px' }}>
-        <div style={{ background: '#F7F8FA', borderRadius: 20, padding: 32, display: 'flex', gap: 24, alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+        <div style={{ background: '#F3F5F8', borderRadius: 20, padding: 32, display: 'flex', gap: 24, alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
           <div style={{ maxWidth: 680 }}>
             <div style={{ ...mono, color: '#5C6378' }}>{t.portalEb}</div>
             <div style={{ fontSize: 24, fontWeight: 700, letterSpacing: '-0.5px', marginTop: 6 }}>{t.portalT}</div>

@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from './Layout';
 import { PageName, Lang } from './routes';
 import { setLinkLang } from './dc';
-import Global, { HoeHetWerkt } from './pages/Global';
+import Global, { HoeHetWerkt, Veiligheid } from './pages/Global';
 import Etalage from './pages/Etalage';
 import Prijslijst from './pages/Prijslijst';
 import OverOns from './pages/OverOns';
@@ -16,7 +16,7 @@ import LabBeheer from './pages/LabBeheer';
 export const SIGNAL = '#FF5A1F';
 
 const COMPONENTS: Record<PageName, React.ComponentType<{ lang: Lang; signal: string }>> = {
-  Global, HoeHetWerkt, Etalage, Prijslijst, OverOns, Contact, Juridisch, Inloggen, Start, Lab, LabBeheer,
+  Global, HoeHetWerkt, Veiligheid, Etalage, Prijslijst, OverOns, Contact, Juridisch, Inloggen, Start, Lab, LabBeheer,
 };
 
 export default function App({ page, lang }: { page: PageName; lang: Lang }) {
