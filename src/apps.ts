@@ -35,8 +35,8 @@ export const APPS: AppItem[] = [
       en: ['Planning board per depot: needed by timetable versus available', 'Suggested transfers; issue the order in one click', 'Maintenance tracked per partner: waiting, started, ready', 'Works together with Wheel re-torquing'],
     },
     screen: '/showcase/dagplanning.jpg',
-    demo: 'https://dagplanning.datawerf.com/dagplanning/demo',
-    login: 'https://dagplanning.datawerf.com/dagplanning/login',
+    demo: 'https://planning.datawerf.com/demo',
+    login: 'https://dagplanning.datawerf.com/',
   },
   {
     key: 'wielen',

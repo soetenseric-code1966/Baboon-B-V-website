@@ -78,6 +78,7 @@ Plaatshouders uit het ontwerp en aanpassingen (contact via mail, inloggen nog ni
 - Apps nu (niets is gratis, besluit 01-11-2026: prijs "Op aanvraag" tot die besloten is): Dagplanning, Wielen natrekken, **Qtyrez bandenmonitor** (01-11-2026, op aanvraag; Demo → `qtyrez.datawerf.com/demo`, Inloggen → `qtyrez.datawerf.com/`; scherm Kosten & analyse uit de demo in `public/showcase/qtyrez.jpg`), Urenregistratie (binnenkort).
 - Een app toevoegen: één regel in `src/apps.ts` en een schermafbeelding in `public/showcase/` (1600 × 1000).
 - Adressen (29-10-2026): Dagplanning op `dagplanning.datawerf.com`, Wielen natrekken op `wielen.datawerf.com` (oude qcontrolz-adressen sturen door).
+- Dagplanning na de overstap (06-11-2026): de demo staat op `https://planning.datawerf.com/demo` (nieuwe Dagplanning op Supabase, fictieve gegevens), inloggen voor klanten op `https://dagplanning.datawerf.com/` (`src/live.ts`, `src/showcase.ts`, `src/apps.ts`). De oude links `/dagplanning/…` sturen nog door.
 
 ## Datawerf lab (29-10-2026)
 - "Start gratis" (kop, voet en alle knoppen) gaat naar `/start/`: idee, naam, e-mail, bedrijf. Daarna `/lab/#id.sleutel`
