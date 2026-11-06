@@ -70,8 +70,8 @@ export const LIVE = [
   {
     name: 'Dagplanning',
     title: { nl: 'Dagplanning wagenpark', en: 'Daily fleet planning' },
-    url: 'https://dagplanning.datawerf.com/dagplanning/demo',
-    host: 'dagplanning.datawerf.com',
+    url: 'https://planning.datawerf.com/demo',
+    host: 'planning.datawerf.com',
     screen: '/showcase/dagplanning.jpg',
     status: 'demo',
     kind: { nl: 'Platform · busvervoer', en: 'Platform · bus operations' },
